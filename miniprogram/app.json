@@ -31,19 +31,19 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/home/home",
+        "pagePath": "pages/index/index",
         "iconPath": "images/home.png",
         "selectedIconPath": "images/home.png",
         "text": "首页"
       },
       {
-        "pagePath": "pages/home/home",
+        "pagePath": "pages/index/index",
         "iconPath": "images/file.png",
         "selectedIconPath": "images/file.png",
         "text": "联系我们"
       },
       {
-        "pagePath": "pages/home/home",
+        "pagePath": "pages/index/index",
         "iconPath": "images/file.png",
         "selectedIconPath": "images/file.png",
         "text": "公司简介"
