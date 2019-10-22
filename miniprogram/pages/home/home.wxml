@@ -12,21 +12,22 @@
   </view>  
   <view class = "row-view">
     <view class = "box">
-      <image src='../../image/desk.png'></image>
+      <image src='../../images/desk.png'></image>
       <text>产品展示</text>
     </view>
     <view class = "box">
-      <image src='../../image/analytics.png'></image>
+      <image src='../../images/analytics.png'></image>
       <text>公司案例</text>
     </view>
     <view class = "box">
-      <image src='../../image/agreement.png'></image>
+      <image src='../../images/agreement.png'></image>
       <text>合作品牌</text>
     </view>
     <view class = "box">
-      <image src='../../image/user.png'></image>
+      <image src='../../images/user.png'></image>
       <text>在线询价</text>
     </view>
+
   </view>
 
 </view> 
