@@ -1,1 +1,36 @@
 /* miniprogram/pages/home/home.wxss */
+page{
+   height: 100%;
+   width: 100%;
+  background: #f6f6f6;
+  display: flex;
+}
+.swiper{
+   width: 100%;
+   height: 100%;
+}
+.row-view{
+    height: 100%;
+    width:100%;
+    display:flex;
+    flex-direction: row;
+}
+.slide-image{
+    width: 100%;
+    height: 160px;
+}
+.btn1 {
+  width: 25%;
+  height: 20%;
+  font-size: 25rpx;
+  margin-top: 20rpx;
+  margin-left: 40rpx;
+}
+.box {
+   width: 20%;
+   height: 20%;
+   margin-left: 10rpx;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+}

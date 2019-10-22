@@ -1,2 +1,33 @@
 <!--miniprogram/pages/home/home.wxml-->
-<text>miniprogram/pages/home/home.wxml</text>
+<view class="container">
+  <view class ="swiper">
+    <swiper indicator-dots="{{indicatorDots}}"
+      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}} " bindchange="bindchangeTag">
+      <block wx:for="{{imgUrls}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image"/>
+      </swiper-item>
+      </block>
+    </swiper>
+  </view>  
+  <view class = "row-view">
+    <view class = "box">
+      <image src='../../image/desk.png'></image>
+      <text>产品展示</text>
+    </view>
+    <view class = "box">
+      <image src='../../image/analytics.png'></image>
+      <text>公司案例</text>
+    </view>
+    <view class = "box">
+      <image src='../../image/agreement.png'></image>
+      <text>合作品牌</text>
+    </view>
+    <view class = "box">
+      <image src='../../image/user.png'></image>
+      <text>在线询价</text>
+    </view>
+  </view>
+
+</view> 
+
