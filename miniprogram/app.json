@@ -38,8 +38,8 @@
       },
       {
         "pagePath": "pages/index/index",
-        "iconPath": "images/file.png",
-        "selectedIconPath": "images/file.png",
+        "iconPath": "images/contact.png",
+        "selectedIconPath": "images/contact.png",
         "text": "联系我们"
       },
       {
