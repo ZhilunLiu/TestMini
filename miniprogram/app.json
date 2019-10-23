@@ -16,6 +16,7 @@
     "pages/im/room/room",
     "pages/products/products",
     "pages/solutions/solutions",
+    "pages/contact/contact",
     "pages/Coop/Coop",
     "pages/detail/bolatudahuiyizhuo/bolatudahuiyizhuo",
     "pages/detail/bolatuxiaohuiyizhuo/bolatuxiaohuiyizhuo",
@@ -49,7 +50,7 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/contact/contact",
         "iconPath": "images/contact.png",
         "selectedIconPath": "images/contact.png",
         "text": "联系我们"
