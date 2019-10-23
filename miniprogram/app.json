@@ -13,7 +13,10 @@
     "pages/openapi/callback/callback",
     "pages/openapi/cloudid/cloudid",
     "pages/im/im",
-    "pages/im/room/room"
+    "pages/im/room/room",
+    "pages/products/products",
+    "pages/solutions/solutions",
+    "pages/Coop/Coop"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -22,8 +25,6 @@
     "navigationBarTitleText": "云开发 QuickStart",
     "navigationBarTextStyle": "black"
   },
-
-
   "tabBar": {
     "color": "#7A7E83",
     "selectedColor": "#3cc51f",
@@ -50,5 +51,5 @@
       }
     ]
   },
-    "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json"
 }

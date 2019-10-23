@@ -16,6 +16,25 @@ Page({
     duration: 1800
   },
 
+  goProducts: function (event) {
+    console.log('clicked');
+    wx.navigateTo({
+      url: '../products/products',
+    })
+  },
+
+  goSolutions: function (event) {
+    console.log('clicked');
+    wx.navigateTo({
+      url: '../solutions/solutions',
+    })
+  },
+  goCoop: function (event) {
+    console.log('clicked');
+    wx.navigateTo({
+      url: '../Coop/Coop',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

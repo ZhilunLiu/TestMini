@@ -11,15 +11,15 @@
     </swiper>
   </view>  
   <view class = "row-view">
-    <view class = "box">
+    <view class = "box" bindtap="goProducts">
       <image src='../../images/desk.png'></image>
       <text>产品展示</text>
     </view>
-    <view class = "box">
+    <view class = "box" bindtap = "goSolutions">
       <image src='../../images/analytics.png'></image>
       <text>公司案例</text>
     </view>
-    <view class = "box">
+    <view class = "box" bindtap="goCoop">
       <image src='../../images/agreement.png'></image>
       <text>合作品牌</text>
     </view>
