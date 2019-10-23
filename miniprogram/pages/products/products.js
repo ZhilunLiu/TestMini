@@ -4,7 +4,7 @@ Page({
 
   data: {
     // 左侧点击类样式
-    curNav: 'A',
+    curNav: 'Huiyizhuo',
   },
   onReady: function () {
     // 生命周期函数--监听页面初次渲染完成
@@ -23,7 +23,7 @@ Page({
   //点击左侧 tab ，右侧列表相应位置联动 置顶
   switchRightTab: function (e) {
     var id = e.target.id;
-    console.log(typeof id)
+    console.log(id)
     this.setData({
       // 动态把获取到的 id 传给 scrollTopId
       scrollTopId: id,
@@ -32,6 +32,18 @@ Page({
     })
   },
 
+  goDetail:function(e){
+    var path = e.currentTarget.dataset.url;
+    console.log(e);
+
+  },
+
+  back: function () {
+    console.log('-----------back');
+    wx.navigateBack({
+      delta: 1, // 回退前 delta(默认为1) 页面
+    })
+  },
   onLoad: function () {
   },
 

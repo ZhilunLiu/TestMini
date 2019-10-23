@@ -16,7 +16,18 @@
     "pages/im/room/room",
     "pages/products/products",
     "pages/solutions/solutions",
-    "pages/Coop/Coop"
+    "pages/Coop/Coop",
+    "pages/detail/bolatudahuiyizhuo/bolatudahuiyizhuo",
+    "pages/detail/bolatuxiaohuiyizhuo/bolatuxiaohuiyizhuo",
+    "pages/detail/gaoguanxiliedahuiyizhuo/gaoguanxiliedaahuiyizhuo",
+    "pages/detail/gaoguanxilieqiatanzhuo/gaoguanxilieqiatanzhuo",
+    "pages/detail/bolatubantai/bolatubantai",
+    "pages/detail/gaoguanxiliebantai/gaoguanxiliebantai",
+    "pages/detail/gaoguanxiliexiaobantai/gaoguanxiliexiaobantai",
+    "pages/detail/gaoguanxiliexiaobantai2/gaoguanxiliexiaobantai2",
+    "pages/detail/bolatuchaji/bolatuchaji",
+    "pages/detail/gaoguanxiliechaji/gaoguanxiliechaji",
+    "pages/detail/gaoguanxiliechashuizhuo/gaoguanxiliechashuizhuo"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

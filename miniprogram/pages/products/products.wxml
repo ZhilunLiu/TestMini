@@ -18,15 +18,14 @@
       <view class='mink' wx:for="{{list}}" wx:for-index="idx" wx:for-item="itemName" wx:key="*this" bindscroll="scrollTop">
         <view class='minl' id='{{idx}}'>{{itemName[0].name}}</view>
           <block wx:for="{{itemName}}" wx:for-index="idex" wx:key="*this" > 
-            <view class="nav_right_items" wx:if="{{idex>0}}">  
-              <navigator url="../detail/detail" hover-class="other-navigator-hover">
-                <view>   
+            <view class="nav_right_items" wx:if="{{idex>0}}" >  
+                <view data-url="{{item.url}}" data-name="{{item.desc}}" id="{{item.id}}" bindtap="goDetail">                  
                   <image src="{{item.picture}}"></image>
                   <view >  
                     <text>{{item.desc}}</text>  
-                  </view> 
+                  </view>                 
                 </view>  
-              </navigator>  
+ 
             </view>      
           </block> 
         </view>
