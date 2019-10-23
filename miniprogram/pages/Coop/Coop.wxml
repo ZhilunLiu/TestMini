@@ -1,8 +1,6 @@
 <!--miniprogram/pages/Coop/Coop.wxml-->
 <view class = "container">
-  <view class = "title">
-    <view class ="line"></view>
-    <text>合作品牌与厂家</text>
-    <view class ="line"></view>
-  </view>
+  <view class = "body">
+    <image src = "https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%85%AC%E5%85%B1/%E5%90%88%E4%BD%9C%E5%93%81%E7%89%8C.PNG?sign=2b8a2462d6ec68468eb287628bdef90c&t=1571793777"></image>
+  </view>  
 </view>  

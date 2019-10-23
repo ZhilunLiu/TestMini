@@ -1,18 +1,33 @@
 /* miniprogram/pages/Coop/Coop.wxss */
-.title{
-    margin-top: 50rpx;
+page{
+   height: 100%;
+   width: 100%;
+  background: #f6f6f6;
+  display: flex;
+}
+
+.box {
+   width: 100%;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+}
+.body {
+    margin-top: 100rpx;
     height: 100%;
     width:100%;
     display:flex;
     flex-direction: row;
 }
-.line{
-margin:auto;
-width: 200rpx;
-height: 2rpx;
-background-color: #D8D8D8;
+image {
+   margin-right: auto;
+   margin-left: auto;
+   width: 750rpx;
+   height: 233rpx;
+
 }
-.text {
+text {
    margin-right: auto;
    margin-left: auto;
    margin-top: 5rpx;

@@ -1,33 +1,40 @@
 // miniprogram/pages/products/products.js
+var list = require('/list.js')
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    // 左侧点击类样式
+    curNav: 'A',
   },
-
-
-  back: function () {
-    console.log('-----------back');
-    wx.navigateBack({
-      delta: 1, // 回退前 delta(默认为1) 页面
+  onReady: function () {
+    // 生命周期函数--监听页面初次渲染完成
+    var listChild1 = list.List[0];
+    var that = this;
+    // 获取可视区高度
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          list: listChild1,
+          winHeight: res.windowHeight,
+        })
+      }
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  //点击左侧 tab ，右侧列表相应位置联动 置顶
+  switchRightTab: function (e) {
+    var id = e.target.id;
+    console.log(typeof id)
+    this.setData({
+      // 动态把获取到的 id 传给 scrollTopId
+      scrollTopId: id,
+      // 左侧点击类样式
+      curNav: id
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onLoad: function () {
   },
+
 
   /**
    * 生命周期函数--监听页面显示
