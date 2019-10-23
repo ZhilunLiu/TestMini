@@ -1,1 +1,32 @@
 /* miniprogram/pages/detail/bolatudahuiyizhuo/bolatudahuiyizhuo.wxss */
+page{
+   height: 100%;
+   width: 100%;
+  background: #f6f6f6;
+  display: flex;
+}
+.swiper{
+   width: 80%;
+   height: 100%;
+   justify-content: center;
+   margin-right: auto;
+   margin-left: auto;
+   margin-top: 150rpx;
+}
+.slide-image{
+    width: 100%;
+    height: 100%;
+}
+image {
+   margin-right: auto;
+   margin-left: auto;
+   width: 100rpx;
+   height: 100rpx;
+}
+
+text {
+   margin-right: auto;
+   margin-left: auto;
+   margin-top: 5rpx;
+   font: 20;
+}

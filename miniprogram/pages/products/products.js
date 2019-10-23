@@ -34,8 +34,10 @@ Page({
 
   goDetail:function(e){
     var path = e.currentTarget.dataset.url;
-    console.log(e);
-
+    console.log(path);
+    wx.navigateTo({
+      url: '../detail/'+path+'/'+path,
+    })
   },
 
   back: function () {
