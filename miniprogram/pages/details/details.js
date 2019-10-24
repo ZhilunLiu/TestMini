@@ -15,7 +15,8 @@ Page({
     describtion:'',
     size:[],
     dimension:[],
-    index:0
+    index:0,
+    dimensionFlag:true
   },
 
   bindPickerChange: function (e) {
@@ -36,7 +37,7 @@ Page({
       name: itemName
     }).get({
       success: res => {
-        console.log(res.data[0].dimension[0][0]);
+        console.log(res);
         this.setData({
           imgUrls :res.data[0].url,
           price: res.data[0].price,
@@ -45,7 +46,11 @@ Page({
           size:res.data[0].size,
           dimension:res.data[0].dimension
         })
-        console.log('[数据库] [查询记录] 成功: ', res)
+        if (res.data[0].dimension[0][0]==0){
+          this.setData({dimensionFlag:false})
+        }
+        console.log('flag is ' + this.dimensionFlag);
+        console.log('[数据库] [查询记录] 成功: ', res);
       },
       fail: err => {
         wx.showToast({
