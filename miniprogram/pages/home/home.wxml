@@ -1,15 +1,16 @@
 <!--miniprogram/pages/home/home.wxml-->
 <view class="container">
   <view class ="swiper">
-    <swiper indicator-dots="{{indicatorDots}}"
+    <swiper class = "swiperrr" indicator-dots="{{indicatorDots}}"
       autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}} " bindchange="bindchangeTag">
       <block wx:for="{{imgUrls}}">
         <swiper-item>
-          <image src="{{item}}" class="slide-image"/>
+          <image src="{{item}}" class="swiperrr"/>
       </swiper-item>
       </block>
     </swiper>
-  </view>  
+  </view>
+  <view class = "bgOficon">  
   <view class = "row-view">
     <view class = "box" bindtap="goProducts">
       <image src='../../images/desk.png'></image>
@@ -28,6 +29,7 @@
       <text>在线询价</text>
     </view>
 
+  </view>
   </view>
 
 </view> 

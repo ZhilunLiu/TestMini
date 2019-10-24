@@ -17,7 +17,8 @@ App({
 
     this.globalData =  {
       userInfo: null,
-        sysWidth: wx.getSystemInfoSync().windowWidth, //图片宽度
+      sysWidth: wx.getSystemInfoSync().windowWidth,
+      sysHeight: wx.getSystemInfoSync().windowHeight, //图片宽度
   }
   }
 })
