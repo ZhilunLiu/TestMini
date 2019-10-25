@@ -1,0 +1,12 @@
+.content-main-body{
+  margin-top: 5vh;
+  height:auto;
+  padding: 0 40rpx;
+}
+
+.content-title{
+  margin-top: 5vh;
+  height:auto;
+  padding: 0 40rpx;
+  text-align: center;
+}

@@ -1,10 +1,18 @@
-<map id="map" longitude="112.995530" latitude="28.147820" scale="16" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location style="width: 100%; height: 200px;"></map>
-<view class="list">
-  <view class="list-item" bindtap="phoneCall">
-    <view class="p"><image class="icon-image" style="width: 24px; height: 24px;"src="/images/telephone-call-32.png"></image>    135 0748 4078</view></view>
-  <view class="list-item">
-    <view class="p"><image src="/images/weixin-48.png"></image>    oocharlesxx</view></view>
-  <view class="list-item">
-    <view class="p"><image class="icon-image" style="width: 24px; height: 24px;"     src="/images/map-icon-32.png"></image>    雨花区桔园小区城开大厦综合楼803、804室</view></view>
-  
+<map id="map" longitude="112.995530" latitude="28.147820" scale="16" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location ></map>
+
+<view class="contact-block" bindtap="phoneCall" hover-class="contact-hover">
+  <view class="contact-text">
+  <image src="/images/telephone-call-32.png"></image> 135 0738 4078</view>
+</view>
+<view class="line"></view>
+
+<view class="contact-block">
+  <view class="contact-text">
+  <image src="/images/weixin-48.png"></image> oocharlesxx</view>
+</view>
+<view class="line"></view>
+
+<view class="contact-block" bindtap="navigateClick" hover-class="contact-hover">
+  <view class="contact-text">
+  <image src="/images/map-icon-32.png"></image> 湖南省长沙市雨花区桔园小区城开大厦综合楼803、804室</view>
 </view>
