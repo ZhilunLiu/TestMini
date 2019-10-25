@@ -32,5 +32,9 @@
   </view>
   </view>
 
+  <view class = "bgOfsub">
+    <view class = "subtitle">近期案例</view>
+  </view>
+
 </view> 
 

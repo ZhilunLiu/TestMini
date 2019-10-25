@@ -1,0 +1,47 @@
+/* miniprogram/pages/solutionDetail/solutionDetail.wxss */
+page{
+   height: 100%;
+   width: 100%;
+  background:white;
+  display: flex;
+}
+.title{
+  font-size: 5vw;
+  font-weight: 600;
+  color: black;
+  font-family: KaiTi;
+}
+.desc{
+  width: 80vw;
+  font-size: 4vw;
+  font-weight: 400;
+  font-family: Hiragino Sans GB;
+  color: rgba(0, 0, 0, 0.705);
+}
+.margin{
+  width:100vw;
+  height: 2vh;
+  color: rgba(128, 128, 128, 0.411);
+}
+.Bigmargin{
+    width:100vw;
+  height: 5vh;
+  color: rgba(128, 128, 128, 0.411);
+}
+.line{
+  width:100vw;
+  height:5rpx;
+  background-color: #D8D8D8;
+  border-left-color:#fff;
+  border-left-style: solid;
+  border-left-width: 10vw; 
+  border-right-color:#fff;
+  border-right-style: solid;
+  border-right-width: 10vw; 
+}
+image {
+   margin-right: auto;
+   margin-left: auto;
+   width: 100vw;
+   height:35vh;
+}

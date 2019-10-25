@@ -22,9 +22,19 @@ page{
     flex-direction: row;
 }
 .bgOficon{
-  margin-top:2vh;
   background-color: white;
   width : 100vw;
+}
+.bgOfsub{
+  margin-top:3vh;
+  background-color: white;
+  width : 100vw;
+}
+
+.subtitle{
+  font-size:5vw;
+  color:coral;
+  font-weight: 600;
 }
 
 .box {
