@@ -5,6 +5,7 @@ Page({
   data: {
     // 左侧点击类样式
     curNav: 'Huiyizhuo',
+    url:'',
   },
   onReady: function () {
     // 生命周期函数--监听页面初次渲染完成

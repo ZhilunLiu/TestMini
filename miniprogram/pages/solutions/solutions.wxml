@@ -1,2 +1,12 @@
-<!--miniprogram/pages/solutions/solutions.wxml-->
-<text>miniprogram/pages/solutions/solutions.wxml</text>
+<view class = "container">
+
+    <view class = "box" bindtap="goProducts">
+      <image src="{{imgUrls[0]}}"></image>
+      <text>{{names[0]}}</text>
+    </view>
+    <view class = "box" bindtap = "goSolutions">
+      <image src="{{imgUrls[1]}}"></image>
+      <text>{{names[1]}}</text>
+    </view>
+
+  </view>

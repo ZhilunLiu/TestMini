@@ -20,7 +20,7 @@ var list = {
         { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/G-JPSB16.jpg?sign=4c56abcd8445323dcbb76e8fabd957a1&t=1571904689', 'desc': '开普勒小班台2' },
       ],
       'Chaji': [
-        { name: '茶几' },
+        { name: '茶几/小桌' },
         { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E6%9F%8F%E6%8B%89%E5%9B%BE/%E6%96%B9%E8%8C%B6%E5%87%A0.PNG?sign=72c983adbb782a133b5444653b4465d3&t=1571885084', 'desc': '柏拉图方茶几'},
         { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E6%9F%8F%E6%8B%89%E5%9B%BE/%E9%95%BF%E8%8C%B6%E5%87%A0.PNG?sign=6e1a8f4bf7556359d5fb6e57361df8eb&t=1571885067', 'desc': '柏拉图长茶几' },
         { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E6%9F%8F%E6%8B%89%E5%9B%BE/c19%20%E5%B0%8F%E6%B4%BD%E8%B0%88.jpg?sign=610c40ea337bb3346dc82f6bf941d6e6&t=1571898101', 'desc': '柏拉图洽谈桌' },
@@ -30,6 +30,7 @@ var list = {
         { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E9%AB%98%E7%AE%A1%E7%B3%BB%E5%88%97/%E6%B4%BD%E8%B0%88%E6%A1%8C.jpg?sign=0fb52f38e1492d49af90e304ad819793&t=1571901809', 'desc': '高管系列洽谈桌' },
         { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E9%AB%98%E7%AE%A1%E7%B3%BB%E5%88%97/%E5%8A%9F%E8%83%BD%E6%B4%BD%E8%B0%88%E6%A1%8C.jpg?sign=ce86390b932f3d54d1f0cdbca6c8624f&t=1571901946', 'desc': '高管系列多功能洽谈桌' },
         { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/G-JPST08.jpg?sign=f1e330f24f3f94e48f1191b35ec0d6c7&t=1571937090', 'desc': '开普勒洽谈桌' },
+        { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/G-JPSH126.jpg?sign=c1ef18bbffa7816d16aafcf384e85ed1&t=1571943790', 'desc': '开普勒主席桌' },
       ],
       'Wenjiangui': [
         { name: '文件柜' },
@@ -48,14 +49,18 @@ var list = {
         { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/G-JPSW08L.jpg?sign=e7d81c297e2002edcb1c3067beab74f5&t=1571906124', 'desc': '开普勒文件柜' },
         { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/G-JPSW08.jpg?sign=502422ac4582bb1c56c1d31d747e181a&t=1571906268', 'desc': '开普勒文件柜2' },
         { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/G-JPSW12R.jpg?sign=01854c536e96030b53d1bc8da14b072c&t=1571906389', 'desc': '开普勒三门文件柜' },
-        { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/G-JPSW120.jpg?sign=1c7e8ca7b7259459c1b54f05afa7569e&t=1571906496', 'desc': '开普勒矮柜' },
-        { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/G-JPSW082.jpg?sign=71ba80889af6dff845814120385729de&t=1571906670', 'desc': '开普勒高柜' },
+        { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/G-JPSW120.jpg?sign=1c7e8ca7b7259459c1b54f05afa7569e&t=1571906496', 'desc': '开普勒三门矮柜' },
+        { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/G-JPSW080.jpg?sign=44f6f9b34df1c195f26e899288c5ea4f&t=1571951208', 'desc': '开普勒矮柜' },
+        { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/G-JPSW082.jpg?sign=71ba80889af6dff845814120385729de&t=1571906670', 'desc': '开普勒三门高柜' },
+        { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/G-JPSW082.jpg?sign=0405ecf4d7e63d468200ea0ebd340329&t=1571951357', 'desc': '开普勒高柜' },
       ],
       'Shafa': [
         { name: '沙发' },
         { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E6%9F%8F%E6%8B%89%E5%9B%BE/%E4%B8%89%E4%BA%BA%E6%B2%99%E5%8F%91.PNG?sign=d306cf13746e2fe69e1263b268283d70&t=1571886535', 'desc': '柏拉图三人沙发'  },
         { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E6%9F%8F%E6%8B%89%E5%9B%BE/%E5%8D%95%E4%BA%BA%E6%B2%99%E5%8F%91.PNG?sign=b816a93455f02598188b0ea9c5a9fbed&t=1571886650', 'desc': '柏拉图单人沙发' },
         { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E9%AB%98%E7%AE%A1%E7%B3%BB%E5%88%97/%E9%AB%98%E7%AE%A1-%E6%B2%99%E5%8F%91%E8%A7%92%E5%BA%A6.jpg?sign=5843fe4349cd084f444141e5bef28a07&t=1571902423', 'desc': '高管系列沙发' },
+        { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/%E5%8D%95%E4%BA%BA%E6%B2%99%E5%8F%91.png?sign=4326f3380a04576aef791aead1a116e3&t=1571944773', 'desc': '开普勒单人沙发' },
+        { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/%E4%B8%89%E4%BA%BA%E6%B2%99%E5%8F%91.png?sign=aec5fd941a9298d6c5e2064b7dad418e&t=1571944881', 'desc': '开普勒三人沙发' },
       ],
       'Gongzuozhan': [
         { name: '员工工作站' },
@@ -78,11 +83,15 @@ var list = {
         { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/G-JPSG162.jpg?sign=c0aa943089a0471aa6f2922df91ced95&t=1571905537', 'desc': '开普勒组合两人位' },
         { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/G-JPSG292.jpg?sign=1359981d9c611811d18c1307dd535a51&t=1571905890', 'desc': '开普勒组合两人位2' },
         { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/G-JPSG324A.jpg?sign=cddc1e38e88b1c47ea741b28a2093110&t=1571905687', 'desc': '开普勒组合四人位' },
+        { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/%E5%93%81%E5%B0%9A%E5%B1%8F%E9%A3%8E%E5%8D%95%E5%93%811.jpg?sign=dd695b490fe161dd3cd98838ad48edff&t=1571944166', 'desc': '开普勒两人位(带单门柜)' },
+        { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/%E5%93%81%E5%B0%9A%E5%B1%8F%E9%A3%8E%E5%8D%95%E5%93%812.jpg?sign=8567e2494dbed65023c5b4d4b2300b6c&t=1571944308', 'desc': '开普勒两人位' },
+        { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/%E5%93%81%E5%B0%9A%E5%B1%8F%E9%A3%8E%E5%8D%95%E5%93%815.jpg?sign=c9c81f142ce98e04971e77bcb9e12a62&t=1571944452', 'desc': '开普勒两人位2' },
       ],
       'Qita': [
         { name: '其他' },
         { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E6%9F%8F%E6%8B%89%E5%9B%BE/%E4%B8%BB%E6%9C%BA%E6%9E%B6.PNG?sign=96d2eeacb453b3a1a16f992fe8ae5352&t=1571898411', 'desc': '柏拉图主机架' },
         { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E6%9F%8F%E6%8B%89%E5%9B%BE/c1%20%E5%89%8D%E5%8F%B0-1.jpg?sign=fcfa6f2b5d4da2d37c2a40b5b8fb2cc2&t=1571899249', 'desc': '柏拉图前台' },
+        { 'picture': 'https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%BC%80%E6%99%AE%E5%8B%92/G-JPSX07.jpg?sign=24b80f83ec5438cf7ac5e977514be492&t=1571943968', 'desc': '开普勒演讲台' },
       ],
       'Kaipule': [
         { name: '开普勒' }

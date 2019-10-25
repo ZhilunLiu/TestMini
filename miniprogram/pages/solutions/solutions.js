@@ -5,6 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    imgUrls:[],
+    names: [],
+    index:0
 
   },
 
@@ -18,14 +21,46 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      names: ['中国平安', '规划设计院']
+    })
+    this.names = ['中国平安', '规划设计院'];
+    var urls = [];
+    const db = wx.cloud.database()
+    console.log('!!!!!!!!'+typeof this.names)
+    for(let i=0;i<this.names.length;i++){
+      var itemName = this.names[i];
+      
+      // 查询当前solution对应name
+      db.collection('solutions').where({
+        name: itemName
+      }).get({
+        success: res => {
+          //console.log(res);
+          urls.push(res.data[0].url[0]);
+          
+          if(i==this.names.length-1){
+            this.setData({
+              imgUrls:urls
+            })
+          }
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '查询记录失败'
+          })
+          console.error('[数据库] [查询记录] 失败：', err)
+        }
+      })
+    }
+    console.log(this.names);
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
