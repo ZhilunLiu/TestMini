@@ -1,12 +1,37 @@
 <view class = "container">
-
-    <view class = "box" bindtap="goProducts">
-      <image src="{{imgUrls[0]}}"></image>
-      <text>{{names[0]}}</text>
+<scroll-view class='scroll_left' scroll-y="true">
+  <view class = "margin"></view>
+    <view class = "bg" bindtap="goProducts" style="background-image: url('{{imgUrls[0]}}');background-repeat:no-repeat;background-size:100% 100%;-moz-background-size:100% 100%;">
+      <view class = "bgoftitle">
+        <text>{{names[0]}}</text>
+      </view>  
     </view>
-    <view class = "box" bindtap = "goSolutions">
-      <image src="{{imgUrls[1]}}"></image>
-      <text>{{names[1]}}</text>
+   <view class = "margin"></view>
+    <view class = "bg" bindtap="goProducts" style="background-image: url('{{imgUrls[1]}}');background-repeat:no-repeat;background-size:100% 100%;-moz-background-size:100% 100%;">
+      <view class = "bgoftitle">
+        <text>{{names[1]}}</text>
+      </view>  
     </view>
 
-  </view>
+    <view class = "margin"></view>
+    <view class = "bg" bindtap="goProducts" style="background-image: url('{{imgUrls[2]}}');background-repeat:no-repeat;background-size:100% 100%;-moz-background-size:100% 100%;">
+      <view class = "bgoftitle">
+        <text>{{names[2]}}</text>
+      </view>  
+    </view>
+
+    <view class = "margin"></view>
+    <view class = "bg" bindtap="goProducts" style="background-image: url('{{imgUrls[3]}}');background-repeat:no-repeat;background-size:100% 100%;-moz-background-size:100% 100%;">
+      <view class = "bgoftitle">
+        <text>{{names[3]}}</text>
+      </view>  
+    </view>
+
+        <view class = "margin"></view>
+    <view class = "bg" bindtap="goProducts" style="background-image: url('{{imgUrls[4]}}');background-repeat:no-repeat;background-size:100% 100%;-moz-background-size:100% 100%;">
+      <view class = "bgoftitle">
+        <text>{{names[4]}}</text>
+      </view>  
+    </view>
+</scroll-view>
+</view>

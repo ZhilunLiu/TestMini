@@ -22,12 +22,11 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      names: ['中国平安', '规划设计院']
+      names: ['中国平安', '规划设计院','湖南中烟','国家电网','五菱电力']
     })
-    this.names = ['中国平安', '规划设计院'];
+    this.names = ['中国平安', '规划设计院', '湖南中烟', '国家电网', '五菱电力'];
     var urls = [];
     const db = wx.cloud.database()
-    console.log('!!!!!!!!'+typeof this.names)
     for(let i=0;i<this.names.length;i++){
       var itemName = this.names[i];
       
@@ -36,13 +35,12 @@ Page({
         name: itemName
       }).get({
         success: res => {
-          //console.log(res);
           urls.push(res.data[0].url[0]);
-          
           if(i==this.names.length-1){
             this.setData({
               imgUrls:urls
             })
+            
           }
         },
         fail: err => {
@@ -54,7 +52,9 @@ Page({
         }
       })
     }
-    console.log(this.names);
+    this.imgUrls = urls;
+    //console.log(this.names);
+    console.log(this.imgUrls);
   },
 
   /**
