@@ -10,3 +10,12 @@
   padding: 0 40rpx;
   text-align: center;
 }
+
+.image-container{
+  margin-top: 5vh; 
+}
+
+.image-container image{
+  margin-top: 5vh;
+  width: 100vw;
+}
