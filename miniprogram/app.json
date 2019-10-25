@@ -17,6 +17,7 @@
     "pages/products/products",
     "pages/solutions/solutions",
     "pages/contact/contact",
+    "pages/about/about",
     "pages/Coop/Coop",
     "pages/details/details"
   ],
@@ -46,7 +47,7 @@
         "text": "联系我们"
       },
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/about/about",
         "iconPath": "images/file.png",
         "selectedIconPath": "images/file.png",
         "text": "公司简介"

@@ -1,6 +1,4 @@
-//contact.js
-
-var app = getApp()
+var app = getApp();
 
 Page({
 
@@ -8,46 +6,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    markers: [{
-      iconPath: "/images/map-marker-48.png",
-      id: 0,
-      latitude: 28.147820,
-      longitude: 112.995530,
-      width: 35,
-      height: 35,
-      callout: {
-        content:"湖南鑫诺家具有限公司",
-        fontSize:14,
-        color: "#000",
-        padding: 8,
-        display: 'ALWAYS',
-      }
-    }],
     
   },
 
-  phoneCall: function () {
-    wx.makePhoneCall({
-      phoneNumber: '+17785877172',
+  back: function () {
+    console.log('-----------back');
+    wx.navigateBack({
+      delta: 1, // 回退前 delta(默认为1) 页面
     })
   },
   
-  navigateClick: function (e){
-    wx.openLocation({
-      latitude: 28.147820,
-      longitude: 112.995530,
-      scale:14,
-      name: "湖南鑫诺家具有限公司",
-      address: "雨花区桔园小区城开大厦综合楼803、804室",
-    })
-
-  },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
