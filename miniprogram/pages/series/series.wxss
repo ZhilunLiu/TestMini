@@ -1,0 +1,17 @@
+/* miniprogram/pages/series/series.wxss */
+.margin{
+  width:100vw;
+  height: 2vh;
+  color: rgba(128, 128, 128, 0.411);
+}
+.title{
+  height: 3vh;
+  width: 100vw;
+  font-size: 5vw;
+}
+image {
+   margin-right: auto;
+   margin-left: auto;
+   width: 100vw;
+   height:70vh;
+}

@@ -25,16 +25,32 @@
       <text>合作品牌</text>
     </view>
     <view class = "box">
-      <image src='../../images/user.png'></image>
+
+      <button  open-type = 'contact' class = "button" ><image src='../../images/user.png'></image></button>
       <text>在线询价</text>
     </view>
 
   </view>
   </view>
 
-  <view class = "bgOfsub">
-    <view class = "subtitle">近期案例</view>
-  </view>
 
+  <view class = "bgOfsub">
+  <view class = "line"></view>
+  <view class="subtitle"><image src="/images/title.png"></image> 热销系列</view>
+  <view class = "line"></view>
+  </view>
+    <view class ="swiper">
+    <swiper class = "swiperrr2" indicator-dots="{{indicatorDots}}"
+      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}} " bindchange="bindchangeTag">
+      <block wx:for="{{seriesUrls}}">
+        <swiper-item>
+          <image src="{{item}}" class="swiperrr" data-index = "{{index}}" data-url="{{item}}" bindtap="tapSeries" />
+      </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class = "foot">
+    <image src ='https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%85%AC%E5%85%B1/foot.PNG?sign=e04216eb9891455eb016fc066839b2f3&t=1572029084'></image>
+  </view>
 </view> 
 

@@ -14,9 +14,9 @@ button:focus{
   outline: 0;
 }
 
-button::after{
-  border: none;
-}
+button::after {
+  border: 0;
+}  
 
 
 page {
