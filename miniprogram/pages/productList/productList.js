@@ -33,12 +33,12 @@ Page({
             {
               child_id: 1,
               name: '柏拉图主管桌',
-              image: "https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E6%9F%8F%E6%8B%89%E5%9B%BE/c2%20%E5%A4%A7%E4%BC%9A%E8%AE%AE%E6%A1%8C-2-7000.jpg?sign=173f32e808f56337f7c6fce7f28452c0&t=1571804309"
+              image: "https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E6%9F%8F%E6%8B%89%E5%9B%BE/c15%20%E7%8F%AD%E5%8F%B0.jpg?sign=d0bb54d38981bbfaf0a89440d0c2d65c&t=1571805863"
             },
             {
               child_id: 2,
               name: '高管系列班台',
-              image: "https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E9%AB%98%E7%AE%A1%E7%B3%BB%E5%88%97/%E7%8F%AD%E5%8F%B03-2.jpg?sign=72ba95bbe6a81c9d6404fd6c1b188d3b&t=1571805442"
+              image: "https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E9%AB%98%E7%AE%A1%E7%B3%BB%E5%88%97/min/%E7%8F%AD%E5%8F%B0E-2-min.jpg?sign=99d3f353a91157acce9ed26abb7dcf84&t=1572049223"
             },
             {
               child_id: 3,
@@ -509,7 +509,7 @@ Page({
             {
               child_id: 3,
               name: '柏拉图主管桌',
-              image: "https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E6%9F%8F%E6%8B%89%E5%9B%BE/c2%20%E5%A4%A7%E4%BC%9A%E8%AE%AE%E6%A1%8C-2-7000.jpg?sign=173f32e808f56337f7c6fce7f28452c0&t=1571804309"
+              image: "https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E6%9F%8F%E6%8B%89%E5%9B%BE/c15%20%E7%8F%AD%E5%8F%B0.jpg?sign=d0bb54d38981bbfaf0a89440d0c2d65c&t=1571805863"
             },
             {
               child_id: 4,
