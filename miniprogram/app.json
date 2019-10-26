@@ -21,7 +21,8 @@
     "pages/Coop/Coop",
     "pages/details/details",
     "pages/solutionDetail/solutionDetail",
-    "pages/series/series"
+    "pages/series/series",
+    "pages/productList/productList"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

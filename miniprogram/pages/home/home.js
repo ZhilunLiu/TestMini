@@ -26,7 +26,7 @@ Page({
   goProducts: function (event) {
     console.log('clicked');
     wx.navigateTo({
-      url: '../products/products',
+      url: '../productList/productList',
     })
   },
 
