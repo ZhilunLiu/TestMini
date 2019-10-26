@@ -26,6 +26,13 @@ Page({
     })
   },  
 
+  buy:function(e){
+    var name = e.currentTarget.dataset.name;
+    wx.navigateTo({
+      url: '../cart/cart?name=' + name,
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

@@ -2,7 +2,7 @@
 <view class = container>
   <view class ="swiper">
     <swiper class = "swiperrr" indicator-dots="{{indicatorDots}}"
-      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}} " bindchange="bindchangeTag">  
+      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}} " >  
       <block wx:for="{{imgUrls}}">
         <swiper-item>
           <image src="{{item}}" class="slide-image"/>
@@ -28,7 +28,7 @@
     </view>
     <view class = "body">体积：{{size[index]}} 立方米</view>
     <view class = "body">颜色/说明：{{describtion}}</view>
-
+    <button bindtap="buy" data-name = "{{name}}">立即购买</button>
   </view>
 
 </view>
