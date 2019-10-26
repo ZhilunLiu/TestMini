@@ -22,8 +22,8 @@
     "pages/details/details",
     "pages/solutionDetail/solutionDetail",
     "pages/series/series",
-                    "pages/cart/cart"
-
+    "pages/productList/productList",
+    "pages/cart/cart"
 
   ],
   "window": {
