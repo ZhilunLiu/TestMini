@@ -31,7 +31,7 @@
 
   <view class = "row_flex">
     <text>详细地址</text>
-    <input class = "input"type ="text" placeholder="XX路XX单元XX号"/>
+    <input class = "input"type ="text" placeholder="XX路XX单元XX号" bindinput="addressInput"/>
   </view>
 
   <view class = "line"></view>
@@ -40,3 +40,10 @@
 <view class = "savebutton">
   <view class = "save" bindtap="save">保存</view>
 </view>
+
+<popup id='popup' 
+      title='提示' 
+      content='请填写完整用户信息' 
+      btn_ok='好的' 
+      bind:success="_success">
+</popup>

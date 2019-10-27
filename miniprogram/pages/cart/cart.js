@@ -8,7 +8,16 @@ Page({
   },
 
   pay:function(e){
-
+    var app = getApp();
+    if (app.globalData.cartList === undefined || app.globalData.cartList.length == 0){
+      this.noItem.showPopup();
+    }else{
+      app.globalData.paying = true;
+      app.globalData.totalPrice = this.data.totalPrice;
+      wx:wx.navigateTo({
+        url: '../myaddress/myaddress',
+      })
+    }
   },
 
   onShow:function() {
@@ -107,7 +116,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var openId = options.openid;
+    this.popup = this.selectComponent("#popup");
+    this.noItem = this.selectComponent("#noItem");
+    var app = getApp();
+    var openId = app.globalData.openId;
+    console.log('openId is '+openId);
+    if(openId===undefined||openId==''){
+      this.popup.showPopup();
+    }
     /*
     const db = wx.cloud.database();
     // 查询当前家具的details对应name
@@ -143,11 +159,27 @@ Page({
 
   },
 
+  _success() {
+    console.log('你点击了确定');
+    this.popup.hidePopup();
+    this.back();
+  },
+
+  _noItemsuccess(){
+    console.log('你点击了确定');
+    this.noItem.hidePopup();
+  },
+
+  back: function (e) {
+    wx.navigateBack({
+      delta: 1, // 回退前 delta(默认为1) 页面
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**

@@ -16,33 +16,28 @@ Page({
   getInfo:function(e){
     var app = getApp();
     console.log(e.detail.userInfo);
-    this.login();
     app.globalData.userInfo = e.detail.userInfo;
-    this.setData({
-      logged:true,
-      avatarUrl: e.detail.userInfo.avatarUrl,
-      name: e.detail.userInfo.nickName
-    })
+    this.login();
+    wx.showToast({ title: '加载中', icon: 'loading', duration: 10000 });
   },
 
+
+
   goMyorders:function(e){
-    var openid = e.currentTarget.dataset.openid;
     wx.navigateTo({
       url: '../myorders/myorders',
     })
   },
 
   goMyaddress:function(e){
-    var openid = e.currentTarget.dataset.openid;
     wx.navigateTo({
       url: '../myaddress/myaddress',
     })
   },
 
   goCart:function(e){
-    var openid = e.currentTarget.dataset.openid;
     wx.navigateTo({
-      url: '../cart/cart?openid',
+      url: '../cart/cart',
     })
   },
 
@@ -108,6 +103,12 @@ Page({
         var openid = res.result.openid;
         app.globalData.openId = openid;
         console.log('云函数获取到的openid: ', res.result.openid)
+        this.setData({
+          logged: true,
+          avatarUrl: app.globalData.userInfo.avatarUrl,
+          name: app.globalData.userInfo.nickName
+        })
+        wx.hideToast();
       }
     })
   }

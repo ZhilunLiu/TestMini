@@ -1,37 +1,29 @@
-// miniprogram/pages/myorders/myorders.js
+// miniprogram/pages/bill/bill.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
-  },
-
-  //弹窗
-  _success() {
-    console.log('你点击了确定');
-    this.popup.hidePopup();
-    this.back();
-  },
-  //上一级
-  back: function (e) {
-    wx.navigateBack({
-      delta: 1, // 回退前 delta(默认为1) 页面
-    })
+    cart:[],
+    name:'',
+    phone:'',
+    address:'',
+    totalprice:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.popup = this.selectComponent("#popup");
     var app = getApp();
-    var openId = app.globalData.openId;
-    console.log('openId is ' + openId);
-    if (openId === undefined || openId == '') {
-      this.popup.showPopup();
-    }
+    this.setData({
+      cart: app.globalData.cartList,
+      totalprice: app.globalData.totalPrice,
+      name: app.globalData.chooseName,
+      phone: app.globalData.choosePho,
+      address: app.globalData.chooseAdd
+    })
   },
 
   /**

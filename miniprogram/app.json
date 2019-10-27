@@ -15,7 +15,8 @@
     "myorders/myorders",
     "pages/myorders/myorders",
     "pages/myaddress/myaddress",
-    "pages/addAddress/addAddress"
+    "pages/addAddress/addAddress",
+    "pages/bill/bill"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

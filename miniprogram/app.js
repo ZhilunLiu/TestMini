@@ -21,6 +21,12 @@ App({
       sysWidth: wx.getSystemInfoSync().windowWidth,
       sysHeight: wx.getSystemInfoSync().windowHeight, //图片宽度
       cartList:[],
+      paying:false,
+      choosenAdd:'',
+      choosePho:'',
+      chooseName:'',
+      totalPrice:'',
+      
   }
   }
 })

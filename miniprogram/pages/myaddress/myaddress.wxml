@@ -1,13 +1,25 @@
 <!--miniprogram/pages/myaddress/myaddress.wxml-->
-<view wx:for ="{{address}}" class = "address">
+<view wx:for ="{{address}}" class = "address" bindtap="chooseAdd" data-index="{{index}}">
   <view class = "row_flex">
     <view class = "name">{{name[index]}}</view>
     <view class = "phone">{{phone[index]}}</view>
+
   </view>
   <view class = "detail">{{address[index]}}</view>
+  <view class = "icon">
+    <image bindtap="deleteAddress" data-index="{{index}}" src = "../../images/delete.png"></image>
+  </view>  
 </view>
 
 
 <view class = "fixed_view">
   <image src = "../../images/plus2.png" bindtap="addAddress"></image>
 </view>
+
+
+<popup id='popup' 
+      title='提示' 
+      content='请先登录' 
+      btn_ok='好的' 
+      bind:success="_success">
+</popup>

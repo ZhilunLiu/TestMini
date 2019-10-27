@@ -1,0 +1,15 @@
+<!--miniprogram/pages/bill/bill.wxml-->
+
+<view class = "items">
+  <view class = "row_flex">
+    <view class = "userInfo">{{name}}</view>
+  </view>
+</view>
+
+
+
+<view class ="fixed_view">
+    <!-- 总价 -->
+    <view class = "totalPrice">￥{{totalPrice}}</view>
+    <view class="pay" bindtap="pay">付款</view>
+</view>
