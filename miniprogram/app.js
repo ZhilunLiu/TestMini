@@ -17,8 +17,10 @@ App({
 
     this.globalData =  {
       userInfo: null,
+      openId:'',
       sysWidth: wx.getSystemInfoSync().windowWidth,
       sysHeight: wx.getSystemInfoSync().windowHeight, //图片宽度
+      cartList:[],
   }
   }
 })

@@ -1,19 +1,6 @@
 {
   "pages": [
     "pages/home/home",
-    "pages/index/index",
-    "pages/userConsole/userConsole",
-    "pages/storageConsole/storageConsole",
-    "pages/databaseGuide/databaseGuide",
-    "pages/addFunction/addFunction",
-    "pages/deployFunctions/deployFunctions",
-    "pages/chooseLib/chooseLib",
-    "pages/openapi/openapi",
-    "pages/openapi/serverapi/serverapi",
-    "pages/openapi/callback/callback",
-    "pages/openapi/cloudid/cloudid",
-    "pages/im/im",
-    "pages/im/room/room",
     "pages/products/products",
     "pages/solutions/solutions",
     "pages/contact/contact",
@@ -23,14 +10,18 @@
     "pages/solutionDetail/solutionDetail",
     "pages/series/series",
     "pages/productList/productList",
-    "pages/cart/cart"
-
+    "pages/cart/cart",
+    "pages/profile/profile",
+    "myorders/myorders",
+    "pages/myorders/myorders",
+    "pages/myaddress/myaddress",
+    "pages/addAddress/addAddress"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTitleText": "湖南鑫诺家具",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
@@ -56,6 +47,12 @@
         "iconPath": "images/file.png",
         "selectedIconPath": "images/file.png",
         "text": "公司简介"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "iconPath": "images/profile.png",
+        "selectedIconPath": "images/profile.png",
+        "text": "个人中心"
       }
     ]
   },

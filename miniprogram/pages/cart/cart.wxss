@@ -1,1 +1,108 @@
 /* miniprogram/pages/cart/cart.wxss */
+Page {
+  display: flex;
+  flex-direction: column;
+  background: rgba(187, 187, 187, 0.678);
+  box-sizing: border-box;
+} 
+
+.row_flex{
+  flex-direction: row;
+  display: flex;
+}
+.column_flex{
+  flex-direction: column;
+  display: flex;
+}
+.itemName{
+  margin-top:3vh;
+  font-size:40rpx;
+}
+.desc{
+  margin-top:1vh;
+  font-size:30rpx;
+}
+.price{
+  margin-left: 15vw;
+  font-size:40rpx;
+  color:coral;
+}
+.selectIcon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.items{
+  margin-top:5vw;
+  margin-left:5vw;
+  margin-right:5vw;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.icon{
+  margin-top: 2vw;
+  margin-left: 2vw;
+  width: 100%;
+  height: 100%;
+}
+.icon image{
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.num{
+  margin-left: 10vw;
+  width: 100%;
+  height: 100%;
+}
+
+.num image{
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.num text{
+  margin-left: 3vw;
+  margin-right: 3vw;
+  font-size: 40rpx;
+  font-weight: 500;
+}
+
+.cart-thumb{
+  width:40vw;
+  height:28vw;
+}
+
+.fixed_view{
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height:6vh;
+  background-color: white;
+  display: flex;
+  align-items: center;
+}
+.fixed_view text{
+  margin-left: 2vw;
+}
+.totalPrice{
+  margin-left: 48vw;
+  color:coral;
+
+}
+.selectAllIcon{
+  margin-left: 2vw;
+}
+.pay{
+  margin-left: 2vw;
+  border-radius: 5px;
+  background-color: coral;
+  width:18vw;
+  height: 8vw;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

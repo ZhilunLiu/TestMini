@@ -320,7 +320,7 @@ Page({
             {
               child_id: 10,
               name: '柏拉图三角六人位',
-              image: "https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E6%9F%8F%E6%8B%89%E5%9B%BE/c12%20%E4%B8%89%E8%A7%926%E4%BA%BA%E4%BD%8D%20%E9%A1%B6.jpg?sign=e28284b400038a25c556f91c2deea043&t=1571806281"
+              image: "https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E6%9F%8F%E6%8B%89%E5%9B%BE/min/D1.PNG?sign=9356a6613bde8f04ed87c75e79820dcf&t=1572124363"
             },
             {
               child_id: 11,
@@ -619,7 +619,7 @@ Page({
             {
               child_id: 25,
               name: '柏拉图三角三人位',
-              image: "https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E6%9F%8F%E6%8B%89%E5%9B%BE/c13%20%E4%B8%89%E8%A7%923%E4%BA%BA%E4%BD%8D.jpg?sign=fa20338f8b7b6b142a84361f32dfe2cd&t=1571806290"
+              image: "https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E6%9F%8F%E6%8B%89%E5%9B%BE/min/D1.PNG?sign=9356a6613bde8f04ed87c75e79820dcf&t=1572124363"
             },
             {
               child_id: 26,

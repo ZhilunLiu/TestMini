@@ -1,0 +1,42 @@
+<!--miniprogram/pages/addAddress/addAddress.wxml-->
+<view class = "bg">
+  <view class = "row_flex">
+    <text>姓名</text>
+    <input class = "input"type ="text" placeholder="收件人姓名" bindinput="nameInput"/>
+  </view>
+
+  <view class = "line"></view>
+
+  <view class = "row_flex">
+    <text>电话</text>
+    <input class = "input"type ="number" placeholder="联系电话" bindinput="phoneInput"/>
+  </view>
+
+  <view class = "line"></view>
+
+  
+  <view class = "row_flex">
+    <text>省份</text>
+    <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+      <view wx:if = "{{hasNoRegion}}">
+        <button class = "picker_button" type = "default" size = "mini">选择地区</button>
+      </view>
+      <view wx:else>
+        <text class ="addressInput">{{region[0]}} {{region[1]}} {{region[2]}}</text>
+      </view>
+    </picker>
+  </view>
+
+  <view class = "line"></view>
+
+  <view class = "row_flex">
+    <text>详细地址</text>
+    <input class = "input"type ="text" placeholder="XX路XX单元XX号"/>
+  </view>
+
+  <view class = "line"></view>
+</view>
+
+<view class = "savebutton">
+  <view class = "save" bindtap="save">保存</view>
+</view>

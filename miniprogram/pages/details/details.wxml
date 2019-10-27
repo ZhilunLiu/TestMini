@@ -2,7 +2,7 @@
 <view class = container>
   <view class ="swiper">
     <swiper class = "swiperrr" indicator-dots="{{indicatorDots}}"
-      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}} ">  
+      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}} " bindchange="bindchangeTag">  
       <block wx:for="{{imgUrls}}">
         <swiper-item>
           <image src="{{item}}" class="slide-image"/>
@@ -13,7 +13,7 @@
   <view class = "title">
     <text class = "priceText">￥{{price[index]}}</text>
     <view class = "titleText">{{name}}</view>
-    <picker bindchange="bindPickerChange" value="{{index}}" range="{{dimension}}">
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{provinces}}">
     <button class = "picker_button" type = "default" size = "mini">尺寸选择</button>
     </picker>
     <view wx:if= "{{dimensionFlag}}">

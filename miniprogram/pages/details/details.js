@@ -26,11 +26,56 @@ Page({
     })
   },  
 
+  bindchangeTag:function(e){
+      console.log("调用swiper");
+  },
+
   buy:function(e){
-    var name = e.currentTarget.dataset.name;
-    wx.navigateTo({
+    var app = getApp();
+    if(app.globalData.openid === undefined){
+      
+    }
+    var curCartList = app.globalData.cartList;
+    var itName = e.currentTarget.dataset.name;
+    var found = false;
+    if (curCartList.length != 0){
+      console.log('not empty!');
+      for (let i = 0; i < curCartList.length; i++) {
+        if (curCartList[i].title == itName) {
+          console.log('same item found');
+          curCartList[i].num = curCartList[i].num + 1;
+          found = true;
+          break;
+        }
+      }
+      if(found==false){
+        this.pushNewItem();
+      }
+    }else{
+      this.pushNewItem();
+    }
+
+
+    console.log(app.globalData.cartList);
+    /*wx.navigateTo({
       url: '../cart/cart?name=' + name,
-    })
+    })*/
+  },
+
+
+  pushNewItem: function () {
+    var app = getApp();
+    var curCartList = app.globalData.cartList;
+    var newItem = {
+      title: this.data.name,
+      price: this.data.price[this.data.index],
+      image: this.data.imgUrls[this.data.index],
+      dimension: this.data.dimension[this.data.index],
+      selected: true,
+      num: 1
+    };
+
+    curCartList.push(newItem);
   },
 
   /**
@@ -39,7 +84,7 @@ Page({
   onLoad: function (options) {
     var itemName = options.name;
     console.log(itemName);
-    const db = wx.cloud.database()
+    const db = wx.cloud.database();
     // 查询当前家具的details对应name
     db.collection('detail').where({
       name: itemName

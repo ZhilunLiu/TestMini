@@ -1,0 +1,13 @@
+<!--miniprogram/pages/myaddress/myaddress.wxml-->
+<view wx:for ="{{address}}" class = "address">
+  <view class = "row_flex">
+    <view class = "name">{{name[index]}}</view>
+    <view class = "phone">{{phone[index]}}</view>
+  </view>
+  <view class = "detail">{{address[index]}}</view>
+</view>
+
+
+<view class = "fixed_view">
+  <image src = "../../images/plus2.png" bindtap="addAddress"></image>
+</view>
