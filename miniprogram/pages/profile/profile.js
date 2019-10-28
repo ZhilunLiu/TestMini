@@ -24,6 +24,7 @@ Page({
 
 
   goMyorders:function(e){
+    console.log('go to my orders');
     wx.navigateTo({
       url: '../myorders/myorders',
     })

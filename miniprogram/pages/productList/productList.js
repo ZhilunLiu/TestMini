@@ -148,7 +148,7 @@ Page({
             },
             {
               child_id: 3,
-              name: '柏拉图三门文件柜3',
+              name: '柏拉图三门文件柜',
               image: "https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E6%9F%8F%E6%8B%89%E5%9B%BE/%E6%9F%9C3.jpg?sign=fda58cf6856d788c31803cc76129ddb3&t=1571806170"
             },
             {

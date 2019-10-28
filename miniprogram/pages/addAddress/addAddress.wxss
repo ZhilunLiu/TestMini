@@ -67,5 +67,5 @@ Page {
   margin-left:5vw;
 }
 .addressInput{
-  font-size:2vw;
+  font-size:5rpx;
 }

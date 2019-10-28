@@ -116,8 +116,8 @@ Page({
     var id = app.globalData.openId;
     this.data.sysName.push(this.data.name);
     this.data.sysPhone.push(this.data.phone);
-    this.data.sysAddress.push(this.data.address);
-
+    var addDetail = this.data.region.concat(this.data.address);
+    this.data.sysAddress.push(addDetail);
     db.collection('users').doc(this.data.dataId).update({
       data: {
         name: this.data.sysName,
@@ -141,14 +141,14 @@ Page({
     this.data.sysName.push(this.data.name);
     this.data.sysPhone.push(this.data.phone);
     this.data.sysAddress.push(this.data.address);
-
+    var addDetail = this.data.region.concat(this.data.address);
     var id = getApp().globalData.openId;
     const db = wx.cloud.database();
     db.collection('users').add({
       data: {
         name: this.data.sysName,
         phone: this.data.sysPhone,
-        address: this.data.sysAddress,
+        address: addDetail,
         orders:[],
       },
       success: res => {

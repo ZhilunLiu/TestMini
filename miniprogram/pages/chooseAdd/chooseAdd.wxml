@@ -1,14 +1,11 @@
 <!--miniprogram/pages/myaddress/myaddress.wxml-->
-<view wx:for ="{{address}}" class = "address">
+<view wx:for ="{{address}}" class = "address" bindtap="chooseAdd" data-index="{{index}}">
   <view class = "row_flex">
     <view class = "name">{{name[index]}}</view>
     <view class = "phone">{{phone[index]}}</view>
 
   </view>
   <view class = "detail">{{address[index]}}</view>
-  <view class = "icon">
-    <image bindtap="deleteAddress" data-index="{{index}}" src = "../../images/delete.png"></image>
-  </view>  
 </view>
 
 

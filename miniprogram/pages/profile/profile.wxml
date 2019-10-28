@@ -11,8 +11,8 @@
 </view>
 
 <view class = "menu">
-  <view class = "row_view" bindtap="goMyorders" data-openid ="{{openId}}" >
-    <view class = "box">
+  <view class = "row_view"  >
+    <view class = "box" bindtap="goMyorders" data-openid ="{{openId}}">
       <image src = "../../images/orders.png" ></image>
       <text>我的订单</text>
     </view> 

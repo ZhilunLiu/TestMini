@@ -1,15 +1,15 @@
-// miniprogram/pages/myaddress/myaddress.js
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      name:[],
-      phone:[],
-      hasAddress:false,
-      address:[],
-      dataId:'',
+    name: [],
+    phone: [],
+    hasAddress: false,
+    address: [],
+    dataId: '',
   },
 
   /**
@@ -26,6 +26,22 @@ Page({
     this.search();
   },
 
+  //选择地址
+  chooseAdd: function (e) {
+    var app = getApp();
+    if (app.globalData.paying) {
+      var idx = e.currentTarget.dataset.index;
+      var add = this.data.address[idx];
+      var pho = this.data.phone[idx];
+      var name = this.data.name[idx];
+      app.globalData.chooseAdd = add;
+      app.globalData.choosePho = pho;
+      app.globalData.chooseName = name;
+      wx: wx.navigateTo({
+        url: '../bill/bill',
+      })
+    }
+  },
 
   //弹窗
   _success() {
@@ -40,7 +56,7 @@ Page({
     })
   },
 
-  search:function(e){
+  search: function (e) {
     var app = getApp();
     var nowopenId = app.globalData.openId;
     const db = wx.cloud.database();
@@ -69,9 +85,9 @@ Page({
     })
   },
 
-  deleteAddress: function(e) {
+  deleteAddress: function (e) {
     var idx = e.currentTarget.dataset.index;
-    var newname = this.data.name.splice(idx,idx+1);
+    var newname = this.data.name.splice(idx, idx + 1);
     var newphone = this.data.phone.splice(idx, idx + 1);
     var newaddress = this.data.address.splice(idx, idx + 1);
     console.log(this.data.name);
@@ -90,7 +106,7 @@ Page({
       },
       success: res => {
         this.setData({
-          name :this.data.name,
+          name: this.data.name,
           phone: this.data.phone,
           address: this.data.address,
         })
@@ -104,7 +120,7 @@ Page({
 
   },
 
-  addAddress:function(e){
+  addAddress: function (e) {
     wx.navigateTo({
       url: '../addAddress/addAddress',
     })

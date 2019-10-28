@@ -15,7 +15,7 @@ Page({
       app.globalData.paying = true;
       app.globalData.totalPrice = this.data.totalPrice;
       wx:wx.navigateTo({
-        url: '../myaddress/myaddress',
+        url: '../chooseAdd/chooseAdd',
       })
     }
   },
@@ -124,29 +124,7 @@ Page({
     if(openId===undefined||openId==''){
       this.popup.showPopup();
     }
-    /*
-    const db = wx.cloud.database();
-    // 查询当前家具的details对应name
-    db.collection('carts').where({
-      openid: openId
-    }).get({
-      success: res => {
-        console.log(res);
-        this.setData({
-        })
-        console.log('[数据库] [查询记录] 成功: ', res);
-      },
-      fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '查询记录失败'
-        })
-        console.error('[数据库] [查询记录] 失败：', err)
-      }
-    })*/
     
-    
-    var app = getApp();
     var boolean = false;
     var list = app.globalData.cartList;
     if (list.length != 0) {

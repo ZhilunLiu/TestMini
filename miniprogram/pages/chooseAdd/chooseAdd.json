@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "选择收获地址",
+  "usingComponents": {
+    "popup": "/component/popup/popup"
+  }
+}

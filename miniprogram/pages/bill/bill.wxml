@@ -1,15 +1,34 @@
 <!--miniprogram/pages/bill/bill.wxml-->
 
 <view class = "items">
+  <view class = "userInfo">{{name}}</view>
+  <view class = "line"/>
   <view class = "row_flex">
-    <view class = "userInfo">{{name}}</view>
+    <view class = "contact">联系电话</view>
+    <view class = "phonenumber">{{phone}}</view>
   </view>
+  <view class = "line"/>
+  <view class = "address">收货地址：{{address}}</view>
+</view>
+
+<view class = "items" wx:for="{{cart}}">
+  <view class = "row_flex">
+        <!-- 点击商品图片可跳转到商品详情 -->
+    <image src="{{item.image}}" class="cart-thumb" ></image>
+
+    <view class = "column_flex">
+        <text class ="itemName">{{item.title}}</text>
+        <text class = "desc">尺寸:{{item.dimension[0]}}mm长,{{item.dimension[1]}}mm宽,{{item.dimension[2]}}mm高</text>
+    </view>
+  </view>
+      <text class = "price">￥{{item.price}}</text>
+
 </view>
 
 
 
 <view class ="fixed_view">
     <!-- 总价 -->
-    <view class = "totalPrice">￥{{totalPrice}}</view>
+    <view class = "totalPrice">￥{{totalprice}}</view>
     <view class="pay" bindtap="pay">付款</view>
 </view>
