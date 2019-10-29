@@ -22,6 +22,11 @@ Page({
               name: '高管系列会议桌',
               image: "https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E9%AB%98%E7%AE%A1%E7%B3%BB%E5%88%97/%E4%BC%9A%E8%AE%AE%E6%A1%8C.PNG?sign=990a716fefb422944c2d900ae60084ab&t=1571902657"
             },
+            {
+              child_id:4,
+              name:'测试物品',
+              image:"https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E6%9F%8F%E6%8B%89%E5%9B%BE/c22%20%E5%8F%8C%E4%BA%BA%E8%81%8C%E5%91%98.jpg?sign=50c14925493bf6552ef749e0a1c52c5b&t=1572030951"
+            }
           ]
       },
       {

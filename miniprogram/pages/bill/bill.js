@@ -10,10 +10,92 @@ Page({
     phone:'',
     address:'',
     totalprice:'',
+    orderNumer:'',
   },
 
   pay:function(e){
+    var items = '';
+    for(let i =0;i<this.data.cart.length;i++){
+      items.concat('，');
+      items.concat(this.data.cart[i]);
+    }
+    var id = getApp().globalData.openId;
     //调用微信支付
+    wx.cloud.callFunction({
+      name: 'getPay',
+      data: {
+        total_fee: this.data.totalprice*100,
+        attach:'test1',
+        body:'test2',
+        appId:'wx036b87531457c042',
+        openId:id,
+        //attach: this.data.name,
+        //body: items
+      }
+    }).then(res => {
+      var order = "otn" + res.result.nonce_str + res.result.timeStamp;
+      this.setData({
+        orderNumer: order,
+      })
+      console.log(res);
+        wx.requestPayment({
+          //传入变量
+          appId: res.result.appid,
+          timeStamp: res.result.timeStamp,
+          nonceStr: res.result.nonce_str,
+          package: 'prepay_id=' + res.result.prepay_id,
+          signType: 'MD5',
+          paySign: res.result.paySign,
+          success: res => {
+            console.log(res);
+            this.saveOrder();
+            wx.showToast({ title: '加载中', icon: 'loading', duration: 10000 });
+          },
+          fail: err => {
+            wx.showToast({
+              icon: 'none',
+              title: '支付失败，请重试'
+            })
+            console.error('微信支付失败：', err)
+          }
+        })
+      })
+
+  },
+
+  saveOrder:function(){
+    const db = wx.cloud.database();
+    db.collection('orders').add({
+      data: {
+        name: this.data.name,
+        phone: this.data.phone,
+        address: this.data.address,
+        totalPrice:this.data.totalprice,
+        items:this.data.cart,
+        orderNumber:this.data.orderNumer,
+      },
+      success: res => {
+        // 在返回结果中会包含新创建的记录的 _id
+        wx.showToast({
+          title: '新增记录成功',
+        })
+        console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+        //隐藏加载中
+        wx.hideToast();
+        //去订单详情
+        wx.redirectTo({
+          url: '../myorders/myorders'
+        })
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '新增记录失败'
+        })
+        console.error('[数据库] [新增记录] 失败：', err)
+      }
+    })
+
   },
 
   /**

@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    orders:[],
   },
 
   //弹窗
@@ -32,6 +32,42 @@ Page({
     if (openId === undefined || openId == '') {
       this.popup.showPopup();
     }
+
+    this.search();
+ 
+
+  },
+
+  search:function(){
+    var openid = getApp().globalData.openId;
+
+    const db = wx.cloud.database();
+    // 查询当前家具的details对应name
+    db.collection('orders').where({
+      _openid: openid
+    }).get({
+      success: res => {
+        console.log(res);
+        this.setData({
+          orders:res.data
+        })
+        console.log('[数据库] [查询记录] 成功: ', res);
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
+  },
+
+  goOrderDetail:function(e){
+    var order = e.currentTarget.dataset.order;
+    wx.navigateTo({
+      url: '../orderDetail/orderDetail?order=' + order,
+    })
   },
 
   /**
@@ -81,5 +117,9 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+
+
+
 })

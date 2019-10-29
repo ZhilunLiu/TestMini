@@ -1,5 +1,20 @@
 <!--miniprogram/pages/myorders/myorders.wxml-->
-<text>miniprogram/pages/myorders/myorders.wxml</text>
+    <!-- wx:for 渲染订单列表 -->
+    <view wx:for="{{orders}}" class = "items" bindtap="goOrderDetail" data-order = "{{item}}">
+      <view class = "row_flex">
+
+        <!-- 点击商品图片可跳转到订单详情 -->
+        <image src="{{item.items[0].image}}" class="cart-thumb" ></image>
+
+        <view class = "column_flex">
+          <text class ="itemName">{{item.items[0].title}}等</text>
+          <text class = "desc">地址:{{item.address}}</text>
+          <text class = "desc">收货人:{{item.name}}</text>
+          <text class = "desc">联系电话:{{item.phone}}</text>
+        </view>
+      </view>
+
+    </view>
 
 
 <popup id='popup' 

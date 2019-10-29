@@ -1,0 +1,36 @@
+<view class = "bg">
+  <view class = "row_flex">
+    <text>姓名:{{order.name}}</text>
+  </view>
+
+  <view class = "line"></view>
+
+  <view class = "row_flex">
+    <text>电话:{{order.phone}}</text>
+  </view>
+
+  <view class = "line"></view>
+
+  
+  <view class = "row_flex">
+    <text>地址:{{order.address}}</text>
+  </view>
+
+  <view class = "line"></view>
+
+   <view class = "row_flex">
+    <text>日期:{{date}}</text>
+  </view>
+</view>
+
+<view wx:for = "{{order.items}}" class = "bg">
+  <view class = "row_flex">
+    <image src = "{{item.image}}"/>
+    <view class ="column_flex">
+      <text>{{item.title}}</text>
+    </view>
+
+  </view>
+
+</view>
+

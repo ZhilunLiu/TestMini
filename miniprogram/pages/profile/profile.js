@@ -15,8 +15,8 @@ Page({
 
   getInfo:function(e){
     var app = getApp();
-    console.log(e.detail.userInfo);
     app.globalData.userInfo = e.detail.userInfo;
+    console.log(app.globalData.userInfo);
     this.login();
     wx.showToast({ title: '加载中', icon: 'loading', duration: 10000 });
   },
@@ -102,6 +102,7 @@ Page({
       name: 'login',
       complete: res => {
         var openid = res.result.openid;
+        app.globalData.userInfo.openId = openid;
         app.globalData.openId = openid;
         console.log('云函数获取到的openid: ', res.result.openid)
         this.setData({
