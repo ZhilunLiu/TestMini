@@ -37,7 +37,7 @@ Page {
 .userInfo{
    margin-top:2vh;
    margin-left:4vw;
-   font-size: 40rpx;
+   font-size: 35rpx;
 }
 
 .fixed_view text{
@@ -45,6 +45,7 @@ Page {
 }
 
 .contact{
+  margin-top:2vh;
    margin-left:4vw;
    font-size: 35rpx;
 }
@@ -52,13 +53,16 @@ Page {
 .address{
    margin-left:4vw;
    font-size: 35rpx;
-   margin-bottom: 1vh;
+   margin-top: 2vh;
+   white-space: nowrap;
 }
 
-.phonenumber{
+.content{
+  margin-top:2vh;
    margin-left:4vw;
+   width:56vw;
    font-size: 35rpx;
-   color: rgba(128, 128, 128, 0.712);
+   color: rgb(48, 47, 47);
 }
 .price{
   font-size:30rpx;
@@ -103,6 +107,6 @@ Page {
   width:80vw;
   height:5rpx;
   background-color: rgba(216, 216, 216, 0.479);
-  margin-bottom: 1vh;
-   margin-top: 1vh
+  margin-top: 1vh;
+  margin-left: 4vw;
 }

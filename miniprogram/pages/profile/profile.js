@@ -8,7 +8,11 @@ Page({
       logged:false,
       openId:'',
       avatarUrl:'',
+      nickname:'',
+      manager:false,
       name:'',
+      phone:'',
+      orderNumber:'',
   },
 
 
@@ -105,13 +109,70 @@ Page({
         app.globalData.userInfo.openId = openid;
         app.globalData.openId = openid;
         console.log('云函数获取到的openid: ', res.result.openid)
+        this.verifyManager();
         this.setData({
           logged: true,
           avatarUrl: app.globalData.userInfo.avatarUrl,
-          name: app.globalData.userInfo.nickName
+          nickname: app.globalData.userInfo.nickName
         })
         wx.hideToast();
       }
     })
+  },
+
+  verifyManager:function(e){
+    var app = getApp();
+    var openId = app.globalData.openId;
+    console.log('verifing, openid is '+openId);
+    const db = wx.cloud.database();
+    // 查询当前家具的details对应name
+    db.collection('managers').where({
+      openid: openId
+    }).get({
+      success: res => {
+        console.log(res);
+        if(res.data[0].openid==openId){
+          this.setData({
+            manager:true,
+          })
+        }
+        console.log('[数据库] [查询记录] 成功: ', res);
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
+    
+  },
+
+
+  nameInput: function (e) {
+    this.setData({
+      name: e.detail.value
+    })
+  },
+
+  phoneInput: function (e) {
+    this.setData({
+      phone: e.detail.value
+    })
+  },
+
+  orderNumInput: function (e) {
+    this.setData({
+      orderNumber: e.detail.value
+    })
+  },
+
+  search:function(e){
+    wx:wx.navigateTo({
+      url: '../searchOrder/searchOrder?name='+this.data.name+'&phone='+this.data.phone+'&orderNumber='+this.data.orderNumber,
+    })
   }
+
+  
 })

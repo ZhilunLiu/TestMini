@@ -13,7 +13,7 @@
   <view class = "title">
     <text class = "priceText">￥{{price[index]}}</text>
     <view class = "titleText">{{name}}</view>
-    <picker bindchange="bindPickerChange" value="{{index}}" range="{{provinces}}">
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{dimension}}">
     <button class = "picker_button" type = "default" size = "mini">尺寸选择</button>
     </picker>
     <view wx:if= "{{dimension[0]}}!=0}}">
@@ -28,7 +28,11 @@
     </view>
     <view class = "body">体积：{{size[index]}} 立方米</view>
     <view class = "body">颜色/说明：{{describtion}}</view>
-    <button bindtap="buy" data-name = "{{name}}">立即购买</button>
+
+    <view class = "buybutton">
+      <view class = "buy" bindtap="buy" data-name = "{{name}}">加入购物车</view>
+    </view>
+
   </view>
 
 </view>

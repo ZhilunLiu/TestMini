@@ -1,14 +1,21 @@
 <!--miniprogram/pages/bill/bill.wxml-->
 
 <view class = "items">
-  <view class = "userInfo">{{name}}</view>
-  <view class = "line"/>
   <view class = "row_flex">
-    <view class = "contact">联系电话</view>
-    <view class = "phonenumber">{{phone}}</view>
+    <view class = "userInfo">联系人:</view>
+    <view class = "content">{{name}}</view>
   </view>
   <view class = "line"/>
-  <view class = "address">收货地址：{{address}}</view>
+  <view class = "row_flex">
+    <view class = "contact">联系电话:</view>
+    <view class = "content">{{phone}}</view>
+  </view>
+  <view class = "line"/>
+  <view class = "row_flex">
+    <view class = "address">收货地址:</view>
+    <view class = "content">{{address}}</view>
+  </view>
+  <view class = "line"/>
 </view>
 
 <view class = "items" wx:for="{{cart}}">

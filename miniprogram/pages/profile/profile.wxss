@@ -50,3 +50,60 @@ Page {
 .iconDesc{
   margin-top:1vh;
 }
+
+.bg{
+  margin-top:5vw;
+  margin-left:5vw;
+  margin-right:5vw;
+  margin-bottom: 5vw;
+  width: 90vw;
+  height: 40vh;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.row_flex{
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+}
+
+.row_flex text{
+  margin-top: 2vh;
+  margin-left:10vw;
+}
+
+
+.input{
+  font-size: 5vw;
+  color: rgba(26, 24, 24, 0.89);
+  margin-top: 2vh;
+  margin-left:2vw;
+}
+
+.line{
+  width:70vw;
+  height:5rpx;
+  background-color: rgba(216, 216, 216, 0.479);
+  margin-left: 10vw;
+  margin-bottom: 1vh;
+   margin-top: 1vh
+}
+
+.searchButton{
+  border-radius: 5px;
+  background-color: coral;
+  width:18vw;
+  height: 8vw;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.search{
+  margin-top:4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -56,3 +56,26 @@ text {
    margin-top: 5rpx;
    font: 20;
 }
+
+.buybutton{
+  width: 100%;
+  height: 120rpx;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buy{
+
+  border-radius: 5px;
+  background-color: coral;
+  width:25vw;
+  height: 10vw;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}

@@ -23,7 +23,6 @@ Page {
 }
 
 .row_flex text{
-  font-size: 5vw;
   margin-top: 2vh;
   margin-left:10vw;
 }
@@ -64,8 +63,24 @@ Page {
 
 .picker_button{
   margin-top: 2vh;
-  margin-left:5vw;
+  margin-left:2vw;
 }
-.addressInput{
-  font-size:5rpx;
+
+.row_flex_add{
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+}
+.address_title{
+  margin-top: 2vh;
+  margin-left:10vw;
+  white-space: nowrap;
+}
+.addinput{
+  margin-left:2vw;
+  width:60vw;
+}
+.addinput text{
+  white-space: pre-line;
+  font-size:4vw;
 }

@@ -15,15 +15,15 @@
   <view class = "line"></view>
 
   
-  <view class = "row_flex">
-    <text>省份</text>
+  <view class = "row_flex_add">
+    <text class = "address_title">省份</text>
     <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
-      <view wx:if = "{{hasNoRegion}}">
-        <button class = "picker_button" type = "default" size = "mini">选择地区</button>
-      </view>
-      <view wx:else>
-        <text class ="addressInput">{{region[0]}} {{region[1]}} {{region[2]}}</text>
-      </view>
+    <view wx:if = "{{hasNoRegion}}">
+      <button class = "picker_button" type = "default" size = "mini">选择地区</button>
+    </view>
+    <view wx:else class = "addinput">
+      <text >{{region[0]}} {{region[1]}} {{region[2]}}</text>
+    </view>
     </picker>
   </view>
 
