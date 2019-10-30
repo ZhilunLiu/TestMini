@@ -1,6 +1,6 @@
 <!--miniprogram/pages/myorders/myorders.wxml-->
     <!-- wx:for 渲染订单列表 -->
-    <view wx:for="{{orders}}" class = "items" bindtap="goOrderDetail" data-order = "{{item}}">
+    <view wx:for="{{orders}}" class = "items" bindtap="goOrderDetail" data-order = "{{item}}" data-index ="{{index}}" >
       <view class = "row_flex">
 
         <!-- 点击商品图片可跳转到订单详情 -->

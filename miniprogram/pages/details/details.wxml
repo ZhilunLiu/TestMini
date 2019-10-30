@@ -16,12 +16,12 @@
     <picker bindchange="bindPickerChange" value="{{index}}" range="{{provinces}}">
     <button class = "picker_button" type = "default" size = "mini">尺寸选择</button>
     </picker>
-    <view wx:if= "{{dimensionFlag}}">
+    <view wx:if= "{{dimension[0]}}!=0}}">
       <view class="body">
         当前尺寸: {{dimension[index][0]}}W X {{dimension[index][1]}}D X {{dimension[index][2]}}H 
       </view>
     </view>  
-    <view wx:elif ="{{dimensionFlag==false}}">
+    <view wx:elif ="{{dimension[0]}}==0">
       <view class="body">
         当前尺寸: {{dimension[index][1]}}半径 X {{dimension[index][2]}}H
       </view>

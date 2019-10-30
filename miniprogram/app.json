@@ -18,7 +18,8 @@
     "pages/addAddress/addAddress",
     "pages/bill/bill",
     "pages/chooseAdd/chooseAdd",
-    "pages/orderDetail/orderDetail"
+    "pages/orderDetail/orderDetail",
+    "pages/track/track"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

@@ -19,9 +19,13 @@
     <view class = "column_flex">
         <text class ="itemName">{{item.title}}</text>
         <text class = "desc">尺寸:{{item.dimension[0]}}mm长,{{item.dimension[1]}}mm宽,{{item.dimension[2]}}mm高</text>
+        <view class = "row_flex">
+          <text class = "price">￥{{item.price}}</text>
+          <text class = "num">X{{item.num}}</text>
+        </view>
     </view>
   </view>
-      <text class = "price">￥{{item.price}}</text>
+
 
 </view>
 

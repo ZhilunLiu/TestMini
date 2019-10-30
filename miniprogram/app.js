@@ -26,6 +26,7 @@ App({
       choosePho:'',
       chooseName:'',
       totalPrice:'',
+      billPaied:false,
       
   }
   }

@@ -64,6 +64,8 @@ Page({
   },
 
   saveOrder:function(){
+    var date = new Date();
+    console.log('new date is '+date);
     const db = wx.cloud.database();
     db.collection('orders').add({
       data: {
@@ -73,6 +75,8 @@ Page({
         totalPrice:this.data.totalprice,
         items:this.data.cart,
         orderNumber:this.data.orderNumer,
+        date:date,
+        status:'待确认',
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id
@@ -82,6 +86,8 @@ Page({
         console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
         //隐藏加载中
         wx.hideToast();
+        getApp().globalData.billPaied = true;
+        console.log('billPaied is ' + getApp().globalData.billPaied);
         //去订单详情
         wx.redirectTo({
           url: '../myorders/myorders'

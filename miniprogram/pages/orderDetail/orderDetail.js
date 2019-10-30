@@ -13,11 +13,31 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var time = this.formatTime(options.order.date);
-    console.log(time);
+    //解码，转换对象
+    var orderr = JSON.parse(decodeURIComponent(options.order));
+
+    var time = options.date;
+    console.log('date is ' + time);
+    //时差解决办法
+    /*
+    var list = date.split(" ");
+    console.log(list);
+    var year = list[4];
+    var month = this.convertToNumber(list[2]);
+    var date = list[3]
+    var time = year+'年'+month+'月'+date+'日';
+    console.log('time is '+time);
+    */
+
     this.setData({
-      order:options.order,
+      order:orderr,
       date:time
+    })
+  },
+
+  track:function(e){
+    wx.navigateTo({
+      url: '../track/track',
     })
   },
 
@@ -70,15 +90,6 @@ Page({
 
   },
 
-    formatTime: function (date) {
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var day = date.getDate();
 
-    var hour = date.getHours();
-    var minute = date.getMinutes();
-    var second = date.getSeconds();
 
-    return year.toString()+'年'+month.toString()+'月'+day.toString() +'日';
-  },
 })

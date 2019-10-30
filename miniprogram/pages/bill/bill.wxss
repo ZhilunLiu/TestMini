@@ -9,6 +9,7 @@ Page {
 .row_flex{
   flex-direction: row;
   display: flex;
+  align-items: center;
 }
 .column_flex{
   flex-direction: column;
@@ -60,9 +61,8 @@ Page {
    color: rgba(128, 128, 128, 0.712);
 }
 .price{
-  margin-left: 40vw;
+  font-size:30rpx;
   color:coral;
-  margin-bottom: 1vh;
 }
 .totalPrice{
   margin-left: 60vw;
@@ -92,6 +92,10 @@ Page {
 }
 .desc{
   margin-top:1vh;
+  font-size:30rpx;
+}
+.num{
+  margin-left: 2vw;
   font-size:30rpx;
 }
 

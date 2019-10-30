@@ -16,11 +16,16 @@ Page {
 }
 .itemName{
   margin-top:3vh;
+  margin-bottom: 1vh;
   font-size:40rpx;
 }
 .desc{
-  margin-top:1vh;
+  width: 50vw;
+  margin-bottom:1vh;
   font-size:30rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .items{
   margin-top:5vw;
