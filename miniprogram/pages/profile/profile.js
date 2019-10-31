@@ -63,6 +63,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var app = getApp();
+    console.log('onShow!!!!!!')
+    if (app.globalData.userInfo!== undefined&&app.globalData.userInfo!=null){
+      console.log('logged in alredy')
+      this.setData({
+        avatarUrl: app.globalData.userInfo.avatarUrl,
+        nickname: app.globalData.userInfo.nickName,
+        manager: app.globalData.manager,
+      })
+    }
+
 
   },
 
@@ -131,6 +142,7 @@ Page({
     }).get({
       success: res => {
         console.log(res);
+        app.globalData.manager = true;
         if(res.data[0].openid==openId){
           this.setData({
             manager:true,
