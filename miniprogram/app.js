@@ -27,6 +27,7 @@ App({
       chooseName:'',
       totalPrice:'',
       billPaied:false,
+      logged:false,
       manager:false,
       
   }

@@ -67,10 +67,12 @@ Page({
     console.log('onShow!!!!!!')
     if (app.globalData.userInfo!== undefined&&app.globalData.userInfo!=null){
       console.log('logged in alredy')
+      console.log(app.globalData.manager);
       this.setData({
         avatarUrl: app.globalData.userInfo.avatarUrl,
         nickname: app.globalData.userInfo.nickName,
         manager: app.globalData.manager,
+        logged:app.globalData.logged,
       })
     }
 
@@ -119,10 +121,11 @@ Page({
         var openid = res.result.openid;
         app.globalData.userInfo.openId = openid;
         app.globalData.openId = openid;
+        app.globalData.logged = true;
         console.log('云函数获取到的openid: ', res.result.openid)
         this.verifyManager();
         this.setData({
-          logged: true,
+          logged: app.globalData.logged,
           avatarUrl: app.globalData.userInfo.avatarUrl,
           nickname: app.globalData.userInfo.nickName
         })
