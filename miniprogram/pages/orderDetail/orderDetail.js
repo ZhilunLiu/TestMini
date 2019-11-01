@@ -7,6 +7,7 @@ Page({
   data: {
     order:[],
     date:'',
+    manager:false,
   },
 
   /**
@@ -28,12 +29,15 @@ Page({
     var time = year+'年'+month+'月'+date+'日';
     console.log('time is '+time);
     */
+    console.log(orderr._id);
 
     this.setData({
       order:orderr,
-      date:time
+      date:time,
+      manager:getApp().globalData.manager,
     })
   },
+
 
   track:function(e){
     wx.navigateTo({
@@ -41,18 +45,52 @@ Page({
     })
   },
 
+  call:function(e){
+    wx.makePhoneCall({
+      phoneNumber: this.data.order.phone,
+    })
+  },
+
+  updateStatus:function(e){
+    wx.navigateTo({
+      url: '../updateTrack/updateTrack?orderId='+this.data.order._id,
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    console.log('onshow');
+    this.update();
+  },
 
+  update:function(e){
+    const db = wx.cloud.database();
+    // 查询
+    db.collection('orders').where({
+      _id: this.data.order._id
+    }).get({
+      success: res => {
+        this.setData({
+          order: res.data[0]
+        })
+        console.log('[数据库] [查询记录] 成功: ', res);
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
   },
 
   /**

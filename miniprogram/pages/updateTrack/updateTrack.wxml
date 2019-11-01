@@ -1,0 +1,28 @@
+<view class = "bg">
+  <view class = "row_flex">
+      <text>状态</text>
+      <input class = "input"type ="text" placeholder="{{order.status}}" bindinput="statusInput"/>
+    </view>
+      
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>物流公司</text>
+      <input class = "input"type ="number" placeholder="{{order.trackCompany}}" bindinput="companyInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>物流追踪号</text>
+      <input class = "input"type ="text" placeholder="{{order.trackNum}}" bindinput="trackNumInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "search">
+      <view class = "searchButton" bindtap="save">保存</view>
+    </view>
+
+
+</view>

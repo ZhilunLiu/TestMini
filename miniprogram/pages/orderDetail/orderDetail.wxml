@@ -6,7 +6,11 @@
 
   <view class = "line"></view>
 
-  <view class = "row_flex">
+  <view class = "row_flex" wx:if ="{{manager}}" bindtap="call">
+  <text class ="title">电话: </text><text class ="content" selectable='true'>{{order.phone}}</text>
+  </view>
+
+  <view class = "row_flex" wx:else>
   <text class ="title">电话: </text><text class ="content" selectable='true'>{{order.phone}}</text>
   </view>
 
@@ -26,6 +30,18 @@
 
   <view class = "row_flex">
   <text class ="title">状态: </text><text class ="content" selectable='true'>{{order.status}}</text>
+  </view>
+
+  <view class = "line"></view>
+  
+  <view class = "row_flex">
+  <text class ="title">物流公司: </text><text class ="content" selectable='true'>{{order.trackCompany}}</text>
+  </view>
+
+  <view class = "line"></view>
+
+  <view class = "row_flex">
+  <text class ="title">物流追踪号: </text><text class ="content" selectable='true'>{{order.trackNum}}</text>
   </view>
 
   <view class = "line"></view>
@@ -69,14 +85,15 @@
 
 <view class = "fixed_view">
   <view class = "bottonTabBar">
-    <view class = "box">
-      <image src = "../../images/track.png" bindtap="track"></image>
-      <text>申请退款</text>
+      <view class = "box"  wx:if="{{manager}}" bindtap="updateStatus">
+      <image src='../../images/user.png'></image>
+      <text>更新物流</text>
     </view>
-    <view class = "box">
+    <view wx:else class = "box">
       <button  open-type = 'contact' class = "button" ><image src='../../images/user.png'></image></button>
       <text>联系客服</text>
     </view>
+
   </view>
 </view>
 

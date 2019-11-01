@@ -210,13 +210,7 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    console.log('触发onhide');
-    if (getApp().globalData.billPaied = true) {
-      getApp().globalData.billPaied = false;
-      wx.redirectTo({
-        url: '../home/home'
-      })
-    }
+
   },
 
   /**

@@ -111,13 +111,14 @@ Page({
   },
 
   update:function(e){
-    const db = wx.cloud.database();
+    
     var app = getApp();
     var id = app.globalData.openId;
     this.data.sysName.push(this.data.name);
     this.data.sysPhone.push(this.data.phone);
     var addDetail = this.data.region.concat(this.data.address);
     this.data.sysAddress.push(addDetail);
+    const db = wx.cloud.database();
     db.collection('users').doc(this.data.dataId).update({
       data: {
         name: this.data.sysName,

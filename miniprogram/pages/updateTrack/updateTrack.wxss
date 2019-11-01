@@ -1,0 +1,109 @@
+Page {
+  display: flex;
+  flex-direction: column;
+  background: rgba(187, 187, 187, 0.678);
+  box-sizing: border-box;
+} 
+.user{
+  width: 100vw;
+  height: 30vh;
+  background-color: white;
+}
+.menu{
+  width: 100vw;
+  display: inline-block;
+  background-color: rgb(248, 245, 245);
+}
+
+.menu image{
+  width:100rpx;
+  height: 100rpx;
+}
+
+.user image{
+  border-radius: 5px;
+  margin-top: 10vh;
+  width: 15vw;
+  height: 15vw;
+}
+.column_view{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.row_view{
+  margin-top:2vh;
+  margin-bottom: 2vh;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.box{
+  width: 100%;
+  height:100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.iconDesc{
+  margin-top:1vh;
+}
+
+.bg{
+  margin-top:10vw;
+  margin-left:5vw;
+  margin-right:5vw;
+  margin-bottom: 5vw;
+  width: 90vw;
+  height: 35vh;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.row_flex{
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+}
+
+.row_flex text{
+  margin-top: 2vh;
+  margin-left:10vw;
+}
+
+
+.input{
+  font-size: 5vw;
+  color: rgba(26, 24, 24, 0.89);
+  margin-top: 2vh;
+  margin-left:2vw;
+}
+
+.line{
+  width:70vw;
+  height:5rpx;
+  background-color: rgba(216, 216, 216, 0.479);
+  margin-left: 10vw;
+  margin-bottom: 1vh;
+   margin-top: 1vh
+}
+
+.searchButton{
+  border-radius: 5px;
+  background-color: coral;
+  width:18vw;
+  height: 8vw;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.search{
+  margin-top:4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
