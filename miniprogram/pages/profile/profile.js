@@ -123,12 +123,65 @@ Page({
         app.globalData.openId = openid;
         app.globalData.logged = true;
         console.log('云函数获取到的openid: ', res.result.openid)
+        this.searchUser();
         this.verifyManager();
         this.setData({
           logged: app.globalData.logged,
           avatarUrl: app.globalData.userInfo.avatarUrl,
           nickname: app.globalData.userInfo.nickName
         })
+        //wx.hideToast();
+      }
+    })
+  },
+
+  addUser:function(e){
+    console.log('no user in db, creating');
+    db.collection('users').add({
+      data: {
+        name: [],
+        phone: [],
+        address: [],
+        orders: [],
+        _openid: getApp().globalData.openId,
+      },
+      success: res => {
+        // 在返回结果中会包含新创建的记录的 _id
+        wx.showToast({
+          title: '新增记录成功',
+        })
+        console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id);
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '新增记录失败'
+        })
+        console.error('[数据库] [新增记录] 失败：', err)
+      }
+    })
+  },
+
+  searchUser:function(e){
+    const db = wx.cloud.database();
+    // 查询当前家具的details对应name
+    db.collection('users').where({
+      openid: getApp().globalData.openId
+    }).get({
+      success: res => {
+        if (res.data.length!=0) {
+          this.addUser();
+        }
+        console.log('[user] [查询记录] 成功: ', res);
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      },
+      complete: com => {
         wx.hideToast();
       }
     })
@@ -144,9 +197,8 @@ Page({
       openid: openId
     }).get({
       success: res => {
-        console.log(res);
-        app.globalData.manager = true;
         if(res.data[0].openid==openId){
+          app.globalData.manager = true;
           this.setData({
             manager:true,
           })
@@ -159,6 +211,9 @@ Page({
           title: '查询记录失败'
         })
         console.error('[数据库] [查询记录] 失败：', err)
+      },
+      complete: com =>{
+        wx.hideToast();
       }
     })
     

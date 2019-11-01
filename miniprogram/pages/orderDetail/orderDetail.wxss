@@ -68,7 +68,7 @@ Page {
 
 .fixed_view{
   width: 100%;
-  height: 12vh;
+  height: 10vh;
   position: fixed;
   bottom: 0;
   display: inline-block;

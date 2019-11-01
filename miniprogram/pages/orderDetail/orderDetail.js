@@ -30,7 +30,6 @@ Page({
     console.log('time is '+time);
     */
     console.log(orderr._id);
-
     this.setData({
       order:orderr,
       date:time,

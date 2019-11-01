@@ -65,11 +65,12 @@ Page {
    color: rgb(48, 47, 47);
 }
 .price{
+  margin-bottom: 2vw;
   font-size:30rpx;
   color:coral;
 }
 .totalPrice{
-  margin-left: 60vw;
+  margin-left: 68vw;
   color:coral;
 }
 
@@ -100,6 +101,7 @@ Page {
 }
 .num{
   margin-left: 2vw;
+  margin-bottom: 2vw;
   font-size:30rpx;
 }
 

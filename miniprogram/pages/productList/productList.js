@@ -26,6 +26,11 @@ Page({
               child_id:4,
               name:'测试物品',
               image:"https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E6%9F%8F%E6%8B%89%E5%9B%BE/c22%20%E5%8F%8C%E4%BA%BA%E8%81%8C%E5%91%98.jpg?sign=50c14925493bf6552ef749e0a1c52c5b&t=1572030951"
+            },
+            {
+              child_id: 4,
+              name: '测试物品2',
+              image: "https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E6%9F%8F%E6%8B%89%E5%9B%BE/c15%20%E7%8F%AD%E5%8F%B0.jpg?sign=d0bb54d38981bbfaf0a89440d0c2d65c&t=1571805863"
             }
           ]
       },
