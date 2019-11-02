@@ -47,6 +47,17 @@ Page {
 
 }
 
+.uploadImg{
+  margin-top:5vw;
+  margin-left:30vw;
+  margin-right:30vw;
+  width: 30vw;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .iconDesc{
   margin-top:1vh;
 }
@@ -58,6 +69,16 @@ Page {
   margin-bottom: 5vw;
   width: 90vw;
   height: 35vh;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.bg2{
+  margin-top:5vw;
+  margin-left:5vw;
+  margin-right:5vw;
+  margin-bottom: 5vw;
+  width: 90vw;
   border-radius: 5px;
   background-color: white;
 }
@@ -79,11 +100,21 @@ Page {
   margin-left:10vw;
 }
 
+.wdh{
+    margin-top: 2vh;
+}
+
 
 .input{
   color: rgba(26, 24, 24, 0.89);
   margin-top: 2vh;
   margin-left:2vw;
+}
+.smallinput{
+    color: rgba(26, 24, 24, 0.89);
+  margin-top: 2vh;
+  margin-left:2vw;
+  width:12vw;
 }
 
 .line{
@@ -98,7 +129,7 @@ Page {
 .searchButton{
   border-radius: 5px;
   background-color: coral;
-  width:18vw;
+  width:30vw;
   height: 8vw;
   color: white;
   display: flex;

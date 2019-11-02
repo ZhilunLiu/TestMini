@@ -20,7 +20,8 @@
     "pages/orderDetail/orderDetail",
     "pages/track/track",
     "pages/searchOrder/searchOrder",
-    "pages/updateTrack/updateTrack"
+    "pages/updateTrack/updateTrack",
+    "pages/addDetails/addDetails"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

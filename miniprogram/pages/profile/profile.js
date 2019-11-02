@@ -13,6 +13,7 @@ Page({
       name:'',
       phone:'',
       orderNumber:'',
+      series:'',
   },
 
 
@@ -162,7 +163,7 @@ Page({
     const db = wx.cloud.database();
     // 查询当前家具的details对应name
     db.collection('users').where({
-      openid: getApp().globalData.openId
+      _openid: getApp().globalData.openId
     }).get({
       success: res => {
         if (res.data.length==0) {
@@ -234,11 +235,84 @@ Page({
     })
   },
 
+  seriesInput: function (e) {
+    this.setData({
+      series: e.detail.value
+    })
+  },
+
   search:function(e){
     wx:wx.navigateTo({
       url: '../searchOrder/searchOrder?name='+this.data.name+'&phone='+this.data.phone+'&orderNumber='+this.data.orderNumber,
     })
-  }
+  },
 
-  
+
+  // 上传图片
+  doUpload: function () {
+    var that = this;
+    // 选择图片
+    wx.chooseImage({
+      count: 2,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+      success: function (res) {
+
+        wx.showLoading({
+          title: '上传中',
+        })
+        // 上传图片
+        for (let i = 0; i < res.tempFilePaths.length; i++) {
+          var timestamp = (new Date()).valueOf();
+          const filePath = res.tempFilePaths[i];
+          console.log('in for loop now')
+          const cloudPath = 'test/' + timestamp + filePath.match(/\.[^.]+?$/)[0]
+          that.upload(cloudPath, filePath);
+        }
+
+      },
+      fail: e => {
+        console.error(e)
+      }
+    })
+  },
+
+
+  upload: function (cloudPath, filePath) {
+    console.log('uploading:');
+    console.log(filePath);
+    console.log(cloudPath);
+    wx.cloud.uploadFile({
+      cloudPath,
+      filePath,
+      success: res => {
+        console.log('[上传文件] 成功：', res)
+
+        app.globalData.fileID = res.fileID
+        app.globalData.cloudPath = cloudPath
+        app.globalData.imagePath = filePath
+        wx.cloud.getTempFileURL({
+          fileList: [res.fileID],
+          success: res => {
+            // get temp file URL
+            console.log(res.fileList)
+          }
+        })
+        wx.navigateTo({
+          url: '../storageConsole/storageConsole'
+        })
+      },
+      fail: e => {
+        console.error('[上传文件] 失败：', e)
+        wx.showToast({
+          icon: 'none',
+          title: '上传失败',
+        })
+      },
+      complete: () => {
+        wx.hideLoading()
+      }
+    })
+  },
+
 })

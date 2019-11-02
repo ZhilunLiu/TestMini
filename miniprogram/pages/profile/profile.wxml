@@ -41,8 +41,51 @@
     </view>
 
 
+  </view>
+
+  <view class = "bg2">
+    <view class = "row_flex">
+      <text>系列名称：</text>
+      <input class = "input"type ="text" placeholder="柏拉图" bindinput="seriesInput"/>
+    </view>
+
+    <view class = "row_flex">
+      <text>家具名称：</text>
+      <input class = "input"type ="text" placeholder="柏拉图会议桌" bindinput="FnameInput"/>
+    </view>
+
+    <view class = "row_flex">
+      <text>家具价格：</text>
+      <input class = "input"type ="number" placeholder="4800" bindinput="priceInput"/>
+    </view>
+
+    <view class = "row_flex">
+      <text>家具描述：</text>
+      <input class = "input"type ="text" placeholder="白蜡木，手抓纹" bindinput="descInput"/>
+    </view>
+
+    <view class = "row_flex">
+      <text>家具大小：</text>
+      <input class = "input"type ="number" placeholder="0.45" bindinput="sizeInput"/>
+    </view>
+
+    <view class = "row_flex">
+      <text>家具尺寸：</text>
+      <input class = "smallinput"type ="number" placeholder="1200" bindinput="widthInput"/>
+      <view class = "wdh">W</view>
+      <input class = "smallinput"type ="number" placeholder="1200" bindinput="depthInput"/>
+      <view class = "wdh">D</view>
+      <input class = "smallinput"type ="number" placeholder="800" bindinput="heightInput"/>
+      <view class = "wdh">H</view>
+    </view>
+
+    <view class = "uploadImg" bindtap="doUpload">
+      <view class = "searchButton">上传产品图片</view>
+    </view>
 
   </view>
+
+
 
 </view>
 
