@@ -4,14 +4,18 @@ page{
    width: 100%;
   background:white;
   display: flex;
+    align-items: center;
 }
 .title{
+  margin-top:2vh;
   font-size: 5vw;
   font-weight: 600;
   color: black;
   font-family: KaiTi;
 }
 .desc{
+  margin-top: 2vh;
+  margin-bottom: 2vh;
   width: 80vw;
   font-size: 4vw;
   font-weight: 400;
@@ -21,12 +25,12 @@ page{
 .margin{
   width:100vw;
   height: 2vh;
-  color: rgba(128, 128, 128, 0.411);
+  background-color: white;
 }
 .Bigmargin{
-    width:100vw;
+  width:100vw;
   height: 5vh;
-  color: rgba(128, 128, 128, 0.411);
+  background-color: white;
 }
 .line{
   width:100vw;

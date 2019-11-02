@@ -6,6 +6,7 @@ Page({
    */
   data: {
     orders:[],
+    length:0,
   },
 
   //弹窗
@@ -49,9 +50,10 @@ Page({
       success: res => {
         console.log(res);
         this.setData({
-          orders:res.data
+          orders:res.data,
+          length: res.data.length,
         })
-        console.log('[数据库] [查询记录] 成功: ', res);
+        console.log(this.data.length);
       },
       fail: err => {
         wx.showToast({

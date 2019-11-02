@@ -26,11 +26,26 @@ Page({
     })
   },  
 
+  previewImage: function (e) {
+    var that = this,
+      //获取当前图片的下表
+      index = e.currentTarget.dataset.index,
+      //数据源
+      pictures = this.data.imgUrls;
+    wx.previewImage({
+      //当前显示下表
+      current: pictures[index],
+      //数据源
+      urls: pictures
+    })
+  },
+
   bindchangeTag:function(e){
       console.log("调用swiper");
   },
 
   buy:function(e){
+
     var app = getApp();
     if(app.globalData.openid === undefined){
       
@@ -74,14 +89,16 @@ Page({
       selected: true,
       num: 1
     };
-
+    
     curCartList.push(newItem);
+    wx.showToast({ title: '添加成功', icon: 'success', duration: 1000 });
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showToast({ title: '加载中', icon: 'loading', duration: 10000 });
     var itemName = options.name;
     console.log(itemName);
     const db = wx.cloud.database();
@@ -102,8 +119,8 @@ Page({
         if (res.data[0].dimension[0][0]==0){
           this.setData({dimensionFlag:false})
         }
-        console.log('flag is ' + this.dimensionFlag);
         console.log('[数据库] [查询记录] 成功: ', res);
+        wx.hideToast();
       },
       fail: err => {
         wx.showToast({

@@ -136,6 +136,7 @@ Page({
   },
 
   addUser:function(e){
+    const db = wx.cloud.database();
     console.log('no user in db, creating');
     db.collection('users').add({
       data: {
@@ -143,13 +144,8 @@ Page({
         phone: [],
         address: [],
         orders: [],
-        _openid: getApp().globalData.openId,
       },
       success: res => {
-        // 在返回结果中会包含新创建的记录的 _id
-        wx.showToast({
-          title: '新增记录成功',
-        })
         console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id);
       },
       fail: err => {
@@ -169,7 +165,7 @@ Page({
       openid: getApp().globalData.openId
     }).get({
       success: res => {
-        if (res.data.length!=0) {
+        if (res.data.length==0) {
           this.addUser();
         }
         console.log('[user] [查询记录] 成功: ', res);

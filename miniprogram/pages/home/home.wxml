@@ -1,5 +1,6 @@
 <!--miniprogram/pages/home/home.wxml-->
 <view class="container">
+
   <view class ="swiper">
     <swiper class = "swiperrr" indicator-dots="{{indicatorDots}}"
       autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}} " bindchange="bindchangeTag">
@@ -49,8 +50,10 @@
       </block>
     </swiper>
   </view>
-  <view class = "foot">
+
+      <view class = "foot">
     <image src ='https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%85%AC%E5%85%B1/foot.PNG?sign=e04216eb9891455eb016fc066839b2f3&t=1572029084'></image>
   </view>
+
 </view> 
 

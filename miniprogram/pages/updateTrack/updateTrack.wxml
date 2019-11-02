@@ -1,7 +1,15 @@
 <view class = "bg">
   <view class = "row_flex">
       <text>状态</text>
-      <input class = "input"type ="text" placeholder="{{order.status}}" bindinput="statusInput"/>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{statusList}}">
+      <view wx:if="{{hasntSelect}}">
+        <button class = "picker_button" type = "default" size = "mini">状态选择</button>
+      </view>
+      <view wx:else class = "picker_result">
+        <text>{{status}}</text>
+      </view>
+      </picker>
+      
     </view>
       
     <view class = "line"></view>

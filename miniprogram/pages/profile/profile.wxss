@@ -61,6 +61,12 @@ Page {
   border-radius: 5px;
   background-color: white;
 }
+.space{
+  width: 100%;
+  height: 1vh;
+  margin-bottom: 1vh;
+  margin-top: 1vh;
+}
 
 .row_flex{
   flex-direction: row;
@@ -75,7 +81,6 @@ Page {
 
 
 .input{
-  font-size: 5vw;
   color: rgba(26, 24, 24, 0.89);
   margin-top: 2vh;
   margin-left:2vw;

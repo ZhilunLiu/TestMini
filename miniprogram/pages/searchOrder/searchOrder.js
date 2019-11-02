@@ -28,6 +28,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showToast({ title: '搜索中', icon: 'loading', duration: 10000 });
     this.popup = this.selectComponent("#popup");
     this.setData({
       name:options.name,
@@ -73,6 +74,7 @@ Page({
           orders: res.data
         })
         console.log('[数据库] [查询记录] 成功: ', res);
+        wx.hideToast();
       },
       fail: err => {
         wx.showToast({
@@ -98,6 +100,7 @@ Page({
           orders: res.data
         })
         console.log('[数据库] [查询记录] 成功: ', res);
+        wx.hideToast();
       },
       fail: err => {
         wx.showToast({
@@ -122,6 +125,7 @@ Page({
           orders: res.data
         })
         console.log('[数据库] [查询记录] 成功: ', res);
+        wx.hideToast();
       },
       fail: err => {
         wx.showToast({
@@ -146,6 +150,7 @@ Page({
           orders: res.data
         })
         console.log('[数据库] [查询记录] 成功: ', res);
+        wx.hideToast();
       },
       fail: err => {
         wx.showToast({

@@ -12,6 +12,7 @@
 
 <view wx:if="{{manager}}">
   <view class = "bg">
+    <view class = "space"/>
 
     <view class = "row_flex">
       <text>姓名</text>

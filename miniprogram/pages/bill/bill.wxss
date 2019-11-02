@@ -70,7 +70,7 @@ Page {
   color:coral;
 }
 .totalPrice{
-  margin-left: 68vw;
+  margin-left: 63vw;
   color:coral;
 }
 

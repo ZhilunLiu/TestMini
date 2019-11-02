@@ -77,10 +77,10 @@ Page {
   white-space: nowrap;
 }
 .addinput{
+  margin-top: 2vh;
   margin-left:2vw;
   width:60vw;
 }
 .addinput text{
-  white-space: pre-line;
   font-size:4vw;
 }

@@ -1,5 +1,4 @@
 <!--miniprogram/pages/solutionDetail/solutionDetail.wxml-->
-<view class = "container">
   <view class = "margin"></view>
     <view class ="line"></view>
   <view class = "title">{{name}}</view>
@@ -11,5 +10,3 @@
     <image src="{{item}}}"></image>
     <view class = "margin"></view>
   </view>
-
-</view>

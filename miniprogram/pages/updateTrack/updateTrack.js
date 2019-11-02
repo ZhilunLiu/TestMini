@@ -9,7 +9,24 @@ Page({
     status:'',
     trackCom:'',
     trackNum:'',
+    statusList:[
+      '待确认',
+      '已确认',
+      '已下单',
+      '已出发',
+      '配送中',
+      '已到达',
+    ],
+    hasntSelect:true,
   },
+
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      hasntSelect:false,
+      status: this.data.statusList[e.detail.value],
+    })
+  }, 
 
   /**
    * 生命周期函数--监听页面加载

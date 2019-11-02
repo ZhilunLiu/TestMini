@@ -14,6 +14,7 @@ Page({
   },
 
   pay:function(e){
+    wx.showToast({ title: '加载中', icon: 'loading', duration: 10000 });
     var items = '';
     for(let i =0;i<this.data.cart.length;i++){
       items.concat('，');
@@ -38,6 +39,7 @@ Page({
         orderNumer: order,
       })
       console.log(res);
+      wx.hideToast();
         wx.requestPayment({
           //传入变量
           appId: res.result.appid,
