@@ -10,27 +10,72 @@
       </block>
     </swiper>
   </view> 
+
+
+
+
+  
   <view class = "title">
-    <text class = "priceText">￥{{price[index]}}</text>
-    <view class = "titleText">{{name}}</view>
-    <picker bindchange="bindPickerChange" value="{{index}}" range="{{dimension}}">
-    <button class = "picker_button" type = "default" size = "mini">尺寸选择</button>
-    </picker>
-    <view wx:if= "{{dimension[0]}}!=0}}">
-      <view class="body">
-        当前尺寸: {{dimension[index][0]}}W X {{dimension[index][1]}}D X {{dimension[index][2]}}H 
+
+    <view wx:if="{{updating}}">
+      <view class = "row_flex">
+        <view class = "priceText">￥</view>
+        <input class = "priceTextinput" type ="number" placeholder="{{price[index]}}" bindinput="priceInput"/>
       </view>
-    </view>  
-    <view wx:elif ="{{dimension[0]}}==0">
-      <view class="body">
-        当前尺寸: {{dimension[index][1]}}半径 X {{dimension[index][2]}}H
+      <view class = "titleText">{{name}}</view>
+
+      <view class = "row_flex">
+        <view class = "body">家具尺寸：</view>
+        <input class = "smallinput"type ="number" placeholder="{{dimension[index][0]}}" bindinput="widthInput"/>
+        <view class = "wdh">W</view>
+        <input class = "smallinput"type ="number" placeholder="{{dimension[index][1]}}" bindinput="depthInput"/>
+        <view class = "wdh">D</view>
+        <input class = "smallinput"type ="number" placeholder="{{dimension[index][2]}}" bindinput="heightInput"/>
+        <view class = "wdh">H</view>
       </view>
+      
+
+      <view class = "row_flex">
+          <view class = "body">体积(立方米)： </view>
+          <input class = "body" type ="number" placeholder="{{size[index]}}" bindinput="sizeInput"/>
+      </view>
+
+      <view class = "row_flex">
+          <view class = "body">颜色/说明：</view>
+          <input class = "body" type ="text" placeholder="{{describtion}}" bindinput="descInput"/>
+      </view>
+      
     </view>
-    <view class = "body">体积：{{size[index]}} 立方米</view>
-    <view class = "body">颜色/说明：{{describtion}}</view>
+
+    <view wx:else>
+
+      <text class = "priceText">￥{{price[index]}}</text>
+      <view class = "titleText">{{name}}</view>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{dimension}}">
+      <button class = "picker_button" type = "default" size = "mini">尺寸选择</button>
+      </picker>
+      <view wx:if= "{{dimension[index][0]}}!=0}}">
+        <view class="body">
+          当前尺寸: {{dimension[index][0]}}W X {{dimension[index][1]}}D X {{dimension[index][2]}}H 
+        </view>
+      </view>  
+      <view wx:elif ="{{dimension[index][0]}}==0">
+        <view class="body">
+          当前尺寸: {{dimension[index][1]}}半径 X {{dimension[index][2]}}H
+        </view>
+      </view>
+      <view class = "body">体积：{{size[index]}} 立方米</view>
+      <view class = "body">颜色/说明：{{describtion}}</view>
+
+    </view>
+
+
 
     <view class = "buybutton">
-      <view class = "buy" bindtap="buy" data-name = "{{name}}">加入购物车</view>
+      <view wx:if="{{updating}}" class = "buy" bindtap="save" >保存</view>
+      <view wx:elif="{{manager}}" class = "buy" bindtap="changeData" >更改信息</view>
+      <view wx:else class = "buy" bindtap="buy" data-name = "{{name}}">加入购物车</view>
+
     </view>
 
   </view>

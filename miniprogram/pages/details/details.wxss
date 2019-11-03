@@ -34,10 +34,17 @@ page{
   margin-left:5vw;
 }
 .priceText{
+    margin-top: 2vh;
     margin-left: 5vw;
     font-size: 5vw;
     color:coral;
 }
+.priceTextinput {
+    margin-top:2vh;
+    font-size: 5vw;
+    color:coral;
+}
+
 .titleText{
     margin-left: 5vw;
     font-size: 6vw;
@@ -48,13 +55,6 @@ image {
    margin-left: auto;
    width: 100rpx;
    height: 100rpx;
-}
-
-text {
-   margin-right: auto;
-   margin-left: auto;
-   margin-top: 5rpx;
-   font: 20;
 }
 
 .buybutton{
@@ -78,4 +78,21 @@ text {
   justify-content: center;
   align-items: center;
 
+}
+
+.row_flex{
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+}
+
+.smallinput{
+    color: rgba(26, 24, 24, 0.89);
+  margin-top: 2vh;
+  margin-left:2vw;
+  width:12vw;
+}
+
+.wdh{
+    margin-top: 2vh;
 }

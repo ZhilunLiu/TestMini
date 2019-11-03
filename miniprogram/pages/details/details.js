@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    dataId:'',
     imgUrls: [],
     indicatorDots: true,
     autoplay: false,
@@ -16,7 +17,12 @@ Page({
     size:[],
     dimension:[],
     index:0,
-    dimensionFlag:true
+    dimensionFlag:true,
+    manager:false,
+    updating:false,
+    width:0,
+    depth:0,
+    height:0,
   },
 
   bindPickerChange: function (e) {
@@ -114,11 +120,13 @@ Page({
           name: res.data[0].name,
           describtion:res.data[0].describtion,
           size:res.data[0].size,
-          dimension:res.data[0].dimension
+          dimension:res.data[0].dimension,
+          dataId:res.data[0]._id,
         })
         if (res.data[0].dimension[0][0]==0){
           this.setData({dimensionFlag:false})
         }
+
         console.log('[数据库] [查询记录] 成功: ', res);
         wx.hideToast();
       },
@@ -132,6 +140,91 @@ Page({
     })
   },
 
+  changeData:function(e){
+    this.setData({
+      updating:true,
+    })
+  },
+
+  //更新
+  save:function(e){
+    var dim = this.data.dimension;
+    dim[this.data.index][0] = parseInt(this.data.width);
+    dim[this.data.index][1] = parseInt(this.data.depth);
+    dim[this.data.index][2] = parseInt(this.data.height);
+    //console.log(dim);
+    //call db update
+
+    console.log(this.data.price );
+    console.log(dim);
+    console.log(this.data.size);
+    console.log(this.data.desc);
+
+    const db = wx.cloud.database();
+    db.collection('detail').doc(this.data.dataId).update({
+      data: {
+        price: this.data.price,
+        dimension: dim,
+        size: this.data.size,
+        describtion:this.data.desc,
+      },
+      success: res => {
+        wx.showToast({ title: '更新成功', icon: 'success', duration: 1000 });
+
+        this.setData({
+          updating:false
+        })
+        console.error('[数据库] [更新记录] 成功', res);
+      },
+      fail: err => {
+        icon: 'none',
+          console.error('[数据库] [更新记录] 失败：', err)
+      }
+    })
+  },
+
+
+  priceInput: function (e) {
+    var temp = this.data.price;
+    temp[this.data.index] = e.detail.value;
+    this.setData({
+      price: temp
+    })
+  },
+
+  descInput: function (e) {
+    this.setData({
+      desc: e.detail.value
+    })
+  },
+
+  sizeInput: function (e) {
+    var temp = this.data.size;
+    temp[this.data.index] = e.detail.value;
+    this.setData({
+      size: temp
+    })
+  },
+
+  widthInput: function (e) {
+    this.setData({
+      width: e.detail.value
+    })
+  },
+
+  depthInput: function (e) {
+    this.setData({
+      depth: e.detail.value
+    })
+  },
+
+  heightInput: function (e) {
+    this.setData({
+      height: e.detail.value
+    })
+  },
+
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -143,7 +236,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var app = getApp();
+    this.setData({
+      manager:app.globalData.manager
+    })
   },
 
   /**
