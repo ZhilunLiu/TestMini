@@ -143,3 +143,7 @@ Page {
   justify-content: center;
   align-items: center;
 }
+
+.picker_button{
+  margin-top: 2vh;
+}

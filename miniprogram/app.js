@@ -29,6 +29,9 @@ App({
       billPaied:false,
       logged:false,
       manager:false,
+      fileID:'',
+      cloudPath:'',
+      imagePath:'',
       
   }
   }

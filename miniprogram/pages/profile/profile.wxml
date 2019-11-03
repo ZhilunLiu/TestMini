@@ -50,8 +50,20 @@
     </view>
 
     <view class = "row_flex">
+      <text>家具种类：</text>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{typeList}}">
+      <view wx:if="{{hasntSelect}}">
+        <button class = "picker_button" type = "default" size = "mini">状态选择</button>
+      </view>
+      <view wx:else class = "picker_button">
+        <view class = "wdh">{{type}}</view>
+      </view>
+      </picker>
+    </view>
+
+    <view class = "row_flex">
       <text>家具名称：</text>
-      <input class = "input"type ="text" placeholder="柏拉图会议桌" bindinput="FnameInput"/>
+      <input class = "input"type ="text" placeholder="柏拉图会议桌" bindinput="fnameInput"/>
     </view>
 
     <view class = "row_flex">
@@ -79,7 +91,7 @@
       <view class = "wdh">H</view>
     </view>
 
-    <view class = "uploadImg" bindtap="doUpload">
+    <view class = "uploadImg" bindtap="uploadImgbutton">
       <view class = "searchButton">上传产品图片</view>
     </view>
 
