@@ -93,3 +93,8 @@ page{
   font-size: 14px;  
   text-align: center;  
 } 
+.hover-nav_left
+{
+  opacity: 0.9;
+  background: #dedede;
+}
