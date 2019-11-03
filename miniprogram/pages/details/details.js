@@ -158,7 +158,7 @@ Page({
     console.log(this.data.price );
     console.log(dim);
     console.log(this.data.size);
-    console.log(this.data.desc);
+    console.log(this.data.describtion);
 
     const db = wx.cloud.database();
     db.collection('detail').doc(this.data.dataId).update({
@@ -166,7 +166,7 @@ Page({
         price: this.data.price,
         dimension: dim,
         size: this.data.size,
-        describtion:this.data.desc,
+        describtion: this.data.describtion,
       },
       success: res => {
         wx.showToast({ title: '更新成功', icon: 'success', duration: 1000 });
@@ -185,6 +185,7 @@ Page({
 
 
   priceInput: function (e) {
+    console.log('price changed')
     var temp = this.data.price;
     temp[this.data.index] = e.detail.value;
     this.setData({
@@ -193,12 +194,14 @@ Page({
   },
 
   descInput: function (e) {
+    console.log('describtion changed')
     this.setData({
-      desc: e.detail.value
+      describtion: e.detail.value
     })
   },
 
   sizeInput: function (e) {
+    console.log('size changed')
     var temp = this.data.size;
     temp[this.data.index] = e.detail.value;
     this.setData({
@@ -207,18 +210,21 @@ Page({
   },
 
   widthInput: function (e) {
+    console.log('dw changed')
     this.setData({
       width: e.detail.value
     })
   },
 
   depthInput: function (e) {
+    console.log('dp changed')
     this.setData({
       depth: e.detail.value
     })
   },
 
   heightInput: function (e) {
+    console.log('dh changed')
     this.setData({
       height: e.detail.value
     })
