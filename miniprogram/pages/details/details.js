@@ -107,6 +107,7 @@ Page({
     wx.showToast({ title: '加载中', icon: 'loading', duration: 10000 });
     var itemName = options.name;
     console.log(itemName);
+    console.log(this.data.data);
     const db = wx.cloud.database();
     // 查询当前家具的details对应name
     db.collection('detail').where({
@@ -123,6 +124,7 @@ Page({
           dimension:res.data[0].dimension,
           dataId:res.data[0]._id,
         })
+        console.log(this.data.price);
         if (res.data[0].dimension[0][0]==0){
           this.setData({dimensionFlag:false})
         }
