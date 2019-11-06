@@ -68,7 +68,7 @@
 
     <view class = "row_flex">
       <text>家具价格：</text>
-      <input class = "input"type ="number" placeholder="4800" bindinput="priceInput"/>
+      <input class = "input"type ="digit" placeholder="4800" bindinput="priceInput"/>
     </view>
 
     <view class = "row_flex">

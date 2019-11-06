@@ -20,7 +20,7 @@
     <view wx:if="{{updating}}">
       <view class = "row_flex">
         <view class = "priceText">￥</view>
-        <input class = "priceTextinput" type ="number" placeholder="{{price[index]}}" bindinput="priceInput"/>
+        <input class = "priceTextinput" type ="digit" placeholder="{{price[index]}}" bindinput="priceInput"/>
       </view>
       <view class = "titleText">{{name}}</view>
 
