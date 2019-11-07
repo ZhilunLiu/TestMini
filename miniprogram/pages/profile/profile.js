@@ -24,7 +24,10 @@ Page({
       type:'',
       typeList:['会议桌','班台','茶几/小桌','文件柜','沙发','员工工作站','其他'],
       hasntSelect:true,
+      hasntSelect2:true,
+      seriesList:[],
       imgUrls:[],
+      newSeries:'',
 
   },
 
@@ -36,6 +39,55 @@ Page({
       type: this.data.typeList[e.detail.value],
     })
   }, 
+
+  bindPicker2Change: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      hasntSelect2: false,
+      series: this.data.seriesList[e.detail.value],
+    })
+  }, 
+
+  addNewSeries:function(e){
+    if(this.data.newSeries == ''){
+      //please enter series
+      wx.showToast({
+        icon: 'none',
+        title: '请填写新系列'
+      })
+    }else{
+      const db = wx.cloud.database();
+      db.collection('gomeSeries').add({
+        data: {
+          name: this.data.newSeries,
+          url: '',
+          index: 100,
+          imgs: [],
+        },
+        success: res => {
+          var itemList = this.data.seriesList;
+          itemList.push(this.data.newSeries);
+          // 在返回结果中会包含新创建的记录的 _id
+          this.setData({
+            seriesList:itemList,
+          })
+          wx.showToast({
+            title: '添加系列成功',
+          })
+          console.log('[数据库] [新增记录] 成功，记录 _id: ', res._id)
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '新增记录失败'
+          })
+          console.error('[数据库] [新增记录] 失败：', err)
+        }
+      })
+    }
+
+
+  },
 
 
 
@@ -72,6 +124,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const db = wx.cloud.database();
+    // 查询当前家具的details对应name
+    db.collection('gomeSeries').where({
+    }).get({
+      success: res => {
+        var tempList = [];
+        for(let i =0;i <res.data.length;i++){
+          tempList.push(res.data[i].name);
+        }
+        this.setData({
+          seriesList:tempList,
+        })
+
+        console.log('[数据库] [查询记录] 成功: ', res);
+        wx.hideToast();
+      },
+      fail: err => {
+      }
+    })
   },
 
   /**
@@ -258,7 +329,7 @@ Page({
 
   seriesInput: function (e) {
     this.setData({
-      series: e.detail.value
+      newSeries: e.detail.value
     })
   },
 

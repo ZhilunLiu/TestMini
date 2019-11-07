@@ -46,14 +46,24 @@
   <view class = "bg2">
     <view class = "row_flex">
       <text>系列名称：</text>
-      <input class = "input"type ="text" placeholder="柏拉图" bindinput="seriesInput"/>
+      <picker bindchange="bindPicker2Change" value="{{index}}" range="{{seriesList}}">
+      <view wx:if="{{hasntSelect2}}">
+        <button class = "picker_button" type = "default" size = "mini">系列选择</button>
+      </view>
+      <view wx:else class = "picker_button">
+        <view class = "wdh">{{type}}</view>
+      </view>
+      </picker>
+
+      <input class = "smallinput"type ="text" placeholder="柏拉图" bindinput="seriesInput"/>
+      <button class = "picker_button" type = "default" size = "mini" bindtap="addNewSeries">添加系列</button>
     </view>
 
     <view class = "row_flex">
       <text>家具种类：</text>
       <picker bindchange="bindPickerChange" value="{{index}}" range="{{typeList}}">
       <view wx:if="{{hasntSelect}}">
-        <button class = "picker_button" type = "default" size = "mini">状态选择</button>
+        <button class = "picker_button" type = "default" size = "mini">种类选择</button>
       </view>
       <view wx:else class = "picker_button">
         <view class = "wdh">{{type}}</view>
