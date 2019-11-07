@@ -18,6 +18,7 @@ Page({
     dimension:[],
     index:0,
     dimensionFlag:true,
+    addingDim:false,
     manager:false,
     updating:false,
     width:0,
@@ -123,6 +124,9 @@ Page({
           size:res.data[0].size,
           dimension:res.data[0].dimension,
           dataId:res.data[0]._id,
+          width:res.data[0].dimension[0],
+          depth: res.data[0].dimension[1],
+          height: res.data[0].dimension[2],
         })
         console.log(this.data.price);
         if (res.data[0].dimension[0][0]==0){
@@ -148,13 +152,38 @@ Page({
     })
   },
 
+  deleteData:function(e){
+    const db = wx.cloud.database()
+    db.collection('detail').doc(this.data.dataId).remove({
+      success: res => {
+        wx.showToast({
+          title: '删除成功',
+        })
+        this.back();
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '删除失败',
+        })
+        console.error('[数据库] [删除记录] 失败：', err)
+      }
+    })
+  },
+
+  back:function(e){
+    wx.navigateBack({
+      delta:1,
+    })
+  },
+
   //更新
   save:function(e){
     var dim = this.data.dimension;
     dim[this.data.index][0] = parseInt(this.data.width);
     dim[this.data.index][1] = parseInt(this.data.depth);
     dim[this.data.index][2] = parseInt(this.data.height);
-    //console.log(dim);
+    console.log(dim);
     //call db update
 
     console.log(this.data.price );
@@ -174,7 +203,46 @@ Page({
         wx.showToast({ title: '更新成功', icon: 'success', duration: 1000 });
 
         this.setData({
-          updating:false
+          updating:false,
+          price:this.data.price,
+          size:this.data.size,
+          dimension:dim,
+          describtion:this.data.describtion,
+        })
+        console.error('[数据库] [更新记录] 成功', res);
+      },
+      fail: err => {
+        icon: 'none',
+          console.error('[数据库] [更新记录] 失败：', err)
+      }
+    })
+  },
+
+  addNewDim:function(){
+
+    var dim = this.data.dimension;
+    var index= this.data.index;
+    var newDim = [parseInt(this.data.width), parseInt(this.data.depth), parseInt(this.data.height)]
+    dim.push(newDim);
+    console.log('after push new DIm is ')
+    console.log(dim);
+    //call db update
+
+    const db = wx.cloud.database();
+    db.collection('detail').doc(this.data.dataId).update({
+      data: {
+        price: this.data.price,
+        dimension: dim,
+        size: this.data.size,
+      },
+      success: res => {
+        wx.showToast({ title: '更新成功', icon: 'success', duration: 1000 });
+
+        this.setData({
+          addingDim: false,
+          price:this.data.price,
+          dimension:dim,
+          size:this.data.size,
         })
         console.error('[数据库] [更新记录] 成功', res);
       },
@@ -186,10 +254,22 @@ Page({
   },
 
 
+  addDim:function(e){
+    this.setData({
+      index: parseInt(this.data.index) + 1,
+      addingDim:true
+    })
+    console.log('now index is ')
+    console.log(this.data.index)
+  },
+
+
+
   priceInput: function (e) {
     console.log('price changed')
     var temp = this.data.price;
     temp[this.data.index] = e.detail.value;
+    console.log(temp)
     this.setData({
       price: temp
     })
@@ -206,6 +286,7 @@ Page({
     console.log('size changed')
     var temp = this.data.size;
     temp[this.data.index] = e.detail.value;
+    console.log(temp)
     this.setData({
       size: temp
     })

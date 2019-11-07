@@ -103,7 +103,8 @@ Page({
     });
     if (!carts.length) {                  // 如果购物车为空
       this.setData({
-        hasList: false              // 修改标识为false，显示购物车为空页面
+        hasList: false, 
+        totalPrice:0             // 修改标识为false，显示购物车为空页面
       });
     } else {                              // 如果不为空
       this.getTotalPrice();           // 重新计算总价格

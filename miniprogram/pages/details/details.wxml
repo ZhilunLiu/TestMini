@@ -5,7 +5,7 @@
       autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}} " bindchange="bindchangeTag">  
       <block wx:for="{{imgUrls}}" >
         <swiper-item>
-          <image src="{{item}}" class="slide-image" data-index="{{index}}" bindtap="previewImage"/>
+            <image src="{{item}}" class="slide-image" data-index="{{index}}" bindtap="previewImage"/>
       </swiper-item>
       </block>
     </swiper>
@@ -47,6 +47,35 @@
       
     </view>
 
+
+    <view wx:elif="{{addingDim}}">
+      <view class = "row_flex">
+        <view class = "priceText">￥</view>
+        <input class = "priceTextinput" type ="digit" placeholder="{{price[index]}}" bindinput="priceInput"/>
+      </view>
+      <view class = "titleText">{{name}}</view>
+
+      <view class = "row_flex">
+        <view class = "body">家具尺寸：</view>
+        <input class = "smallinput"type ="number" placeholder="{{dimension[index][0]}}" bindinput="widthInput"/>
+        <view class = "wdh">W</view>
+        <input class = "smallinput"type ="number" placeholder="{{dimension[index][1]}}" bindinput="depthInput"/>
+        <view class = "wdh">D</view>
+        <input class = "smallinput"type ="number" placeholder="{{dimension[index][2]}}" bindinput="heightInput"/>
+        <view class = "wdh">H</view>
+      </view>
+      
+
+      <view class = "row_flex">
+          <view class = "body">体积(立方米)： </view>
+          <input class = "body" type ="number" placeholder="{{size[index]}}" bindinput="sizeInput"/>
+      </view>
+
+      
+    </view>
+
+
+
     <view wx:else>
 
       <text class = "priceText">￥{{price[index]}}</text>
@@ -66,6 +95,7 @@
       </view>
       <view class = "body">体积：{{size[index]}} 立方米</view>
       <view class = "body">颜色/说明：{{describtion}}</view>
+      
 
     </view>
 
@@ -73,7 +103,12 @@
 
     <view class = "buybutton">
       <view wx:if="{{updating}}" class = "buy" bindtap="save" >保存</view>
-      <view wx:elif="{{manager}}" class = "buy" bindtap="changeData" >更改信息</view>
+      <view wx:elif="{{addingDim}}" class = "buy" bindtap = "addNewDim">保存</view>
+      <view wx:elif="{{manager}}" class = "row_flex"> 
+      <view class = "buy" bindtap="changeData" >更改信息</view>
+      <view class = "addDim" bindtap="addDim">添加尺寸</view>
+      <view class = "delete" bindtap="deleteData" >删除此产品</view>
+      </view>
       <view wx:else class = "buy" bindtap="buy" data-name = "{{name}}">加入购物车</view>
 
     </view>

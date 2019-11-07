@@ -242,5 +242,9 @@ Page({
       fail: err => {
       }
     })
-  }
+  },
+
+  onShow: function () {
+    this.loadCurType();
+  },
 })  

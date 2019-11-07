@@ -472,10 +472,6 @@ Page({
       filePath,
       success: res => {
 
-        //app.globalData.fileID = res.fileID
-        //console.log('fileId：', res.fileID)
-        //app.globalData.cloudPath = cloudPath
-        //app.globalData.imagePath = filePath
         console.log('[上传文件] 成功：', res)
         wx.cloud.getTempFileURL({
           fileList: [res.fileID],
@@ -492,9 +488,6 @@ Page({
             this.addTodb();
             //}
             console.log(imgUrls)
-            wx.navigateTo({
-              url: '../storageConsole/storageConsole'
-            })
           }
         })
 
@@ -513,14 +506,15 @@ Page({
   },
 
   addTodb:function(){
-    var dim = [this.data.width,this.data.depth,this.data.height];
-    console.log('dim is '+ dim)
+    var dim = [[this.data.width,this.data.depth,this.data.height]];
+    var price =[this.data.price];
+    var size = [this.data.size];
     const db = wx.cloud.database();
     db.collection('detail').add({
       data: {
         name: this.data.fname,
-        price: this.data.price,
-        size: this.data.size,
+        price: price,
+        size: size,
         series: this.data.series,
         describtion: this.data.desc,
         type: this.data.type,
@@ -529,6 +523,8 @@ Page({
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id
+        this.setData({
+        })
         wx.showToast({
           title: '添加成功',
         })

@@ -51,7 +51,7 @@
         <button class = "picker_button" type = "default" size = "mini">系列选择</button>
       </view>
       <view wx:else class = "picker_button">
-        <view class = "wdh">{{type}}</view>
+        <view class = "wdh">{{series}}</view>
       </view>
       </picker>
 

@@ -67,6 +67,30 @@ image {
   align-items: center;
 }
 
+.delete{
+  margin-left:5vw;
+  border-radius: 5px;
+  background-color: red;
+  width:25vw;
+  height: 10vw;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addDim{
+  margin-left:5vw;
+  border-radius: 5px;
+  background-color: coral;
+  width:25vw;
+  height: 10vw;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .buy{
 
   border-radius: 5px;
