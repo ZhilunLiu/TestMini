@@ -149,6 +149,9 @@ Page({
   changeData:function(e){
     this.setData({
       updating:true,
+      width:this.data.dimension[this.data.index][0],
+      depth:this.data.dimension[this.data.index][1],
+      height:this.data.dimension[this.data.index][2],
     })
   },
 
