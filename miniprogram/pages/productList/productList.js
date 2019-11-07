@@ -44,6 +44,7 @@ Page({
         children:
           []
       },
+      /*
       {
         cate_id: 8,
         cate_name: "高管系列",
@@ -64,7 +65,7 @@ Page({
         ishaveChild: true,
         children:
           []
-      },
+      },*/
 
 
 
@@ -168,23 +169,29 @@ Page({
 
     wx.showToast({ title: '加载中', icon: 'loading', duration: 10000 });
 
+    this.loadLeftBar();
+
+
+  },
+
+  loadCurType:function(){
     var Item = {
       cate_id: 1,
       cate_name: "会议桌",
       ishaveChild: true,
-      children:[]
+      children: []
     }
 
     var ItemList = this.data.cateItems
-    
+
     console.log(this.data.cateItems[0].children)
 
     const db = wx.cloud.database();
-    
+
     db.collection('detail').where({
-      type:"会议桌"
+      type: "会议桌"
     }).field({
-      _id:false,
+      _id: false,
       name: true,
       url: true,
     }).get({
@@ -198,12 +205,42 @@ Page({
         console.log('[数据库] [查询记录] 成功: ', res);
       },
       fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '查询记录失败'
-        })
-        console.error('[数据库] [查询记录] 失败：', err)
       }
     })
   },
+
+  loadLeftBar:function(){
+
+    var tempList = this.data.cateItems;
+    var length = this.data.cateItems.length;
+    const db = wx.cloud.database();
+    db.collection('gomeSeries').where({
+    }).get({
+      success: res => {
+
+        for(let i =0 ;i<res.data.length;i++){
+          console.log('inthe loop');
+          var item = {
+            cate_id: length+i,
+            cate_name: res.data[i].name,
+            ishaveChild: true,
+            children: []
+          }
+          console.log(item);
+
+          tempList.push(item);
+        }
+        console.log(tempList);
+        this.setData({
+          cateItems: tempList,
+        })
+
+        this.loadCurType();
+
+        console.log('[数据库] [查询记录] 成功: ', res);
+      },
+      fail: err => {
+      }
+    })
+  }
 })  
