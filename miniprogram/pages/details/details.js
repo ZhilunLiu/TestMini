@@ -12,6 +12,7 @@ Page({
     interval: 3000,
     duration: 1800,
     price:[],
+    disPrice:[],
     name:'',
     describtion:'',
     size:[],
@@ -24,6 +25,7 @@ Page({
     width:0,
     depth:0,
     height:0,
+    hasDisc:false,
   },
 
   bindPickerChange: function (e) {
@@ -91,6 +93,7 @@ Page({
     var newItem = {
       title: this.data.name,
       price: this.data.price[this.data.index],
+      disPrice:this.data.disPrice[this.data.disPrice],
       image: this.data.imgUrls[this.data.index],
       dimension: this.data.dimension[this.data.index],
       selected: true,
@@ -117,17 +120,23 @@ Page({
     }).get({
       success: res => {
         console.log(res);
+        var bool = false;
+        if(res.data[0].disPrice.length!=0){
+          bool = true;
+        }
         this.setData({
           imgUrls :res.data[0].url,
           price: res.data[0].price,
+          disPrice:res.data[0].disPrice,
+          hasDisc:bool,
           name: res.data[0].name,
           describtion:res.data[0].describtion,
           size:res.data[0].size,
           dimension:res.data[0].dimension,
           dataId:res.data[0]._id,
-          width:res.data[0].dimension[0],
-          depth: res.data[0].dimension[1],
-          height: res.data[0].dimension[2],
+          width:res.data[0].dimension[0][0],
+          depth: res.data[0].dimension[0][1],
+          height: res.data[0].dimension[0][2],
         })
         console.log(this.data.price);
         if (res.data[0].dimension[0][0]==0){
@@ -199,6 +208,7 @@ Page({
     db.collection('detail').doc(this.data.dataId).update({
       data: {
         price: this.data.price,
+        disPrice:this.data.disPrice,
         dimension: dim,
         size: this.data.size,
         describtion: this.data.describtion,
@@ -209,6 +219,7 @@ Page({
         this.setData({
           updating:false,
           price:this.data.price,
+          disPrice:this.data.disPrice,
           size:this.data.size,
           dimension:dim,
           describtion:this.data.describtion,
@@ -236,6 +247,7 @@ Page({
     db.collection('detail').doc(this.data.dataId).update({
       data: {
         price: this.data.price,
+        disPrice:this.data.disPrice,
         dimension: dim,
         size: this.data.size,
       },
@@ -245,6 +257,7 @@ Page({
         this.setData({
           addingDim: false,
           price:this.data.price,
+          disPrice:this.data.disPrice,
           dimension:dim,
           size:this.data.size,
         })
@@ -276,6 +289,17 @@ Page({
     console.log(temp)
     this.setData({
       price: temp
+    })
+  },
+
+
+  disPriceInput: function (e) {
+    console.log('disPriceInput changed')
+    var temp = this.data.disPrice;
+    temp[this.data.index] = e.detail.value;
+    console.log(temp)
+    this.setData({
+      disPrice: temp
     })
   },
 

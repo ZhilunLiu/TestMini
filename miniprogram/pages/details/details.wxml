@@ -77,8 +77,16 @@
 
 
     <view wx:else>
-
-      <text class = "priceText">￥{{price[index]}}</text>
+      <view wx:if="{{hasDisc}}">
+        <view class = "priceText">
+          ￥{{price[index]}}
+          <cover-view class = "disline"></cover-view>
+        </view>
+        <view class = "priceText">￥{{disPrice[index]}}</view>
+      </view>
+      <view wx:else>
+        <view class = "priceText">￥{{price[index]}}</view>
+      </view>
       <view class = "titleText">{{name}}</view>
       <picker bindchange="bindPickerChange" value="{{index}}" range="{{dimension}}">
       <button class = "picker_button" type = "default" size = "mini">尺寸选择</button>
