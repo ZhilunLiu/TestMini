@@ -253,7 +253,6 @@ Page({
 
   searchUser:function(e){
     const db = wx.cloud.database();
-    // 查询当前家具的details对应name
     db.collection('users').where({
       _openid: getApp().globalData.openId
     }).get({

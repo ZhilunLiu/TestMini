@@ -96,60 +96,12 @@ Page({
     const db = wx.cloud.database();
 
     if(index < 7){
-      
-      db.collection('detail').where({
-        type: item.cate_name
-      }).field({
-        _id:false,
-        name: true,
-        url: true,
-      }).get({
-        success: res => {
-          ItemList[index].children = res.data
-          this.setData({
-            cateItems: ItemList,
-            curNav:id,
-            curIndex: index
-          })
-          wx.hideToast();
 
-          console.log('[数据库] [查询记录] 成功: ', res);
-        },
-        fail: err => {
-          wx.showToast({
-            icon: 'none',
-            title: '查询记录失败'
-          })
-          console.error('[数据库] [查询记录] 失败：', err)
-        }
-      })
+      this.loadtypeDetail(item, id, index, ItemList);
 
     } else{
-      console.log("开普勒")
-      db.collection('detail').where({
-        series: item.cate_name
-      }).get({
-        success: res => {
-          ItemList[index].children = res.data
-          this.setData({
-            cateItems: ItemList,
-            curNav:id,
-            curIndex: index
-          })
-          wx.hideToast();
-
-          console.log('[数据库] [查询记录] 成功: ', res);
-        },
-        fail: err => {
-          wx.showToast({
-            icon: 'none',
-            title: '查询记录失败'
-          })
-          console.error('[数据库] [查询记录] 失败：', err)
-        }
-      })
-
-
+      console.log("Series now:")
+      this.loadFullDetail(item, id, index, ItemList);
     }
     
     
@@ -159,6 +111,50 @@ Page({
     //  curNav: id,
     //  curIndex: index
     //})
+  },
+
+  loadFullDetail: function (item, id, index, ItemList) {
+    var that = this;
+    var name = item.cate_name;
+    wx.cloud.callFunction({
+      name: 'getMoreDetail',
+      data: {
+        series: name,
+      },
+      success(res){
+        ItemList[index].children = res.result.data;
+        console.log('云函数获取到的result: ', res.result)
+        that.setData({
+          cateItems: ItemList,
+          curNav: id,
+          curIndex: index
+        })
+        wx.hideToast();
+      },
+      fail:console.error
+    })
+  },
+
+  loadtypeDetail: function (item, id, index, ItemList) {
+    var that = this;
+    console.log(item)
+    wx.cloud.callFunction({
+      name: 'getTypeDetail',
+      data: {
+        type: item,
+      },
+      success(res) {
+        ItemList[index].children = res.result.data;
+        console.log('云函数获取到的result: ', res.result)
+        that.setData({
+          cateItems: ItemList,
+          curNav: id,
+          curIndex: index
+        })
+        wx.hideToast();
+      },
+      fail: console.error
+    })
   },
 
   onLoad: function (options) {
