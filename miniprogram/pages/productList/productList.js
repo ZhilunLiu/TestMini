@@ -128,10 +128,6 @@ Page({
       console.log("开普勒")
       db.collection('detail').where({
         series: item.cate_name
-      }).field({
-        _id:false,
-        name: true,
-        url: true,
       }).get({
         success: res => {
           ItemList[index].children = res.data
