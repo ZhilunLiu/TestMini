@@ -58,7 +58,7 @@
 
       <view class = "row_flex">
           <view class = "body">颜色/说明：</view>
-          <input class = "body" type ="text" placeholder="{{describtion}}" bindinput="descInput"/>
+          <textarea class="textarea" value="{{desc}}" placeholder="{{describtion}}" placeholder-class="placeholder" maxlength="-1" focus="true" auto-height="true" bindinput="descInput"></textarea>
       </view>
       
     </view>

@@ -29,6 +29,15 @@ page{
   font-size:4vw;
   color: black;
 }
+.descInput{
+  margin-top: 2vh;
+  font-size: 28rpx;
+  margin: 10%;
+  background-color: lightgray;
+  width: 80%;
+  height: 100px;
+}
+
 .picker_button{
   margin-top: 2vh;
   margin-left:5vw;
