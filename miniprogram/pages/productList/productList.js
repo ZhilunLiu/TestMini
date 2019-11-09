@@ -215,7 +215,7 @@ Page({
         for(let i =0 ;i<res.data.length;i++){
           console.log('inthe loop');
           var item = {
-            cate_id: length+i,
+            cate_id: length+i+1,
             cate_name: res.data[i].name,
             ishaveChild: true,
             children: []
