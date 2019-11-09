@@ -21,7 +21,7 @@
         <view class = "icon">
           <image  bindtap="deleteList" data-index="{{index}}" src = "../../images/delete.png"></image>
         </view>
-        <text class = "price">￥{{item.price}}</text>
+        <text class = "price">￥{{item.disPrice}}</text>
         <!-- 增加减少数量按钮 -->
         <view class = "num">
             <image bindtap="minusCount" data-index="{{index}}" src = "../../images/minus.png"></image>

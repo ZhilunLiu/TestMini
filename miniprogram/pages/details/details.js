@@ -61,11 +61,12 @@ Page({
     }
     var curCartList = app.globalData.cartList;
     var itName = e.currentTarget.dataset.name;
+    var dim = this.data.dimension[this.data.index];
     var found = false;
     if (curCartList.length != 0){
       console.log('not empty!');
       for (let i = 0; i < curCartList.length; i++) {
-        if (curCartList[i].title == itName) {
+        if (curCartList[i].title == itName && curCartList[i].dimension == dim) {
           console.log('same item found');
           curCartList[i].num = curCartList[i].num + 1;
           found = true;
@@ -93,7 +94,7 @@ Page({
     var newItem = {
       title: this.data.name,
       price: this.data.price[this.data.index],
-      disPrice:this.data.disPrice[this.data.disPrice],
+      disPrice:this.data.disPrice[this.data.index],
       image: this.data.imgUrls[this.data.index],
       dimension: this.data.dimension[this.data.index],
       selected: true,

@@ -110,7 +110,7 @@
       </picker>
       <view wx:if= "{{dimension[index][0]}}!=0}}">
         <view class="body">
-          当前尺寸: {{dimension[index][0]}}W X {{dimension[index][1]}}D X {{dimension[index][2]}}H 
+          当前尺寸: {{dimension[index][0]}}长 X {{dimension[index][1]}}宽 X {{dimension[index][2]}}高 毫米 
         </view>
       </view>  
       <view wx:elif ="{{dimension[index][0]}}==0">

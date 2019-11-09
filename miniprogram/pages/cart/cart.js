@@ -30,7 +30,7 @@ Page({
     let total = 0;
     for (let i = 0; i < carts.length; i++) {         // 循环列表得到每个数据
       if (carts[i].selected) {                   // 判断选中才会计算价格
-        total += carts[i].num * carts[i].price;     // 所有价格加起来
+        total += carts[i].num * carts[i].disPrice;     // 所有价格加起来
       }
     }
     console.log('totalprice is '+total);
@@ -131,6 +131,7 @@ Page({
     if (list.length != 0) {
       boolean = true;
     }
+
     this.setData({
         carts:list,
         hasList:boolean
