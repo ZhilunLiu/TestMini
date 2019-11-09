@@ -141,7 +141,7 @@ Page({
     wx.cloud.callFunction({
       name: 'getTypeDetail',
       data: {
-        type: item,
+        type: item.cate_name,
       },
       success(res) {
         ItemList[index].children = res.result.data;
@@ -165,6 +165,8 @@ Page({
 
 
   },
+
+
 
   loadCurType:function(){
     var Item = {

@@ -18,11 +18,27 @@
   <view class = "title">
 
     <view wx:if="{{updating}}">
-      <view class = "row_flex">
-        <view class = "priceText">￥</view>
-        <input class = "priceTextinput" type ="digit" placeholder="{{price[index]}}" bindinput="priceInput"/>
+      <view wx:if="{{hasDisc}}">
+        <view class = "row_flex">
+          <view class = "priceText">原价</view>
+          <input class = "priceTextinput" type ="digit" placeholder="{{price[index]}}" bindinput="priceInput"/>
+        </view>
+        <view class = "row_flex">
+          <view class = "priceText">折后价</view>
+          <input class = "priceTextinput" type ="digit" placeholder="{{disPrice[index]}}" bindinput="disPriceInput"/>
+        </view>
       </view>
-      <view class = "titleText">{{name}}</view>
+      <view wx:else>
+        <view class = "row_flex">
+          <view class = "priceText">￥</view>
+          <input class = "priceTextinput" type ="digit" placeholder="{{price[index]}}" bindinput="priceInput"/>
+        </view>
+      </view>
+
+      <view class = "row_flex">
+        <view class = "body">家具名称：</view>
+        <input class = "body" type ="text" placeholder="{{name}}" bindinput="nameInput"/>
+      </view>
 
       <view class = "row_flex">
         <view class = "body">家具尺寸：</view>
@@ -82,11 +98,12 @@
           ￥{{price[index]}}
           <cover-view class = "disline"></cover-view>
         </view>
-        <view class = "priceText">￥{{disPrice[index]}}</view>
+        <view class = "disPriceText">￥{{disPrice[index]}}</view>
       </view>
       <view wx:else>
         <view class = "priceText">￥{{price[index]}}</view>
       </view>
+
       <view class = "titleText">{{name}}</view>
       <picker bindchange="bindPickerChange" value="{{index}}" range="{{dimension}}">
       <button class = "picker_button" type = "default" size = "mini">尺寸选择</button>

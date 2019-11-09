@@ -105,6 +105,39 @@ Page({
   },
 
 
+
+  discount: function () {
+    const db = wx.cloud.database();
+    var temp = this.data.price;
+    var disc = this.data.disc;
+    for(let i = 0; i<temp.length;i++){
+      temp[i] = temp[i] / disc;
+    }
+    console.log('temp is ')
+    console.log(temp)
+    db.collection('detail').doc(this.data.dataId).update({
+      data: {
+
+        disPrice: temp,
+
+      },
+      success: res => {
+        wx.showToast({ title: '更新成功', icon: 'success', duration: 1000 });
+
+        this.setData({
+          disPrice: this.data.disPrice,
+          hasDisc:true,
+        })
+        console.error('[数据库] [更新记录] 成功', res);
+      },
+      fail: err => {
+        icon: 'none',
+          console.error('[数据库] [更新记录] 失败：', err)
+      }
+    })
+  },
+
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -144,6 +177,7 @@ Page({
         }
 
         console.log('[数据库] [查询记录] 成功: ', res);
+
         wx.hideToast();
       },
       fail: err => {
@@ -300,6 +334,15 @@ Page({
     console.log(temp)
     this.setData({
       disPrice: temp
+    })
+  },
+
+  nameInput:function(e){
+    console.log('disPriceInput changed')
+    var temp = e.detail.value;
+    console.log(temp)
+    this.setData({
+      name: temp
     })
   },
 

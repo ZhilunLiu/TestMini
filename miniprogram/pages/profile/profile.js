@@ -28,6 +28,7 @@ Page({
       seriesList:[],
       imgUrls:[],
       newSeries:'',
+      disPrice:'',
 
   },
 
@@ -344,6 +345,12 @@ Page({
     })
   },
 
+  disPriceInput: function (e) {
+    this.setData({
+      disPrice: e.detail.value
+    })
+  },
+
   descInput: function (e) {
     this.setData({
       desc: e.detail.value
@@ -508,6 +515,7 @@ Page({
     var dim = [[this.data.width,this.data.depth,this.data.height]];
     var price =[this.data.price];
     var size = [this.data.size];
+    var disPrice = [this.data.disPrice];
     const db = wx.cloud.database();
     db.collection('detail').add({
       data: {
@@ -519,6 +527,7 @@ Page({
         type: this.data.type,
         url: this.data.imgUrls,
         dimension: dim,
+        disPrice: disPrice,
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id

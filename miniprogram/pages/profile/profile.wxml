@@ -82,6 +82,11 @@
     </view>
 
     <view class = "row_flex">
+      <text>折后价格：</text>
+      <input class = "input"type ="digit" placeholder="2400" bindinput="disPriceInput"/>
+    </view>
+
+    <view class = "row_flex">
       <text>家具描述：</text>
       <input class = "input"type ="text" placeholder="白蜡木，手抓纹" bindinput="descInput"/>
     </view>

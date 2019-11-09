@@ -8,7 +8,7 @@ const MAX_LIMIT = 100
 exports.main = async (event, context) => {
 
   var type = event.type;
-
+  console.log(type);
   // 先取出集合记录总数
   const countResult = await db.collection('detail').count()
   const total = countResult.total

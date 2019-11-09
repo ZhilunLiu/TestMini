@@ -42,6 +42,14 @@ page{
    color:coral;
 }
 
+.disPriceText{
+  position: relative;
+  display: block;
+   margin-left: 5vw;
+   font-size: 7vw;
+   color:coral;
+}
+
 .disline{
   position: absolute;
   top: 50%;
