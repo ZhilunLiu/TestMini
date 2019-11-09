@@ -95,7 +95,7 @@ Page({
       title: this.data.name,
       price: this.data.price[this.data.index],
       disPrice:this.data.disPrice[this.data.index],
-      image: this.data.imgUrls[this.data.index],
+      image: this.data.imgUrls[0],
       dimension: this.data.dimension[this.data.index],
       selected: true,
       num: 1

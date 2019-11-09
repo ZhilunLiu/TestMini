@@ -1,5 +1,6 @@
 <!--miniprogram/pages/myorders/myorders.wxml-->
     <!-- wx:for 渲染订单列表 -->
+  <scroll-view class = "scrollView" scroll-y="true" style="height:90vh;">
     <view wx:for="{{orders}}" class = "items" bindtap="goOrderDetail" data-order = "{{item}}" data-index ="{{index}}" >
       <view class = "row_flex">
 
@@ -15,8 +16,8 @@
       </view>
 
     </view>
-
-
+  </scroll-view>
+  
 <popup id='popup' 
       title='提示' 
       content='请先登录' 
