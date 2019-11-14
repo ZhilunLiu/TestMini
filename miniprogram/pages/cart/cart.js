@@ -4,7 +4,8 @@ Page({
     carts: [],               // 购物车列表
     hasList: false,          // 列表是否有数据
     totalPrice: 0,           // 总价，初始为0
-    selectAllStatus: true    // 全选状态，默认全选
+    selectAllStatus: true,    // 全选状态，默认全选
+    hasDisPrice:false,
   },
 
   pay:function(e){
@@ -30,7 +31,17 @@ Page({
     let total = 0;
     for (let i = 0; i < carts.length; i++) {         // 循环列表得到每个数据
       if (carts[i].selected) {                   // 判断选中才会计算价格
-        total += carts[i].num * carts[i].disPrice;     // 所有价格加起来
+        if(carts[i].disPrice!=null){
+          total += carts[i].num * carts[i].disPrice;     // 所有价格加起来
+          carts[i].hasDisPrice = true;
+          console.log(carts);
+          this.setData({
+            carts:carts
+          })
+        }else{
+          total += carts[i].num * carts[i].price;
+        }
+
       }
     }
     console.log('totalprice is '+total);
