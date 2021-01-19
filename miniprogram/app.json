@@ -28,7 +28,8 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "湖南鑫诺家具",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "pageOrientation": "landscape"
   },
   "tabBar": {
     "color": "#7A7E83",
