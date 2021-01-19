@@ -2,7 +2,7 @@
 
 <view class="contact-block" bindtap="phoneCall" hover-class="contact-hover">
   <view class="contact-text">
-  <image src="/images/telephone-call-32.png"></image> 135 0738 4078</view>
+  <image src="/images/telephone-call-32.png"></image> 135 0748 4078</view>
 </view>
 <view class="line"></view>
 
