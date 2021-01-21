@@ -1,0 +1,76 @@
+
+<view class = "bg2">
+    <view class = "space"/>
+
+    <view class = "row_flex">
+      <text>订单号</text>
+      <text>{{orderNumber}}</text>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>状态</text>
+      <text> 未下单 </text>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>客户</text>
+      <input class = "input"type ="text" placeholder="{{customer}}" bindinput="nameInput"/>
+    </view>
+      
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>电话</text>
+      <input class = "input"type ="text" placeholder="{{phone}}" bindinput="phoneInput"/>
+    </view>
+      
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>地址</text>
+      <input class = "input"type ="text" placeholder="{{address}}" bindinput="addressInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>下单日期</text>
+      <input class = "input"type ="text" placeholder="{{dealdate}}" bindinput="dealDateInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>交货日期</text>
+      <input class = "input"type ="text" placeholder="{{duedate}}" bindinput="duedateInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>合同金额</text>
+      <input class = "input"type ="text" placeholder="{{orderTotal}}" bindinput="orderTotalInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>开票单位</text>
+      <input class = "input"type ="text" placeholder="{{company}}" bindinput="companyInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "search">
+      <view class = "searchButton" bindtap="update">更改并保存</view>
+    </view>
+
+    <view class = "search">
+      <view class = "searchButton" bindtap="caigoudan">采购单</view>
+    </view>
+
+  </view>

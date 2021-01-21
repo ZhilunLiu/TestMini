@@ -1,5 +1,10 @@
 {
   "pages": [
+
+    "pages/profile/profile",
+    "pages/new/caigoudan/caigoudan",
+    "pages/new/newOrders/orders/orders",
+    "pages/new/createOrder/createOrder",
     "pages/home/home",
     "pages/products/products",
     "pages/solutions/solutions",
@@ -11,7 +16,6 @@
     "pages/series/series",
     "pages/productList/productList",
     "pages/cart/cart",
-    "pages/profile/profile",
     "pages/myorders/myorders",
     "pages/myaddress/myaddress",
     "pages/addAddress/addAddress",
@@ -28,9 +32,9 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "湖南鑫诺家具",
-    "navigationBarTextStyle": "black",
-    "pageOrientation": "landscape"
+    "navigationBarTextStyle": "black"
   },
+  "resizable": true,
   "tabBar": {
     "color": "#7A7E83",
     "selectedColor": "#3cc51f",
@@ -63,5 +67,8 @@
       }
     ]
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "usingComponents": {
+    "table-view": "../../../miniprogram_npm/miniprogram-table-component"
+  }
 }

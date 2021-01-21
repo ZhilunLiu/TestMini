@@ -1,0 +1,59 @@
+
+<view class = "bg2">
+    <view class = "space"/>
+
+    <view class = "row_flex">
+      <text>客户</text>
+      <input class = "input"type ="text" placeholder="客户姓名" bindinput="nameInput"/>
+    </view>
+
+      
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>电话</text>
+      <input class = "input"type ="text" placeholder="客户联系电话" bindinput="phoneInput"/>
+    </view>
+      
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>地址</text>
+      <input class = "input"type ="text" placeholder="客户地址....." bindinput="addressInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>下单日期</text>
+      <input class = "input"type ="text" placeholder="下单日期....." bindinput="dealDateInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>交货日期</text>
+      <input class = "input"type ="text" placeholder="交货日期....." bindinput="duedateInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>合同金额</text>
+      <input class = "input"type ="text" placeholder="合同金额....." bindinput="orderTotalInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>开票单位</text>
+      <input class = "input"type ="text" placeholder="开票单位....." bindinput="companyInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "search">
+      <view class = "searchButton" bindtap="create">新建</view>
+    </view>
+
+  </view>

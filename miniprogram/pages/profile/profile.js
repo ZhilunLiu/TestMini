@@ -388,6 +388,12 @@ Page({
     })
   },
 
+  create:function(e){
+    wx:wx.navigateTo({
+      url: '../new/createOrder/createOrder?nickname='+this.data.nickName,
+    })
+  },
+
   uploadImgbutton:function(){
     var data = this.data
     if (data.series == '' || data.fname == '' || data.type == '' || data.price == '' || data.desc == '', data.width == '', data.height == '') {
