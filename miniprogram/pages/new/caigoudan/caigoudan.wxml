@@ -1,2 +1,57 @@
-<!--miniprogram/pages/new/caigoudan/caigoudan.wxml-->
-<text>this is test test </text>
+
+    <!-- wx:for 渲染购物车列表 -->
+    <scroll-view class = "scrollView" scroll-y="true" style="height:90vh;">
+      <view wx:for="{{carts}}" class = "items">
+        <view class = "row_flex">
+
+          <!-- 点击商品图片可跳转到商品详情 -->
+          <image src="{{item.image[0]}}" class="cart-thumb" bindtap="goDetails" data-title = "{{item.title}}"></image>
+
+          <view class = "column_flex">
+            <text class ="itemName">{{item.title}}</text>
+            <text class = "desc">尺寸:{{item.dimension[0]}}mm长,{{item.dimension[1]}}mm宽,{{item.dimension[2]}}mm高</text>
+          </view>
+        </view>
+        <view class = "row_flex">
+          <view class = "icon">
+            <image  bindtap="deleteList" data-index="{{index}}" src = "../../../images/delete.png"></image>
+          </view>
+          <view wx:if="{{item.hasDisPrice}}">
+            <text class = "price">￥{{item.disPrice}}</text>
+          </view>
+          <view wx:else>
+            <text class = "price">￥{{item.price}}</text>
+          </view>
+          <!-- 增加减少数量按钮 -->
+          <view class = "num">
+              <image bindtap="minusCount" data-index="{{index}}" src = "../../../images/minus.png"></image>
+              <text>{{item.num}}</text>
+              <image bindtap="addCount" data-index="{{index}}" src = "../../../images/plus.png"></image>
+          </view>        
+        </view>
+      </view>
+    </scroll-view>
+
+<!-- 底部操作栏 -->
+<view class ="fixed_view">
+    <!-- 总价 -->
+    <view class = "row_flex">
+      <view class = "totalPrice">￥{{totalPrice}}</view>
+      <view class="pay" bindtap="save">保存</view>
+      <view class="pay" bindtap="add">添加</view>
+    </view>
+</view>
+
+<popup id='popup' 
+      title='提示' 
+      content='请先登录' 
+      btn_ok='好的' 
+      bind:success="_success">
+</popup>
+
+<popup id ='noItem'
+       title = '提示'
+       content='供货单是空的'
+       btn_ok='好的'
+       bind:success="_noItemsuccess"
+/>

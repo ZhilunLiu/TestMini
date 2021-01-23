@@ -56,4 +56,6 @@
       <view class = "searchButton" bindtap="create">新建</view>
     </view>
 
+    
+
   </view>

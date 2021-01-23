@@ -1,0 +1,48 @@
+
+<view class = "bg2">
+    <view class = "row_flex">
+      <text>系列名称：</text>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{seriesList}}">
+      <view wx:if="{{hasntSelect}}">
+        <button class = "picker_button" type = "default" size = "mini">系列选择</button>
+      </view>
+      <view wx:else class = "picker_button">
+        <view class = "wdh">{{series}}</view>
+      </view>
+      </picker>
+
+      <text>家具种类：</text>
+      <picker bindchange="bindPicker2Change" value="{{index}}" range="{{typeList}}">
+      <view wx:if="{{hasntSelect2}}">
+        <button class = "picker_button" type = "default" size = "mini">种类选择</button>
+      </view>
+      <view wx:else class = "picker_button">
+        <view class = "wdh">{{type}}</view>
+      </view>
+      </picker>
+  </view>
+</view>
+
+<scroll-view class = "scrollView" scroll-y="true" style="height:80vh;">
+      <view wx:for="{{carts}}" class = "items">
+        <view class = "row_flex">
+          <!-- 点击商品图片可跳转到商品详情 -->
+          <image src="{{item.url}}" class="cart-thumb" bindtap="goDetails" data-title = "{{item.title}}"></image>
+
+          <view class = "column_flex">
+            <text class ="itemName">{{item.name}}</text>
+            <text class = "desc">尺寸:{{item.dimension[0][0]}}mm长,{{item.dimension[0][1]}}mm宽,{{item.dimension[0][2]}}mm高</text>
+          </view>
+        </view>
+        <view class = "row_flex">
+          <view wx:if="{{item.hasDisPrice}}">
+            <text class = "price">￥{{item.disPrice}}</text>
+          </view>
+          <view wx:else>
+            <text class = "price">￥{{item.price}}</text>
+          </view>
+          
+          <view class="pay" data-id = '{{item._id}}' bindtap="save">添加</view>
+        </view>
+      </view>
+    </scroll-view>

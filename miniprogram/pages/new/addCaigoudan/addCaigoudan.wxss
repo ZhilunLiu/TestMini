@@ -16,11 +16,11 @@ Page {
 }
 .itemName{
   margin-top:3vh;
-  font-size:40rpx;
+  font-size:25rpx;
 }
 .desc{
   margin-top:1vh;
-  font-size:30rpx;
+  font-size:20rpx;
 }
 .price{
   margin-left: 15vw;
@@ -34,7 +34,7 @@ Page {
 }
 
 .items{
-  margin-top:5vh;
+  margin-top:5vw;
   margin-left:5vw;
   margin-right:5vw;
   border-radius: 5px;
@@ -92,15 +92,13 @@ Page {
   color:coral;
 
 }
-.selectAllIcon{
-  margin-left: 2vw;
-}
 .pay{
-  margin-left: 2vw;
+  margin-left: 35vw;
+  margin-right: 2vw;
   border-radius: 5px;
   background-color: coral;
   width:18vw;
-  height: 6vh;
+  height: 8vh;
   color: white;
   display: flex;
   justify-content: center;

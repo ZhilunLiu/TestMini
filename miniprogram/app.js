@@ -32,7 +32,7 @@ App({
       fileID:'',
       cloudPath:'',
       imagePath:'',
-      
+      selectedOrderId:'',
   }
   }
 })

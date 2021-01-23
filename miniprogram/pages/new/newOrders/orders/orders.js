@@ -14,7 +14,7 @@ Page({
     dealer:'',
     phone:'',
     orderNumber:0,
-    orderId:0,
+    orderId:'',
     status:'',
   },
 
@@ -24,41 +24,82 @@ Page({
   onLoad: function (options) {
     this.setData({
       orderId:options.orderId,
+      customer:options.customer,
     }),
-
     wx.showToast({ title: '加载中', icon: 'loading', duration: 10000 });
-    console.log(this.data.data);
+    if(this.data.orderId!=undefined){
+      this.findByOrderId();
+    }
+    if(this.data.customer!=undefined){
+      this.findByName();
+    }
+  },
+
+  findByOrderId:function(){
     const db = wx.cloud.database();
-    // 查询当前家具的details对应name
-    db.collection('orders').where({
-      _id: this.data.orderId
-    }).get({
-      success: res => {
-        console.log(res);
-        this.setData({
-          customer :res.data[0].customer,
-          address: res.data[0].address,
-          status:res.data[0].status,
-          phone:res.data[0].phone,
-          dealdate: res.data[0].dealdate,
-          duedate:res.data[0].duedate,
-          orderTotal:res.data[0].orderTotal,
-          company:res.data[0].company,
-          dealer:res.data[0].dealer,
-        })
-        console.log('[数据库] [查询记录] 成功: ', res);
+      // 查询当前家具的details对应name
+      db.collection('orders').where({
+        _id: this.data.orderId
+      }).get({
+        success: res => {
+          console.log(res);
+          this.setData({
+            customer :res.data[0].customer,
+            address: res.data[0].address,
+            status:res.data[0].status,
+            phone:res.data[0].phone,
+            dealdate: res.data[0].dealdate,
+            duedate:res.data[0].duedate,
+            orderTotal:res.data[0].orderTotal,
+            company:res.data[0].company,
+            dealer:res.data[0].dealer,
+          })
+          console.log('[数据库] [查询记录] 成功: ', res);
 
-        wx.hideToast();
-      },
-      fail: err => {
-        wx.showToast({
-          icon: 'none',
-          title: '查询记录失败'
-        })
-        console.error('[数据库] [查询记录] 失败：', err)
-      }
-    })
+          wx.hideToast();
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '查询记录失败'
+          })
+          console.error('[数据库] [查询记录] 失败：', err)
+        }
+      })    
+  },
 
+  findByName:function(){
+    const db = wx.cloud.database();
+      // 查询当前家具的details对应name
+      db.collection('orders').where({
+        customer: this.data.customer
+      }).get({
+        success: res => {
+          console.log(res);
+          this.setData({
+            customer :res.data[0].customer,
+            address: res.data[0].address,
+            status:res.data[0].status,
+            phone:res.data[0].phone,
+            dealdate: res.data[0].dealdate,
+            duedate:res.data[0].duedate,
+            orderTotal:res.data[0].orderTotal,
+            company:res.data[0].company,
+            dealer:res.data[0].dealer,
+            orderId:res.data[0]._id,
+          })
+          console.log('[数据库] [查询记录] 成功: ', res);
+
+          wx.hideToast();
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '查询记录失败'
+          })
+          console.error('[数据库] [查询记录] 失败：', err)
+        }
+      })  
   },
 
   /**
@@ -152,11 +193,9 @@ Page({
     })
   },
 
-  caigoudan:function(){
-    const db = wx.cloud.database();
-    db.collection('orders').where({
-      _id:this.data.orderId
-      }).update({
+  update:function(){
+  const db = wx.cloud.database();
+    db.collection('orders').doc(this.data.orderId).update({
       data: {
         orderNumber:0,
         customer:this.data.customer,
@@ -178,9 +217,6 @@ Page({
         wx.showToast({
           title: '添加成功',
         })
-        wx.navigateTo({
-          url: '../newOrders/orders/orders?orderId='+this.data.orderId,
-        })
       },
       fail: err => {
         wx.showToast({
@@ -189,6 +225,15 @@ Page({
         })
         console.error('[数据库] [新增记录] 失败：', err)
       }
+    })
+  },
+
+  caigoudan:function(){
+    var app = getApp();
+    app.globalData.selectedOrderId = this.data.orderId;
+    console.log('选择了订单---------------------'+this.data.orderId);
+    wx.navigateTo({
+      url: '../../caigoudan/caigoudan?orderId='+this.data.orderId,
     })
   },
 })

@@ -29,6 +29,7 @@ Page({
       imgUrls:[],
       newSeries:'',
       disPrice:'',
+      customer:'',
 
   },
 
@@ -315,6 +316,13 @@ Page({
     })
   },
 
+  customerInput: function (e) {
+    this.setData({
+      customer: e.detail.value
+    })
+  },
+
+
   phoneInput: function (e) {
     this.setData({
       phone: e.detail.value
@@ -388,9 +396,22 @@ Page({
     })
   },
 
+  searchOrder:function(e){
+    console.log('正在跳转订单页面 订单号为'+this.data.orderNumber+' 姓名为'+this.data.customer);
+    wx:wx.navigateTo({
+      url: '../new/searchOrderResult/searchOrderResult?customer='+this.data.customer+'&orderId='+this.data.orderNumber,
+    })
+  },
+
   create:function(e){
     wx:wx.navigateTo({
       url: '../new/createOrder/createOrder?nickname='+this.data.nickName,
+    })
+  },
+
+  addFurniture:function(e){
+    wx:wx.navigateTo({
+      url: '../new/addProduct/addProduct'
     })
   },
 

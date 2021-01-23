@@ -1,7 +1,3 @@
 {
-  "usingComponents": {
-    "table-view": "../../../miniprogram_npm/miniprogram-table-component",
-    "recycle-view": "miniprogram-recycle-view/recycle-view",         
-    "recycle-item": "miniprogram-recycle-view/recycle-item"
-  }
+  "navigationBarTitleText": "供货单"
 }

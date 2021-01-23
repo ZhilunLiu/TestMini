@@ -108,7 +108,7 @@ Page {
 .input{
   color: rgba(26, 24, 24, 0.89);
   margin-top: 2vh;
-  margin-left:2vw;
+  margin-left:10vw;
 }
 .smallinput{
     color: rgba(26, 24, 24, 0.89);

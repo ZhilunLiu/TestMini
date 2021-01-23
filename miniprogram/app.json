@@ -1,6 +1,5 @@
 {
   "pages": [
-
     "pages/profile/profile",
     "pages/new/caigoudan/caigoudan",
     "pages/new/newOrders/orders/orders",
@@ -25,7 +24,10 @@
     "pages/track/track",
     "pages/searchOrder/searchOrder",
     "pages/updateTrack/updateTrack",
-    "pages/addDetails/addDetails"
+    "pages/addDetails/addDetails",
+    "pages/new/addCaigoudan/addCaigoudan",
+    "pages/new/addProduct/addProduct",
+    "pages/new/searchOrderResult/searchOrderResult"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -69,6 +71,9 @@
   },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
-    "table-view": "../../../miniprogram_npm/miniprogram-table-component"
+    "table-view": "../../../miniprogram_npm/miniprogram-table-component",
+    "recycle-view": "miniprogram-recycle-view/recycle-view",
+    "recycle-item": "miniprogram-recycle-view/recycle-item",
+    "popup": "/component/popup/popup"
   }
 }
