@@ -225,7 +225,7 @@ Page({
 
   add:function(e){
     wx.navigateTo({
-      url: '../addCaigoudan/addCaigoudan',
+      url: '../addCaigoudan/addCaigoudan?orderId = '+this.data.orderId,
     })
   },
 

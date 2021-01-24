@@ -54,7 +54,6 @@ Page({
   },
 
   buy:function(e){
-
     var app = getApp();
     if(app.globalData.openid === undefined){
       
@@ -145,12 +144,11 @@ Page({
   onLoad: function (options) {
     wx.showToast({ title: '加载中', icon: 'loading', duration: 10000 });
     var itemName = options.name;
-    console.log(itemName);
-    console.log(this.data.data);
+    var itemId = options.itemId;
     const db = wx.cloud.database();
     // 查询当前家具的details对应name
     db.collection('detail').where({
-      name: itemName
+      _id: itemId
     }).get({
       success: res => {
         console.log(res);
@@ -436,5 +434,12 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  add:function(){
+    console.log('try to save the item----------------------- id is '+this.data.dataId);
+    wx.navigateTo({
+      url: '../new/caigoudan/caigoudan?itemId='+this.data.dataId,
+    })
   }
 })

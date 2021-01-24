@@ -23,8 +23,8 @@ Page {
   font-size:20rpx;
 }
 .price{
-  margin-left: 15vw;
-  font-size:40rpx;
+  margin-left: 0vw;
+  font-size:30rpx;
   color:coral;
 }
 .selectIcon{
@@ -98,7 +98,7 @@ Page {
   border-radius: 5px;
   background-color: coral;
   width:18vw;
-  height: 8vh;
+  height: 5vh;
   color: white;
   display: flex;
   justify-content: center;

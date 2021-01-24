@@ -134,7 +134,7 @@
       <view class = "addDim" bindtap="addDim">添加尺寸</view>
       <view class = "delete" bindtap="deleteData" >删除此产品</view>
       </view>
-      <view wx:else class = "buy" bindtap="buy" data-name = "{{name}}">加入购物车</view>
+      <view wx:else class = "buy" bindtap="add" data-name = "{{name}}">添加进订单</view>
 
     </view>
 

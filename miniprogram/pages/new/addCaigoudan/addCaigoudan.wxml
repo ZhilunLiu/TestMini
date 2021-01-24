@@ -27,7 +27,7 @@
       <view wx:for="{{carts}}" class = "items">
         <view class = "row_flex">
           <!-- 点击商品图片可跳转到商品详情 -->
-          <image src="{{item.url}}" class="cart-thumb" bindtap="goDetails" data-title = "{{item.title}}"></image>
+          <image src="{{item.url[0]}}" class="cart-thumb" bindtap="goDetails" data-id = "{{item._id}}"></image>
 
           <view class = "column_flex">
             <text class ="itemName">{{item.name}}</text>

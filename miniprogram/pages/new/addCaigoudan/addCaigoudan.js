@@ -11,12 +11,17 @@ Page({
     hasntSelect2:true,
     series:'',
     carts:[],
+    orderId:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var orderId = options.orderId;
+    this.setData({
+      orderId: orderId
+    })
     const db = wx.cloud.database();
     // 查询当前家具的details对应name
     db.collection('gomeSeries').where({
@@ -93,7 +98,7 @@ Page({
       hasntSelect: false,
       series: this.data.seriesList[e.detail.value],
     })
-
+    this.searchFurniture();
   }, 
 
   bindPicker2Change: function (e) {
@@ -107,25 +112,25 @@ Page({
 
   searchFurniture:function(){
     const db = wx.cloud.database();
-    if(!this.data.hasntSelect){
-      console.log('searching furniture with series!!! ');
-    db.collection('detail').where({
-      series:this.data.series
-    }).get({
-      success: res => {
-        this.setData({
-          cart:tempList,
-        })
-        console.log('seriesList is !!!! ', res);
-        console.log('[数据库] [查询记录] 成功: ', res);
-        wx.hideToast();
-      },
-      fail: err => {
-        console.log('search failed!!! ');
-      }
-    })
+    if(!this.data.hasntSelect&& this.data.hasntSelect2){
+      console.log('searching furniture with series!!!  seriess is '+this.data.series);
+      db.collection('detail').where({
+        series:this.data.series
+      }).get({
+        success: res => {
+          this.setData({
+            carts:res.data,
+          })
+          console.log('seriesList is !!!! ', res);
+          console.log('[数据库] [查询记录] 成功: ', res);
+          wx.hideToast();
+        },
+        fail: err => {
+          console.log('search failed!!! ');
+        }
+      })
     }
-    else if(!this.data.hasntSelect2){
+    else if(!this.data.hasntSelect2 && this.data.hasntSelect){
       console.log('searching furniture with type!!!  type is '+this.data.type);
     db.collection('detail').where({
       type:this.data.type
@@ -151,7 +156,7 @@ Page({
       }).get({
         success: res => {
           this.setData({
-            cart:tempList,
+            carts:res.data,
           })
           console.log('seriesList is !!!! ', res);
           console.log('[数据库] [查询记录] 成功: ', res);
@@ -198,6 +203,14 @@ Page({
     console.log('try to save the item----------------------- id is '+itemId);
     wx.navigateTo({
       url: '../caigoudan/caigoudan?itemId='+itemId,
+    })
+  },
+
+  goDetails:function(event){
+    var itemId = event.currentTarget.dataset.id;
+    console.log('try to go to the detail of the item----------------------- id is '+itemId);
+    wx.navigateTo({
+      url: '../../details/details?itemId='+itemId+'&orderId='+this.data.orderId,
     })
   }
 
