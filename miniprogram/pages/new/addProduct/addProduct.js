@@ -28,6 +28,9 @@ Page({
     imgUrls:[],
     newSeries:'',
     disPrice:'',
+    company:'',
+    comment:'',
+    model:'',
   },
 
   /**
@@ -106,7 +109,7 @@ Page({
 
   uploadImgbutton:function(){
     var data = this.data
-    if (data.series == '' || data.fname == '' || data.type == '' || data.price == '' || data.desc == '', data.width == '', data.height == '') {
+    if (data.series == '' || data.fname == '' || data.type == '' || data.price == '' || data.company=='' ||data.desc == '', data.width == '', data.height == '') {
       wx.showToast({
         icon: 'none',
         title: '请填写完整家具信息',
@@ -124,7 +127,7 @@ Page({
     // 查询当前家具的details对应name
     db.collection('detail').where({
       name: this.data.fname,
-      series: this.data.series
+      company: this.data.company
     }).get({
       success: res => {
         
@@ -145,6 +148,123 @@ Page({
           title: '查询记录失败'
         })
         console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
+  },
+
+  
+  // 上传图片
+  doUpload: function () {
+    var that = this;
+    // 选择图片
+    wx.chooseImage({
+      count: 9,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+      success: function (res) {
+
+        wx.showLoading({
+          title: '上传中',
+        })
+        // 上传图片
+        for (let i = 0; i < res.tempFilePaths.length; i++) {
+          var newDateTime = (new Date()).valueOf();
+          var name = that.data.fname;
+          var company = that.data.company;
+          const filePath = res.tempFilePaths[i];
+          console.log('in for loop now')
+          const cloudPath = company + '/' + name + newDateTime + filePath.match(/\.[^.]+?$/)[0]
+          that.upload(cloudPath, filePath);
+        }
+
+      },
+      fail: e => {
+        console.error(e)
+      }
+    })
+  },
+
+  upload: function (cloudPath, filePath) {
+    var that = this;
+    var app = getApp();
+    console.log('uploading:');
+    console.log(filePath);
+    console.log(cloudPath);
+    wx.cloud.uploadFile({
+      cloudPath,
+      filePath,
+      success: res => {
+
+        console.log('[上传文件] 成功：', res)
+        wx.cloud.getTempFileURL({
+          fileList: [res.fileID],
+          success: res => {
+            // get temp file URL
+            //for (let i = 0; i < res.fileList.length;i++){
+              //console.log('url is ' + res.fileList[i].tempFileURL)
+            var temp = this.data.imgUrls;
+            temp.push(res.fileList[0].tempFileURL);
+            that.setData({
+              imgUrls:temp
+            })
+            console.log(this.data.imgUrls);
+            this.addTodb();
+            //}
+            console.log(imgUrls)
+          }
+        })
+
+      },
+      fail: e => {
+        console.error('[上传文件] 失败：', e)
+        wx.showToast({
+          icon: 'none',
+          title: '上传失败',
+        })
+      },
+      complete: () => {
+        wx.hideLoading()
+      }
+    })
+  },
+
+  
+  addTodb:function(){
+    var dim = [[this.data.width,this.data.depth,this.data.height]];
+    var price =[this.data.price];
+    var size = [this.data.size];
+    const db = wx.cloud.database();
+    db.collection('detail').add({
+      data: {
+        name: this.data.fname,
+        price: price,
+        size: size,
+        series: this.data.series,
+        describtion: this.data.desc,
+        type: this.data.type,
+        url: this.data.imgUrls,
+        dimension: dim,
+        company:this.data.company,
+        comment:this.data.comment,
+        model:this.data.model,
+      },
+      success: res => {
+        // 在返回结果中会包含新创建的记录的 _id
+        this.setData({
+        })
+        wx.showToast({
+          title: '添加成功',
+        })
+        wx.navigateTo({
+          url: '',
+        })
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '新增记录失败'
+        })
+        console.error('[数据库] [新增记录] 失败：', err)
       }
     })
   },
@@ -218,6 +338,24 @@ Page({
   heightInput: function (e) {
     this.setData({
       height: e.detail.value
+    })
+  },
+
+  companyInput: function (e) {
+    this.setData({
+      company: e.detail.value
+    })
+  },
+
+  modelInputInput: function (e) {
+    this.setData({
+      model: e.detail.value
+    })
+  },
+
+  commentInput: function (e) {
+    this.setData({
+      comment: e.detail.value
     })
   },
 

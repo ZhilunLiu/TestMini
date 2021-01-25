@@ -1,16 +1,15 @@
 <!--miniprogram/pages/detail/bolatudahuiyizhuo/bolatudahuiyizhuo.wxml-->
-<view class = container>
-  <view class ="swiper">
+<view >
+  <view class = "col_flex">
     <swiper class = "swiperrr" indicator-dots="{{indicatorDots}}"
       autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}} " bindchange="bindchangeTag">  
-      <block wx:for="{{imgUrls}}" >
+      <view wx:for="{{imgUrls}}" class = "slide-image">
         <swiper-item>
-            <image src="{{item}}" class="slide-image" data-index="{{index}}" bindtap="previewImage"/>
+            <image src="{{item}}"  data-index="{{index}}" bindtap="previewImage"/>
       </swiper-item>
-      </block>
+    </view>
     </swiper>
-  </view> 
-
+  </view>
 
 
 
@@ -20,14 +19,19 @@
     <view wx:if="{{updating}}">
       <view wx:if="{{hasDisc}}">
         <view class = "row_flex">
-          <view class = "priceText">原价</view>
+        <view class = "body">原价</view>
           <input class = "priceTextinput" type ="digit" placeholder="{{price[index]}}" bindinput="priceInput"/>
         </view>
+
+      <!--
         <view class = "row_flex">
           <view class = "priceText">折后价</view>
           <input class = "priceTextinput" type ="digit" placeholder="{{disPrice[index]}}" bindinput="disPriceInput"/>
         </view>
-      </view>
+      
+      -->
+    </view>
+
       <view wx:else>
         <view class = "row_flex">
           <view class = "priceText">￥</view>
@@ -93,6 +97,10 @@
 
 
     <view wx:else>
+      
+      <view class = "priceText">￥{{price[index]}}</view>
+
+      <!--
       <view wx:if="{{hasDisc}}">
         <view class = "priceText">
           ￥{{price[index]}}
@@ -101,8 +109,11 @@
         <view class = "disPriceText">￥{{disPrice[index]}}</view>
       </view>
       <view wx:else>
-        <view class = "priceText">￥{{price[index]}}</view>
+        
       </view>
+
+      -->
+      
 
       <view class = "titleText">{{name}}</view>
       <picker bindchange="bindPickerChange" value="{{index}}" range="{{dimension}}">

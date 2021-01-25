@@ -1,5 +1,10 @@
 <view class = "bg2">
     <view class = "row_flex">
+        <text>家具厂家：</text>
+        <input class = "input"type ="digit" placeholder="请输入家具厂家" bindinput="companyInput"/>
+    </view>
+
+    <view class = "row_flex">
       <text>系列名称：</text>
       <picker bindchange="bindPicker2Change" value="{{index}}" range="{{seriesList}}">
       <view wx:if="{{hasntSelect2}}">
@@ -10,8 +15,10 @@
       </view>
       </picker>
 
-      <input class = "smallinput"type ="text" placeholder="柏拉图" bindinput="seriesInput"/>
+      <input class = "smallinput"type ="text" placeholder="或请输入新家具系列" bindinput="seriesInput"/>
+      <view>
       <button class = "picker_button" type = "default" size = "mini" bindtap="addNewSeries">添加系列</button>
+      </view>
     </view>
 
     <view class = "row_flex">
@@ -28,36 +35,41 @@
 
     <view class = "row_flex">
       <text>家具名称：</text>
-      <input class = "input"type ="text" placeholder="柏拉图会议桌" bindinput="fnameInput"/>
+      <input class = "input"type ="text" placeholder="请输入家具名称" bindinput="fnameInput"/>
     </view>
 
     <view class = "row_flex">
       <text>家具价格：</text>
-      <input class = "input"type ="digit" placeholder="4800" bindinput="priceInput"/>
-    </view>
-
-    <view class = "row_flex">
-      <text>折后价格：</text>
-      <input class = "input"type ="digit" placeholder="2400" bindinput="disPriceInput"/>
+      <input class = "input"type ="digit" placeholder="请输入家具价格" bindinput="priceInput"/>
     </view>
 
     <view class = "row_flex">
       <text>家具描述：</text>
-      <input class = "input"type ="text" placeholder="白蜡木，手抓纹" bindinput="descInput"/>
+      <input class = "input"type ="text" placeholder="请输入家具描述" bindinput="descInput"/>
+    </view>
+
+    <view class = "row_flex">
+      <text>家具型号：</text>
+      <input class = "input"type ="text" placeholder="请输入家具型号" bindinput="modelInput"/>
+    </view>
+
+    <view class = "row_flex">
+      <text>家具备注：</text>
+      <input class = "input"type ="text" placeholder="请输入家具备注" bindinput="commentInput"/>
     </view>
 
     <view class = "row_flex">
       <text>家具大小：</text>
-      <input class = "input"type ="number" placeholder="0.45" bindinput="sizeInput"/>
+      <input class = "input"type ="number" placeholder="请输入家具大小" bindinput="sizeInput"/>
     </view>
 
     <view class = "row_flex">
       <text>家具尺寸：</text>
-      <input class = "smallinput"type ="number" placeholder="1200" bindinput="widthInput"/>
+      <input class = "smallinput"type ="number" placeholder="XXXX" bindinput="widthInput"/>
       <view class = "wdh">W</view>
-      <input class = "smallinput"type ="number" placeholder="1200" bindinput="depthInput"/>
+      <input class = "smallinput"type ="number" placeholder="XXXX" bindinput="depthInput"/>
       <view class = "wdh">D</view>
-      <input class = "smallinput"type ="number" placeholder="800" bindinput="heightInput"/>
+      <input class = "smallinput"type ="number" placeholder="XXXX" bindinput="heightInput"/>
       <view class = "wdh">H</view>
     </view>
 

@@ -70,7 +70,15 @@
     </view>
 
     <view class = "search">
-      <view class = "searchButton" bindtap="caigoudan">采购单</view>
+      <view class = "searchButton" bindtap="caigoudan">供货单</view>
+    </view>
+
+    <view class = "search">
+      <view class = "searchButton" bindtap="generateFrom">生成表格</view>
+    </view>
+
+    <view class = "search">
+      <view class = "searchButton" bindtap="getCart">下载表格</view>
     </view>
 
   </view>

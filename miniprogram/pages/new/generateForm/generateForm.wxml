@@ -1,0 +1,72 @@
+<!--miniprogram/pages/new/generateFrom/generateForm.wxml-->
+<view class = "table">
+  <view class ="tr">
+    <view class = "th">湖南鑫诺家具产品价格表，长沙韶山路城开大厦8层，电话85684712</view>  
+  </view>
+
+  <view class ="tr">
+    <view class = "td">需方单位</view>  
+    <view class = "td">湖南鑫诺</view> 
+    <view class = "td">需方联系人</view>  
+    <view class = "td">某某</view>
+    <view class = "td">电话</view>  
+    <view class = "td">13333333333</view>  
+  </view>
+  <view class ="tr">
+    <view class = "td">需方地址</view>  
+    <view class = "td">长沙</view> 
+    <view class = "td">交货日期</view>  
+    <view class = "td">2020.01.01</view>
+    <view class = "td">订单编号</view>  
+    <view class = "td">2333</view>  
+  </view>
+
+  <view class ="tr">
+    <view class = "td_regular">房号</view>  
+    <view class = "td_regular">名称</view> 
+    <view class = "td_regular">型号</view>  
+    <view class = "td">图片</view>
+    <view class = "td_regular">规格</view>  
+    <view class = "td_short">数量</view>
+    <view class = "td_short">单位</view>  
+    <view class = "td_regular">单价</view>
+    <view class = "td_regular">金额</view>  
+    <view class = "td_regular">备注</view> 
+    <view class = "td">材质</view>   
+  </view>
+
+  <view wx:for="{{carts}}" class = "tr">
+    <view class = "td_regular">{{item.roomNumber}}</view>  
+    <view class = "td_regular">{{item.name}}</view> 
+    <view class = "td_regular">{{item.model}}</view>  
+    <image class = "td" src = "{{item.image[0]}}" mode = "widthFix"></image>
+    <view class = "td_regular">{{item.dimension[0][0]}}W * {{item.dimension[0][1]}}D * {{item.dimension[0][2]}}H</view>  
+    <view class = "td_short">{{item.num}}</view>
+    <view class = "td_short">张</view>  
+    <view class = "td_regular">{{item.price[0]}}</view>
+    <view class = "td_regular">{{item.totalPrice}}</view>  
+    <view class = "td_regular">{{item.comment}}</view> 
+    <view class = "td">{{item.desc}}</view> 
+  </view>
+
+  <view class ="tr">
+    <view class = "td">合计金额：￥{{orderTotal}}.00元</view>  
+    <view class = "td">大写：                   元整</view> 
+  </view>
+
+  <view class ="tr">
+    <view class = "td">以上报价包含运输、安装费用。</view>  
+  </view>
+
+  <view class ="tr">
+    <view class = "td_col">
+      <view >备注：1、合同签定三天内预付50%订金，订金到帐开始生产，安装后七日内验收并将所有货款付清，货款未按要求结清，货物所有权归供货方所有； </view> 
+        <text decode="{{true}}">2、需方以转账形式将货款汇入供方以下指定账户，不得以现金或现金支票的形式支付货款（若特殊情况需以现金支付,必须由供方提供加盖财务专用章的收款函）；
+          （全称：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开户行：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;账号：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;）</text>
+        <view>3、如订货方无特殊需求，所有产品均按厂方常规材质、工艺生产，订货方对订货单及图纸确认无误，请签字盖章回传供货方。</view>
+        <text decode="{{true}}">需方单位【盖章】:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;供方单位【盖章】:</text>
+        <text decode="{{true}}">需方代表签字:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;供方代表签字: 
+        </text>                       
+    </view>  
+  </view>
+</view>

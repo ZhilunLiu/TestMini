@@ -1,0 +1,50 @@
+/* miniprogram/pages/new/generateFrom/generateForm.wxss */
+Page{
+  background: white;
+}
+.table{
+  border:1px solid gray;
+  width: 100%;
+}
+
+.tr{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.th{
+  font-weight: 900;
+  font-size:1rem;
+  color:red;
+}
+
+.th,.td{
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  border:1px solid gray;
+}
+
+.td_short{
+  padding: 5px;
+  text-align: center;
+  border:1px solid gray;
+}
+
+.td_regular{
+  padding: 5px;
+  width: 50%;
+  text-align: center;
+  border:1px solid gray;
+}
+
+.td_col{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 5px;
+  width: 100%;
+  text-align: center;
+  border:1px solid gray;
+}

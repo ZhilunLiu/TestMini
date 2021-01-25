@@ -2,7 +2,7 @@
 <view class = "user">
   <view wx:if = "{{logged}}" class = "column_view">
     <image src = "{{avatarUrl}}"></image>
-    <view style = "margin-top:3vh;font-size:10rpx">{{nickname}}</view>
+    <view class = "username">{{nickname}}</view>
   </view>
   <view wx:else class = "column_view">
     <image src = "../../images/profile.png"></image>

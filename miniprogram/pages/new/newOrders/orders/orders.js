@@ -16,6 +16,8 @@ Page({
     orderNumber:0,
     orderId:'',
     status:'',
+    carts:[],
+    fileUrl:'',
   },
 
   /**
@@ -231,9 +233,102 @@ Page({
   caigoudan:function(){
     var app = getApp();
     app.globalData.selectedOrderId = this.data.orderId;
-    console.log('选择了订单---------------------'+this.data.orderId);
+    console.log('正在前往采购单，选择了订单---------------------'+this.data.orderId);
     wx.navigateTo({
       url: '../../caigoudan/caigoudan?orderId='+this.data.orderId,
     })
+  },
+
+  generateFrom:function(){
+    console.log('正在生成表格，选择了订单---------------------'+getApp().globalData.selectedOrderId);
+    wx.navigateTo({
+      url: '../../generateForm/generateForm'
+    })
+  },
+
+  downloadExcel:function(){
+    //1,定义excel表格名
+    let dataCVS = 'test.xlsx'
+    //2，定义存储数据的
+    let alldata = [];
+    let row = ['名字', '单价', '规格']; //表属性
+    alldata.push(row);
+    var carts = this.data.carts;
+    for (let key in carts) {
+      let arr = [];
+      arr.push(carts[key].name);
+      arr.push(carts[key].price[0]);
+      arr.push(carts[key].dimension[0]);
+      alldata.push(arr)
+    }
+    //3，把数据保存到excel里
+    var buffer =  xlsx.build([{
+      name: "mySheetName",
+      data: alldata
+    }]);
+    //4，把excel文件保存到云存储里
+    wx.cloud.uploadFile({
+      cloudPath: dataCVS,
+      fileContent: buffer, //excel二进制文件
+      success: res => {
+
+        console.log('[上传文件] 成功：', res)
+        wx.cloud.getTempFileURL({
+          fileList: [res.fileID],
+          success: res => {
+            var temp = this.data.imgUrls;
+            temp.push(res.fileList[0].tempFileURL);
+            that.setData({
+              fileUrl:temp
+            })
+            console.log(this.data.fileUrl);
+          }
+        })
+
+      },
+      fail: e => {
+        console.error('[上传文件] 失败：', e)
+        wx.showToast({
+          icon: 'none',
+          title: '上传失败',
+        })
+      },
+      complete: () => {
+        wx.hideLoading()
+      }
+
+
+    })
+  },
+
+  getCart:function(){
+    const xlsx = require('node-xlsx');
+    const db = wx.cloud.database();
+    console.log('正在查询信息，表格ID为------------'+this.data.orderId);
+      // 查询
+      db.collection('orders').where({
+        _id: this.data.orderId
+      }).get({
+        success: res => {
+          console.log('the res is ===================',res.data);
+          this.setData({
+            carts:res.data[0].carts,
+          })
+          wx.showLoading({
+            title: '下载中',
+          })
+          this.downloadExcel();
+          console.log('[数据库] [查询记录] 成功: ', res);
+          console.log('the orders are =============',this.data.carts);
+          wx.hideToast();
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '查询记录失败'
+          })
+          console.error('[数据库] [查询记录] 失败：', err)
+        }
+      })  
   },
 })

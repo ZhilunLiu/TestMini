@@ -18,7 +18,8 @@
   "homepage": "https://github.com/ZhilunLiu/TestMini#readme",
   "dependencies": {
     "miniprogram-recycle-view": "^0.1.5",
-    "miniprogram-table-component": "^1.1.0"
+    "miniprogram-table-component": "^1.1.0",
+    "node-xlsx": "^0.16.1"
   },
   "devDependencies": {},
   "keywords": []

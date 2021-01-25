@@ -200,10 +200,18 @@ Page({
   save:function(event){
     var $this = this;
     var itemId = event.currentTarget.dataset.id
-    console.log('try to save the item----------------------- id is '+itemId);
-    wx.navigateTo({
-      url: '../caigoudan/caigoudan?itemId='+itemId,
+    let page = getCurrentPages();
+    let prevPage = page[page.length-2];
+    prevPage.setData({
+      itemId:itemId
     })
+    console.log('try to save the item----------------------- id is '+prevPage.data.itemId);
+    wx.navigateBack({
+      delta: 0,
+    })
+    //wx.navigateTo({
+      //url: '../caigoudan/caigoudan?itemId='+itemId,
+    //})
   },
 
   goDetails:function(event){

@@ -263,7 +263,7 @@ Page {
     color: rgba(26, 24, 24, 0.89);
   margin-top: 2vh;
   margin-left:2vw;
-  width:12vw;
+  width:15vw;
 }
 
 .line{
@@ -298,4 +298,9 @@ Page {
 
 .picker_button{
   margin-top: 2vh;
+}
+
+.username{
+  margin-top:3vh;
+  font-size :1rem;
 }

@@ -232,10 +232,10 @@ Page({
 
   addUser:function(e){
     const db = wx.cloud.database();
-    console.log('no user in db, creating');
+    console.log('no user in db, creating, the name is +');
     db.collection('users').add({
       data: {
-        name: [],
+        name: getApp().globalData.userInfo.nickName,
         phone: [],
         address: [],
         orders: [],

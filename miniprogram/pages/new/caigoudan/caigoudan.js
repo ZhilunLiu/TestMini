@@ -12,37 +12,59 @@ Page({
   },
 
   save:function(e){
-    var app = getApp();
-    if (app.globalData.cartList === undefined || app.globalData.cartList.length == 0){
-    }else{
-      app.globalData.paying = true;
-      app.globalData.totalPrice = this.data.totalPrice;
-      wx:wx.navigateTo({
-        url: '../newOrders/orders/orders',
-      })
-    }
+    //save the cart to the database
+    var orderId = getApp().globalData.selectedOrderId;
+    const db = wx.cloud.database();
+    console.log('try to save the caigoudan, the orderId is----------------'+orderId);
+    db.collection('orders').doc(orderId).update({
+      data: {
+        carts: this.data.carts,
+      },
+      success: res => {
+        wx.showToast({ title: '更新成功', icon: 'success', duration: 1000 });
+        console.log('[数据库] [更新记录] 成功', res);
+        wx:wx.navigateBack({
+          delta: 0,
+        })
+        /*/wx:wx.navigateTo({
+          url: '../newOrders/orders/orders',
+        })*/
+      },
+      fail: err => {
+        icon: 'none',
+          console.error('[数据库] [更新记录] 失败：', err)
+      }
+    })
+   
+    
   },
 
   onShow:function(options) {
-    console.log(this.data.carts);
-    this.getTotalPrice();
+    console.log('reshowing page, the orderId is '+this.data.orderId);
+    this.refreshCart();
   },
 
     /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const db = wx.cloud.database();
+    console.log('caigoudan Onloading-----------------------------');
     var theitemId = options.itemId;
-    var newItem = [];
-    var completed = false;
     this.setData({
       itemId:theitemId
     })
     //get the cart detail of this order
     this.getCart();
-    console.log('option id is !!!!!!!!!!!!------ '+options.itemId);
+    //refreshCart by push new Item it to it
+    this.refreshCart();
+  },
+
+  refreshCart:function(){
+    var newItem = [];
+    const db = wx.cloud.database();
+    console.log('option id is !!!!!!!!!!!!------ '+this.data.itemId);
     if(this.data.itemId != undefined){
+      console.log('try to add item the item id is !!!!!!!!!!!!------ '+this.data.itemId);
       //get new item detail from db
       db.collection('detail').where({
         _id:this.data.itemId
@@ -51,11 +73,12 @@ Page({
           this.setData({
             newItem:res.data[0],
           })
-         
+          console.log('found the Item !!!!!!!!!!!!------ ',this.data.newItem);
           //push new item 
           if(this.data.newItem.name != undefined){
+            console.log('cin the if statement!!!!!!!!!!!!!!111111------- ',this.data.newItem.name);
             newItem = {
-              id:this.data.itemId,
+              id:this.data.newItem._id,
               name: this.data.newItem.name,
               price: this.data.newItem.price,
               image: this.data.newItem.url,
@@ -63,6 +86,7 @@ Page({
               selected: true,
               num: 1
             };
+            console.log('create new Item and try to push!!!!!!!!!!!!------ ',newItem);
              //console.log('[数据库] [查询记录] 成功: ', res);
           console.log('新的家具是----- ', newItem);
             var templist = this.data.carts;
@@ -72,6 +96,7 @@ Page({
             this.setData({
               carts:templist,
             })
+            
           }
           //refresh price
           this.getTotalPrice();
@@ -82,26 +107,25 @@ Page({
         },
       })
     }
-
   },
 
   getCart:function(){
     const db = wx.cloud.database();
     var orderId = getApp().globalData.selectedOrderId;
     console.log('gettting cartttttttttttttttttttttt order Id is '+orderId);
-    db.collection('order').where({
+    db.collection('orders').where({
       _id:orderId
     }).get({
       success: res => {
         this.setData({
-          cart:res.data[0],
+          carts:res.data[0].carts,
         })
         
         this.getTotalPrice();
         wx.hideToast();
       },
       fail: err => {
-        console.log('search failed!!! ');
+        console.log('getting cart failed!!! ');
       },
     })
   },
@@ -250,7 +274,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    console.log('Caigoudan is unloading!!!!!!!!!!!!!!_________________+++++++++++++++++++++++++');
   },
 
   /**

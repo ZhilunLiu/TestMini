@@ -141,6 +141,8 @@ Page({
 
   select:function(event){
     var itemId = event.currentTarget.dataset.id;
+    var app = getApp();
+    app.globalData.selectedOrderId = itemId;
     wx.navigateTo({
       url: '../newOrders/orders/orders?orderId='+itemId,
     })
