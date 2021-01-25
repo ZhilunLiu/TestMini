@@ -165,7 +165,7 @@ Page({
     })
   },
 
-  dealdateInput: function (e) {
+  dealDateInput: function (e) {
     this.setData({
       dealdate: e.detail.value
     })
@@ -196,6 +196,9 @@ Page({
   },
 
   update:function(){
+    console.log('updating the order, the ID is ============================'+this.data.orderId);
+
+    console.log('updating the order, the dealdate is ============================'+this.data.dealdate);
   const db = wx.cloud.database();
     db.collection('orders').doc(this.data.orderId).update({
       data: {
