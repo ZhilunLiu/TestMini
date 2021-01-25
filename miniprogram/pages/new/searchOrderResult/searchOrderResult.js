@@ -6,8 +6,9 @@ Page({
    */
   data: {
     orders:[],
-    orderId:'',
+    orderId:0,
     customer:'',
+    stuff:'',
   },
 
   /**
@@ -16,13 +17,21 @@ Page({
   onLoad: function (options) {
     this.setData({
       orderId:options.orderId,
-      customer:options.customer
+      customer:options.customer,
+      stuff:options.stuff,
     }),
     wx.showToast({ title: '加载中', icon: 'loading', duration: 10000 });
-    if(this.data.orderId!=undefined){
+    console.log('业务员名字是---'+this.data.stuff);
+    if(this.data.orderId!=0){
       this.findByOrderId();
     }
-    if(this.data.customer!=undefined){
+    else if(this.data.customer!=''&&this.data.stuff!=''){
+      this.findByNameAndStuff();
+    }
+    else if(this.data.stuff!=''){
+      this.findByStuff();
+    }
+    else if(this.data.customer!=''){
       this.findByName();
     }
   },
@@ -77,28 +86,17 @@ Page({
   },
 
   findByOrderId:function(){
+    console.log('正在通过订单号查询，订单号为@@@@@@@@@@@@@',this.data.orderId);
+    var orderId = parseInt(this.data.orderId);
     const db = wx.cloud.database();
       // 查询当前家具的details对应name
       db.collection('orders').where({
-        _id: this.data.orderId
+        orderNumber:orderId
       }).get({
         success: res => {
-          console.log(res);
-          var orders = this.data.orders;
-          var theOrder = {
-            customer :res.data[0].customer,
-            address: res.data[0].address,
-            status:res.data[0].status,
-            phone:res.data[0].phone,
-            dealdate: res.data[0].dealdate,
-            duedate:res.data[0].duedate,
-            orderTotal:res.data[0].orderTotal,
-            company:res.data[0].company,
-            dealer:res.data[0].dealer, 
-          }
-          orders.push(theOrder);
+          console.log('查询结果@@@@@@@@@@@@@',res);
           this.setData({
-            orders:orders
+            orders:res.data
           })
           console.log('[数据库] [查询记录] 成功: ', res);
 
@@ -115,10 +113,37 @@ Page({
   },
 
   findByName:function(){
+    console.log('正在通过名字查询，名字是---',this.data.customer);
     const db = wx.cloud.database();
       // 查询当前家具的details对应name
       db.collection('orders').where({
         customer: this.data.customer
+      }).get({
+        success: res => {
+          console.log('the res is ===================',res.data);
+          this.setData({
+            orders:res.data,
+          })
+          console.log('[数据库] [查询记录] 成功: ', res);
+          console.log('the orders are =============',this.data.orders);
+          wx.hideToast();
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '查询记录失败'
+          })
+          console.error('[数据库] [查询记录] 失败：', err)
+        }
+      })  
+  },
+
+  findByStuff:function(){
+    console.log('正在通过业务员查询，名字是---',this.data.stuff);
+    const db = wx.cloud.database();
+      // 查询当前家具的details对应name
+      db.collection('orders').where({
+        orderManager: this.data.stuff
       }).get({
         success: res => {
           console.log('the res is ===================',res.data);
@@ -146,5 +171,32 @@ Page({
     wx.navigateTo({
       url: '../newOrders/orders/orders?orderId='+itemId,
     })
+  },
+
+  findByNameAndStuff:function(){
+    console.log("find by name and stuff the stuff is "+this.data.stuff)
+    const db = wx.cloud.database();
+      // 查询当前家具的details对应name
+      db.collection('orders').where({
+        customer: this.data.customer,
+        orderManager: this.data.stuff
+      }).get({
+        success: res => {
+          console.log(res);
+          this.setData({
+            orders:res.data
+          })
+          console.log('[数据库] [查询记录] 成功: ', res);
+
+          wx.hideToast();
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '查询记录失败'
+          })
+          console.error('[数据库] [查询记录] 失败：', err)
+        }
+      })  
   },
 })

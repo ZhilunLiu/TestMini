@@ -151,16 +151,10 @@ Page({
       _id: itemId
     }).get({
       success: res => {
-        console.log(res);
-        var bool = false;
-        if(res.data[0].disPrice.length!=0){
-          bool = true;
-        }
+        console.log('正在载入细节'+res);
         this.setData({
           imgUrls :res.data[0].url,
           price: res.data[0].price,
-          disPrice:res.data[0].disPrice,
-          hasDisc:bool,
           name: res.data[0].name,
           describtion:res.data[0].describtion,
           size:res.data[0].size,
@@ -170,7 +164,7 @@ Page({
           depth: res.data[0].dimension[0][1],
           height: res.data[0].dimension[0][2],
         })
-        console.log(this.data.price);
+        console.log('设置完成'+this.data.price);
         if (res.data[0].dimension[0][0]==0){
           this.setData({dimensionFlag:false})
         }

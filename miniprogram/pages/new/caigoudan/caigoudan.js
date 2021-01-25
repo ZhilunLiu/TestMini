@@ -19,6 +19,7 @@ Page({
     db.collection('orders').doc(orderId).update({
       data: {
         carts: this.data.carts,
+        orderReg:this.data.totalPrice,
       },
       success: res => {
         wx.showToast({ title: '更新成功', icon: 'success', duration: 1000 });
@@ -84,6 +85,11 @@ Page({
               image: this.data.newItem.url,
               dimension: this.data.newItem.dimension,
               selected: true,
+              comment:this.data.newItem.comment,
+              describtion:this.data.newItem.describtion,
+              company:this.data.newItem.company,
+              series:this.data.newItem.series,
+              model:this.data.newItem.model,
               num: 1
             };
             console.log('create new Item and try to push!!!!!!!!!!!!------ ',newItem);
@@ -132,25 +138,13 @@ Page({
 
   getTotalPrice:function() {
     let carts = this.data.carts;                  // 获取购物车列表
+    console.log('carts is ',carts);
     let total = 0;
     for (let i = 0; i < carts.length; i++) {         // 循环列表得到每个数据
-      if (carts[i].selected) {                   // 判断选中才会计算价格
-        if(carts[i].disPrice!=null){
-          total += carts[i].num * carts[i].disPrice;     // 所有价格加起来
-          carts[i].hasDisPrice = true;
-          console.log(carts);
-          this.setData({
-            carts:carts
-          })
-        }else{
-          total += carts[i].num * carts[i].price;
-        }
-
-      }
+          total += carts[i].num * carts[i].price[0];
     }
     console.log('totalprice is '+total);
     this.setData({                                // 最后赋值到data中渲染到页面
-      carts: carts,
       totalPrice: total.toFixed(2)
     });
   },

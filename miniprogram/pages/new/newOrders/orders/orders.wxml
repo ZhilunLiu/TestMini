@@ -3,64 +3,85 @@
     <view class = "space"/>
 
     <view class = "row_flex">
-      <text>订单号</text>
+      <text decode="{{true}}">订单号 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
       <text>{{orderNumber}}</text>
     </view>
 
     <view class = "line"></view>
 
     <view class = "row_flex">
-      <text>状态</text>
+      <text decode="{{true}}">状态&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
       <text> 未下单 </text>
     </view>
 
     <view class = "line"></view>
 
     <view class = "row_flex">
-      <text>客户</text>
+      <text decode="{{true}}">客户单位&nbsp;&nbsp;&nbsp;</text>
       <input class = "input"type ="text" placeholder="{{customer}}" bindinput="nameInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>客户联系人</text>
+      <input class = "input"type ="text" placeholder="{{contact}}" bindinput="contactInput"/>
     </view>
       
     <view class = "line"></view>
 
     <view class = "row_flex">
-      <text>电话</text>
+      <text decode="{{true}}">电话&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
       <input class = "input"type ="text" placeholder="{{phone}}" bindinput="phoneInput"/>
     </view>
       
     <view class = "line"></view>
 
     <view class = "row_flex">
-      <text>地址</text>
+      <text decode="{{true}}">地址&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
       <input class = "input"type ="text" placeholder="{{address}}" bindinput="addressInput"/>
     </view>
 
     <view class = "line"></view>
 
     <view class = "row_flex">
-      <text>下单日期</text>
+      <text decode="{{true}}">下单日期&nbsp;&nbsp;&nbsp;</text>
       <input class = "input"type ="text" placeholder="{{dealdate}}" bindinput="dealDateInput"/>
     </view>
 
     <view class = "line"></view>
 
     <view class = "row_flex">
-      <text>交货日期</text>
+      <text decode="{{true}}">交货日期&nbsp;</text>
       <input class = "input"type ="text" placeholder="{{duedate}}" bindinput="duedateInput"/>
     </view>
 
     <view class = "line"></view>
 
     <view class = "row_flex">
-      <text>合同金额</text>
+      <text decode="{{true}}">合同金额&nbsp;&nbsp;&nbsp;</text>
       <input class = "input"type ="text" placeholder="{{orderTotal}}" bindinput="orderTotalInput"/>
     </view>
 
     <view class = "line"></view>
 
     <view class = "row_flex">
-      <text>开票单位</text>
+      <text decode="{{true}}">开票单位&nbsp;&nbsp;&nbsp;</text>
       <input class = "input"type ="text" placeholder="{{company}}" bindinput="companyInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text decode="{{true}}">业务主管&nbsp;&nbsp;&nbsp;</text>
+      <input class = "input"type ="text" placeholder="{{orderManager}}" bindinput="orderManagerInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text decode="{{true}}">经办人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
+      <input class = "input"type ="text" placeholder="{{orderStuff}}" bindinput="orderStuffInput"/>
     </view>
 
     <view class = "line"></view>

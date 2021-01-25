@@ -3,11 +3,18 @@
     <view class = "space"/>
 
     <view class = "row_flex">
-      <text>客户</text>
+      <text>客户单位</text>
       <input class = "input"type ="text" placeholder="客户姓名" bindinput="nameInput"/>
     </view>
 
       
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>联系人</text>
+      <input class = "input"type ="text" placeholder="联系人....." bindinput="contactInput"/>
+    </view>
+
     <view class = "line"></view>
 
     <view class = "row_flex">
@@ -48,6 +55,20 @@
     <view class = "row_flex">
       <text>开票单位</text>
       <input class = "input"type ="text" placeholder="开票单位....." bindinput="companyInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>业务主管</text>
+      <input class = "input"type ="text" placeholder="业务主管....." bindinput="orderManagerInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>经办人</text>
+      <input class = "input"type ="text" placeholder="经办人....." bindinput="orderStuffInput"/>
     </view>
 
     <view class = "line"></view>

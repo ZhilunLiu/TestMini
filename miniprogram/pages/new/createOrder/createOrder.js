@@ -15,12 +15,36 @@ Page({
     phone:'',
     orderNumber:0,
     orderId:'',
+    contact:'',
+    dataId:'',
+    orderStuff:'',
+    orderManager:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const db = wx.cloud.database();
+    db.collection('orders').get({
+      success: res => {
+        var len = res.data.length;
+        console.log('长度是',len)
+        this.setData({
+          orderNumber:res.data[len-1].orderNumber+1,
+        })
+        console.log('[数据库] [查询记录] 成功: ', res);
+        console.log('updating the orderNumber the orderNumberId is  (((((((((((((((((((((((((((((((((((((',this.data.orderNumber);
+        wx.hideToast();
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })    
     this.setData({
       nickname:options.nickname
     })
@@ -120,11 +144,29 @@ Page({
     })
   },
 
+  contactInput: function (e) {
+    this.setData({
+      contact: e.detail.value
+    })
+  },
+
+  orderManagerInput:function (e) {
+    this.setData({
+      orderManager: e.detail.value
+    })
+  },
+
+  orderStuffInput:function (e) {
+    this.setData({
+      orderStuff: e.detail.value
+    })
+  },
+
   create:function(){
     const db = wx.cloud.database();
     db.collection('orders').add({
       data: {
-        orderNumber:0,
+        orderNumber:this.data.orderNumber,
         customer:this.data.customer,
         address:this.data.company,
         dealer:this.data.nickname,
@@ -134,7 +176,9 @@ Page({
         company:this.data.company,
         phone:this.data.phone,
         status:'',
-
+        contact:this.data.contact,
+        orderManager:this.data.orderManager,
+        orderStuff:this.data.orderStuff,
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id

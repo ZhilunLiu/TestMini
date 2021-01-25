@@ -4,7 +4,8 @@ Page{
 }
 .table{
   border:1px solid gray;
-  width: 100%;
+  padding:4px;
+  width: 98%;
 }
 
 .tr{

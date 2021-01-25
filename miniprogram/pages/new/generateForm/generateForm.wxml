@@ -1,4 +1,6 @@
 <!--miniprogram/pages/new/generateFrom/generateForm.wxml-->
+<canvas canvas-id="shareBox"></canvas>
+
 <view class = "table">
   <view class ="tr">
     <view class = "th">湖南鑫诺家具产品价格表，长沙韶山路城开大厦8层，电话85684712</view>  
@@ -6,23 +8,23 @@
 
   <view class ="tr">
     <view class = "td">需方单位</view>  
-    <view class = "td">湖南鑫诺</view> 
+    <view class = "td">{{order.customer}}</view> 
     <view class = "td">需方联系人</view>  
-    <view class = "td">某某</view>
+    <view class = "td">{{order.contact}}</view>
     <view class = "td">电话</view>  
-    <view class = "td">13333333333</view>  
+    <view class = "td">{{order.phone}}</view>  
   </view>
   <view class ="tr">
     <view class = "td">需方地址</view>  
-    <view class = "td">长沙</view> 
+    <view class = "td">{{order.address}}</view> 
     <view class = "td">交货日期</view>  
-    <view class = "td">2020.01.01</view>
+    <view class = "td">{{order.duedate}}</view>
     <view class = "td">订单编号</view>  
     <view class = "td">2333</view>  
   </view>
 
   <view class ="tr">
-    <view class = "td_regular">房号</view>  
+    <view class = "td_regular">序号</view>  
     <view class = "td_regular">名称</view> 
     <view class = "td_regular">型号</view>  
     <view class = "td">图片</view>
@@ -36,7 +38,7 @@
   </view>
 
   <view wx:for="{{carts}}" class = "tr">
-    <view class = "td_regular">{{item.roomNumber}}</view>  
+    <view class = "td_regular">{{index+1}}</view>  
     <view class = "td_regular">{{item.name}}</view> 
     <view class = "td_regular">{{item.model}}</view>  
     <image class = "td" src = "{{item.image[0]}}" mode = "widthFix"></image>
@@ -44,14 +46,19 @@
     <view class = "td_short">{{item.num}}</view>
     <view class = "td_short">张</view>  
     <view class = "td_regular">{{item.price[0]}}</view>
-    <view class = "td_regular">{{item.totalPrice}}</view>  
+    <view class = "td_regular">{{item.price[0]*item.num}}</view>  
     <view class = "td_regular">{{item.comment}}</view> 
-    <view class = "td">{{item.desc}}</view> 
+    <view class = "td">{{item.describtion}}</view> 
   </view>
 
   <view class ="tr">
-    <view class = "td">合计金额：￥{{orderTotal}}.00元</view>  
-    <view class = "td">大写：                   元整</view> 
+    <view class = "td">合计金额：￥{{order.orderReg}}.00元</view>  
+    <view class = "td">大写：{{capitalReg}}</view> 
+  </view>
+
+  <view class ="tr">
+    <view class = "td">折后金额：￥{{order.orderTotal}}.00元</view>  
+    <view class = "td">大写：{{capitalTotal}} </view> 
   </view>
 
   <view class ="tr">

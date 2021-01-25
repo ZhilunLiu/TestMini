@@ -1,6 +1,6 @@
 
     <!-- wx:for 渲染购物车列表 -->
-    <scroll-view class = "scrollView" scroll-y="true" style="height:80vh;">
+    <scroll-view class = "scrollView" scroll-y="true" style="height:90vh;">
       <view wx:for="{{carts}}" class = "items">
         <view class = "row_flex">
           <!-- 点击商品图片可跳转到商品详情 -->

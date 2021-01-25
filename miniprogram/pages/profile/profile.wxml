@@ -11,7 +11,62 @@
 </view>
 
 <view wx:if = "{{logged}}">
-<view wx:if="{{manager}}">
+  <view class = "column_view">
+  <view class = "bg2">
+    <view class = "space"/>
+
+    <view class = "row_flex">
+      <text>客户</text>
+      <input class = "input"type ="text" placeholder="客户姓名" bindinput="customerInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>订单号</text>
+      <input class = "input"type ="number" placeholder="订单编号....." bindinput="orderNumInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>业务员</text>
+      <input class = "input"type ="text" placeholder="业务员名称....." bindinput="stuffInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    
+
+    <view class = "search">
+      <view class = "searchButton" bindtap="searchOrder">搜索</view>
+    </view>
+
+    </view>
+    <view class="row_flex">
+      <view class = "search">
+        <view class = "searchButton" bindtap="create">新建订单</view>
+      </view>
+    </view>
+
+    <view class="row_flex">
+      <view class = "search">
+        <view class = "searchButton" bindtap="addFurniture">添加产品</view>
+      </view>
+    </view>
+
+    <view class="row_flex">
+      <view class = "search">
+        <view class = "searchButton" bindtap="searchFurniture">搜索产品</view>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+  <view wx:if="{{manager}}">
+
+  <!--
   <view class = "bg">
     <view class = "space"/>
 
@@ -40,116 +95,10 @@
     <view class = "search">
       <view class = "searchButton" bindtap="search">搜索</view>
     </view>
-
-
+-->
   </view>
-
-  <view class = "bg2">
-    <view class = "row_flex">
-      <text>系列名称：</text>
-      <picker bindchange="bindPicker2Change" value="{{index}}" range="{{seriesList}}">
-      <view wx:if="{{hasntSelect2}}">
-        <button class = "picker_button" type = "default" size = "mini">系列选择</button>
-      </view>
-      <view wx:else class = "picker_button">
-        <view class = "wdh">{{series}}</view>
-      </view>
-      </picker>
-
-      <input class = "smallinput"type ="text" placeholder="柏拉图" bindinput="seriesInput"/>
-      <button class = "picker_button" type = "default" size = "mini" bindtap="addNewSeries">添加系列</button>
-    </view>
-
-    <view class = "row_flex">
-      <text>家具种类：</text>
-      <picker bindchange="bindPickerChange" value="{{index}}" range="{{typeList}}">
-      <view wx:if="{{hasntSelect}}">
-        <button class = "picker_button" type = "default" size = "mini">种类选择</button>
-      </view>
-      <view wx:else class = "picker_button">
-        <view class = "wdh">{{type}}</view>
-      </view>
-      </picker>
-    </view>
-
-    <view class = "row_flex">
-      <text>家具名称：</text>
-      <input class = "input"type ="text" placeholder="柏拉图会议桌" bindinput="fnameInput"/>
-    </view>
-
-    <view class = "row_flex">
-      <text>家具价格：</text>
-      <input class = "input"type ="digit" placeholder="4800" bindinput="priceInput"/>
-    </view>
-
-    <view class = "row_flex">
-      <text>折后价格：</text>
-      <input class = "input"type ="digit" placeholder="2400" bindinput="disPriceInput"/>
-    </view>
-
-    <view class = "row_flex">
-      <text>家具描述：</text>
-      <input class = "input"type ="text" placeholder="白蜡木，手抓纹" bindinput="descInput"/>
-    </view>
-
-    <view class = "row_flex">
-      <text>家具大小：</text>
-      <input class = "input"type ="number" placeholder="0.45" bindinput="sizeInput"/>
-    </view>
-
-    <view class = "row_flex">
-      <text>家具尺寸：</text>
-      <input class = "smallinput"type ="number" placeholder="1200" bindinput="widthInput"/>
-      <view class = "wdh">W</view>
-      <input class = "smallinput"type ="number" placeholder="1200" bindinput="depthInput"/>
-      <view class = "wdh">D</view>
-      <input class = "smallinput"type ="number" placeholder="800" bindinput="heightInput"/>
-      <view class = "wdh">H</view>
-    </view>
-
-    <view class = "uploadImg" bindtap="uploadImgbutton">
-      <view class = "searchButton">上传产品图片</view>
-    </view>
-
-  </view>
-</view>
 
 <view wx:else class = "column_view">
-  <view class = "bg2">
-    <view class = "space"/>
-
-    <view class = "row_flex">
-      <text>客户</text>
-      <input class = "input"type ="text" placeholder="客户姓名" bindinput="customerInput"/>
-    </view>
-
-      
-    <view class = "line"></view>
-
-    <view class = "row_flex">
-      <text>订单号</text>
-      <input class = "input"type ="text" placeholder="订单编号....." bindinput="orderNumInput"/>
-    </view>
-
-    <view class = "line"></view>
-
-    <view class = "search">
-      <view class = "searchButton" bindtap="searchOrder">搜索</view>
-    </view>
-
-  </view>
-  <view class="row_flex">
-    <view class = "search">
-      <view class = "searchButton" bindtap="create">新建订单</view>
-    </view>
-  </view>
-
-  <view class="row_flex">
-    <view class = "search">
-      <view class = "searchButton" bindtap="addFurniture">添加家具</view>
-    </view>
-  </view>
-
-</view>
+ 
 </view>
 

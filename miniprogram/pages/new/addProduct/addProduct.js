@@ -255,8 +255,8 @@ Page({
         wx.showToast({
           title: '添加成功',
         })
-        wx.navigateTo({
-          url: '',
+        wx.navigateBack({
+          delta: 0,
         })
       },
       fail: err => {
@@ -347,7 +347,7 @@ Page({
     })
   },
 
-  modelInputInput: function (e) {
+  modelInput: function (e) {
     this.setData({
       model: e.detail.value
     })

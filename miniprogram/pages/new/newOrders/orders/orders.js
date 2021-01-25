@@ -18,6 +18,9 @@ Page({
     status:'',
     carts:[],
     fileUrl:'',
+    contact:'',
+    orderStuff:'',
+    orderManager:'',
   },
 
   /**
@@ -27,17 +30,20 @@ Page({
     this.setData({
       orderId:options.orderId,
       customer:options.customer,
+      stuff:options.stuff,
     }),
+    console.log("业务员是"+this.data.stuff)
     wx.showToast({ title: '加载中', icon: 'loading', duration: 10000 });
-    if(this.data.orderId!=undefined){
+    if(this.data.orderId!=''){
       this.findByOrderId();
     }
-    if(this.data.customer!=undefined){
+    if(this.data.customer!=''){
       this.findByName();
     }
   },
 
   findByOrderId:function(){
+    console.log("find by orderNumber the number is "+this.data.orderId);
     const db = wx.cloud.database();
       // 查询当前家具的details对应name
       db.collection('orders').where({
@@ -55,6 +61,8 @@ Page({
             orderTotal:res.data[0].orderTotal,
             company:res.data[0].company,
             dealer:res.data[0].dealer,
+            contact:res.data[0].contact,
+            orderNumber:res.data[0].orderNumber,
           })
           console.log('[数据库] [查询记录] 成功: ', res);
 
@@ -71,6 +79,7 @@ Page({
   },
 
   findByName:function(){
+    console.log("find by name the name is "+this.data.customer)
     const db = wx.cloud.database();
       // 查询当前家具的details对应name
       db.collection('orders').where({
@@ -89,6 +98,8 @@ Page({
             company:res.data[0].company,
             dealer:res.data[0].dealer,
             orderId:res.data[0]._id,
+            contact:res.data[0].contact,
+            orderNumber:res.data[0].orderNumber,
           })
           console.log('[数据库] [查询记录] 成功: ', res);
 
@@ -195,6 +206,25 @@ Page({
     })
   },
 
+  contactInput:function (e) {
+    this.setData({
+      contact: e.detail.value
+    })
+  },
+
+  orderManagerInput:function (e) {
+    this.setData({
+      orderManager: e.detail.value
+    })
+  },
+
+  
+  orderStuffInput:function (e) {
+    this.setData({
+      orderStuff: e.detail.value
+    })
+  },
+
   update:function(){
     console.log('updating the order, the ID is ============================'+this.data.orderId);
 
@@ -211,8 +241,9 @@ Page({
         orderTotal:this.data.orderTotal,
         company:this.data.company,
         phone:this.data.phone,
-        status:'',
-
+        contact:this.data.contact,  
+        orderStuff:this.data.orderStuff,
+        orderManager:this.data.orderManager,
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id

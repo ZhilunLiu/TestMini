@@ -12,7 +12,7 @@ Page({
       manager:false,
       name:'',
       phone:'',
-      orderNumber:'',
+      orderNumber:0,
       series:'',
       fname:'',
       price:'',
@@ -30,7 +30,7 @@ Page({
       newSeries:'',
       disPrice:'',
       customer:'',
-
+      stuff:'',
   },
 
 
@@ -389,17 +389,22 @@ Page({
     })
   },
 
-
+  stuffInput:function (e) {
+    this.setData({
+      stuff: e.detail.value
+    })
+  },
+/*
   search:function(e){
     wx:wx.navigateTo({
       url: '../searchOrder/searchOrder?name='+this.data.name+'&phone='+this.data.phone+'&orderNumber='+this.data.orderNumber,
     })
   },
-
+*/
   searchOrder:function(e){
-    console.log('正在跳转订单页面 订单号为'+this.data.orderNumber+' 姓名为'+this.data.customer);
+    console.log('正在跳转订单页面 订单号为'+this.data.orderNumber+' 姓名为'+this.data.customer+'业务员姓名为'+this.data.stuff);
     wx:wx.navigateTo({
-      url: '../new/searchOrderResult/searchOrderResult?customer='+this.data.customer+'&orderId='+this.data.orderNumber,
+      url: '../new/searchOrderResult/searchOrderResult?customer='+this.data.customer+'&orderId='+this.data.orderNumber+'&stuff='+this.data.stuff,
     })
   },
 
@@ -414,6 +419,7 @@ Page({
       url: '../new/addProduct/addProduct'
     })
   },
+
 
   uploadImgbutton:function(){
     var data = this.data
@@ -576,5 +582,11 @@ Page({
       }
     })
   },
+
+  searchFurniture:function(){
+    wx.navigateTo({
+      url: '../new/searchProduct/searchProduct',
+    })
+  }
 
 })
