@@ -3,8 +3,8 @@
 
   <view wx:for="{{orders}}" view class = "bg2"  data-id = '{{item._id}}' bindtap="select">
     <view class = "row_flex">
-      <text>订单号</text>
-      <text>{{item._id}}</text>
+      <text decode="{{true}}">订单号&nbsp;&nbsp;&nbsp;</text>
+      <text>{{item.orderNumber}}</text>
     </view>
 
     <view class = "row_flex">
@@ -30,3 +30,11 @@
   </view>
 
 </scroll-view>
+
+<view class = "bottomMenu">
+      <view class = "row_flex"> 
+        <view class = "pageButton" bindtap="prevPage">上一页</view>
+        <text>{{pageNumber}}/{{totalPage}}</text>
+        <view class = "pageButton" bindtap="nextPage" >下一页</view>
+      </view>
+</view>

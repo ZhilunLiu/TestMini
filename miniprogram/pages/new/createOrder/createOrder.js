@@ -114,7 +114,7 @@ Page({
     })
   },
 
-  dealdateInput: function (e) {
+  dealDateInput: function (e) {
     this.setData({
       dealdate: e.detail.value
     })
@@ -188,9 +188,12 @@ Page({
         wx.showToast({
           title: '添加成功',
         })
-        wx.navigateTo({
-          url: '../newOrders/orders/orders?orderId='+this.data.orderId,
+        wx.navigateBack({
+          delta: 0,
         })
+        //wx.navigateTo({
+          //url: '../newOrders/orders/orders?orderId='+this.data.orderId,
+        //})
       },
       fail: err => {
         wx.showToast({

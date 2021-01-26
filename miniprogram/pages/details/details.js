@@ -22,10 +22,18 @@ Page({
     addingDim:false,
     manager:false,
     updating:false,
+    addingItem:false,
     width:0,
     depth:0,
     height:0,
     hasDisc:false,
+    comment:'',
+    fileId:'',
+    series:'',
+    type:'',
+    typeList:['班台','职员桌','文件柜','班椅','沙发','茶几','茶水柜','会议桌','会议椅','主席台','会议条桌','演讲台','接待台','洽谈桌','其他'],
+    hasnotSelectSeries:true,
+    hasnotSelectType:true,
   },
 
   bindPickerChange: function (e) {
@@ -34,6 +42,22 @@ Page({
       index: e.detail.value
     })
   },  
+
+  seriesChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      hasnotSelectSeries:false,
+      series: this.data.seriesList[e.detail.value],
+    })
+  }, 
+
+  typeChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      hasnotSelectType:false,
+      type: this.data.typeList[e.detail.value],
+    })
+  }, 
 
   previewImage: function (e) {
     var that = this,
@@ -50,7 +74,8 @@ Page({
   },
 
   bindchangeTag:function(e){
-      console.log("调用swiper");
+      console.log("调用swiper,imgUrl is ",this.data.imgUrls);
+
   },
 
   buy:function(e){
@@ -106,38 +131,6 @@ Page({
 
 
 
-  discount: function () {
-    const db = wx.cloud.database();
-    var temp = this.data.price;
-    var disc = this.data.disc;
-    for(let i = 0; i<temp.length;i++){
-      temp[i] = temp[i] / disc;
-    }
-    console.log('temp is ')
-    console.log(temp)
-    db.collection('detail').doc(this.data.dataId).update({
-      data: {
-
-        disPrice: temp,
-
-      },
-      success: res => {
-        wx.showToast({ title: '更新成功', icon: 'success', duration: 1000 });
-
-        this.setData({
-          disPrice: this.data.disPrice,
-          hasDisc:true,
-        })
-        console.error('[数据库] [更新记录] 成功', res);
-      },
-      fail: err => {
-        icon: 'none',
-          console.error('[数据库] [更新记录] 失败：', err)
-      }
-    })
-  },
-
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -145,13 +138,20 @@ Page({
     wx.showToast({ title: '加载中', icon: 'loading', duration: 10000 });
     var itemName = options.name;
     var itemId = options.itemId;
+    var addingItem = options.addingItem;
+    if(addingItem==true){
+      this.setData({
+        addingItem:addingItem,
+      })
+    }
+
     const db = wx.cloud.database();
     // 查询当前家具的details对应name
     db.collection('detail').where({
       _id: itemId
     }).get({
       success: res => {
-        console.log('正在载入细节'+res);
+        console.log('正在载入细节',res);
         this.setData({
           imgUrls :res.data[0].url,
           price: res.data[0].price,
@@ -163,12 +163,16 @@ Page({
           width:res.data[0].dimension[0][0],
           depth: res.data[0].dimension[0][1],
           height: res.data[0].dimension[0][2],
+          comment:res.data[0].comment,
+          fileId:res.data[0].fileId,
+          series:res.data[0].series,
+          type:res.data[0].type,
         })
         console.log('设置完成'+this.data.price);
         if (res.data[0].dimension[0][0]==0){
           this.setData({dimensionFlag:false})
         }
-
+        this.getSeriesList();
         console.log('[数据库] [查询记录] 成功: ', res);
 
         wx.hideToast();
@@ -179,6 +183,28 @@ Page({
           title: '查询记录失败'
         })
         console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })
+  },
+
+  getSeriesList:function(){
+    const db = wx.cloud.database();
+    // 查询当前家具的details对应name
+    db.collection('gomeSeries').where({
+    }).get({
+      success: res => {
+        var tempList = [];
+        for(let i =0;i <res.data.length;i++){
+          tempList.push(res.data[i].name);
+        }
+        this.setData({
+          seriesList:tempList,
+        })
+        console.log('seriesList is !!!! ', res);
+        console.log('[数据库] [查询记录] 成功: ', res);
+        wx.hideToast();
+      },
+      fail: err => {
       }
     })
   },
@@ -199,7 +225,7 @@ Page({
         wx.showToast({
           title: '删除成功',
         })
-        this.back();
+        this.deleteImg();
       },
       fail: err => {
         wx.showToast({
@@ -208,6 +234,20 @@ Page({
         })
         console.error('[数据库] [删除记录] 失败：', err)
       }
+    })
+  },
+
+  deleteImg:function(){
+    console.log('deleting img');
+    wx.cloud.deleteFile({
+      fileList:[this.data.fileId],
+      success: res =>{
+        console.log('删除图片成功',res)
+        wx.navigateBack({
+          delta: 2,
+        })
+      },
+      fail: console.error
     })
   },
 
@@ -239,6 +279,9 @@ Page({
         dimension: dim,
         size: this.data.size,
         describtion: this.data.describtion,
+        comment:this.data.comment,
+        type:this.data.type,
+        series:this.data.series,
       },
       success: res => {
         wx.showToast({ title: '更新成功', icon: 'success', duration: 1000 });
@@ -374,6 +417,13 @@ Page({
     console.log('dh changed')
     this.setData({
       height: e.detail.value
+    })
+  },
+
+  commentInput:function (e) {
+    console.log('dh changed')
+    this.setData({
+      comment: e.detail.value
     })
   },
 

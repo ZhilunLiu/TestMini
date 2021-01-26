@@ -253,6 +253,18 @@ Page({
     })
   },
 
+  myInfo:function(){
+    wx.navigateTo({
+      url: '../new/myInfo/myInfo',
+    })
+  },
+
+  stuffInfo:function(){
+    wx.navigateTo({
+      url: '../new/stuffInfo/stuffInfo',
+    })
+  },
+
   searchUser:function(e){
     const db = wx.cloud.database();
     db.collection('users').where({
@@ -587,6 +599,12 @@ Page({
     wx.navigateTo({
       url: '../new/searchProduct/searchProduct',
     })
-  }
+  },
+
+  myOrders:function(){
+    wx.navigateTo({
+      url: '../new/myOrders/myOrders',
+    })
+  },
 
 })

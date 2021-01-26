@@ -6,12 +6,15 @@ Page({
    */
   data: {
     type:'',
-    typeList:['会议桌','班台','茶几/小桌','文件柜','沙发','员工工作站','其他'],
+    typeList:['班台','职员桌','文件柜','班椅','沙发','茶几','茶水柜','会议桌','会议椅','主席台','会议条桌','演讲台','接待台','洽谈桌','其他'],
     hasntSelect:true,
     hasntSelect2:true,
     series:'',
     carts:[],
     orderId:'',
+    groupOrder:[],
+    pageNumber:1,
+    totalPage:1,
   },
 
   /**
@@ -114,8 +117,13 @@ Page({
         series:this.data.series
       }).get({
         success: res => {
+          var itemInPage =10 ;
+          var groupOrder = this.group(res.data,itemInPage);
+          var totalPage = this.getTotalPage(res.data.length,itemInPage);
           this.setData({
-            carts:res.data,
+            carts:groupOrder[0],
+            groupOrder:groupOrder,
+            totalPage:totalPage
           })
           console.log('seriesList is !!!! ', res);
           console.log('[数据库] [查询记录] 成功: ', res);
@@ -132,8 +140,13 @@ Page({
       type:this.data.type
     }).get({
       success: res => {
+        var itemInPage =10 ;
+          var groupOrder = this.group(res.data,itemInPage);
+          var totalPage = this.getTotalPage(res.data.length,itemInPage);
         this.setData({
-          carts:res.data
+          carts:groupOrder[0],
+            groupOrder:groupOrder,
+            totalPage:totalPage
         })
         console.log('cart is !!!! ', this.data.carts);
         console.log('[数据库] [查询记录] 成功: ', res);
@@ -151,8 +164,13 @@ Page({
         series:this.data.series
       }).get({
         success: res => {
+          var itemInPage =10 ;
+          var groupOrder = this.group(res.data,itemInPage);
+          var totalPage = this.getTotalPage(res.data.length,itemInPage);
           this.setData({
-            carts:res.data,
+            carts:groupOrder[0],
+            groupOrder:groupOrder,
+            totalPage:totalPage
           })
           console.log('seriesList is !!!! ', res);
           console.log('[数据库] [查询记录] 成功: ', res);
@@ -199,6 +217,50 @@ Page({
     wx.navigateTo({
       url: '../../details/details?itemId='+itemId+'&orderId='+this.data.orderId,
     })
-  }
+  },
+
+    //页数相关代码
+    getTotalPage:function(len,itemInPage){
+      var totalPage =1;
+      if(len%itemInPage==0){
+        totalPage = len/itemInPage;
+      }else{
+        totalPage = Math.floor(len/itemInPage)+1;
+      }
+      return totalPage;
+    },
+  
+    group:function(array, subGroupLength) {
+      let index = 0;
+      let newArray = [];
+      let len = array.length;
+      newArray.push(array.slice(index, Math.min(index += subGroupLength,len)));
+      while(index < len) {
+          newArray.push(array.slice(index, Math.min(index += subGroupLength,len)));
+      }
+      console.log('returing newArray===========',newArray);
+      return newArray;
+    },
+  
+    prevPage:function(){
+      console.log('跳转到上一页');
+      if(this.data.pageNumber>1){
+        this.setData({
+          carts:this.data.groupOrder[this.data.pageNumber-2],
+          pageNumber:this.data.pageNumber-1,
+        })
+      }
+  
+    },
+  
+    nextPage:function(){
+      console.log('跳转到下一页');
+      if(this.data.pageNumber<this.data.totalPage){
+        this.setData({
+          carts:this.data.groupOrder[this.data.pageNumber],
+          pageNumber:this.data.pageNumber+1,
+        })
+      }
+    },
 
 })

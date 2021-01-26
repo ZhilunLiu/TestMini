@@ -1,0 +1,28 @@
+<!--miniprogram/pages/new/myInfo/myInfo.wxml-->
+
+<view class = "column_view">
+  <view class = "bg2">
+  <view class = "row_flex">
+      <text>姓名</text>
+      <input class = "input"type ="text" placeholder="{{name}}" bindinput="nameInput"/>
+    </view>
+
+    <view class = "row_flex">
+      <text>电话</text>
+      <input class = "input"type ="text" placeholder="{{phone}}" bindinput="phoneInput"/>
+    </view>
+
+    <view class = "row_flex">
+      <text>地址</text>
+      <input class = "input"type ="text" placeholder="{{address}}" bindinput="addressInput"/>
+    </view>
+
+    </view>
+
+  <view class="row_flex">
+        <view class = "search">
+          <view class = "searchButton" bindtap="save">保存</view>
+        </view>
+  </view>
+</view>
+

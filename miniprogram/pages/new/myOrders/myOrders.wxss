@@ -1,4 +1,4 @@
-/* miniprogram/pages/new/searchOrderResult/searchOrderResult.wxss */
+/* miniprogram/pages/new/myOrders/myOrders.wxss */
 .bottomMenu{
   width: 100%;
   height: 10vh;

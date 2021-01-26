@@ -3,11 +3,13 @@
   <view class = "col_flex">
     <swiper class = "swiperrr" indicator-dots="{{indicatorDots}}"
       autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}} " bindchange="bindchangeTag">  
-      <view wx:for="{{imgUrls}}" class = "slide-image">
-        <swiper-item>
-            <image src="{{item}}"  data-index="{{index}}" bindtap="previewImage"/>
-      </swiper-item>
-    </view>
+      <view class = "slide-image">
+        <block wx:for="{{imgUrls}}" wx:key = "id">
+          <swiper-item>
+              <image src="{{item}}" mode="widthFix" data-index="{{index}}" bindtap="previewImage"/>
+          </swiper-item>
+        </block>
+      </view>
     </swiper>
   </view>
 
@@ -15,126 +17,133 @@
 
   
   <view class = "title">
+    <scroll-view class = "scrollView" scroll-y="true" style="height:40vh;" show-scrollbar="true" enhanced="true">
+      <view wx:if="{{updating}}">
 
-    <view wx:if="{{updating}}">
-      <view wx:if="{{hasDisc}}">
+          <view class = "row_flex">
+            <view class = "priceText">￥</view>
+            <input class = "priceTextinput" type ="digit" placeholder="{{price[index]}}" bindinput="priceInput"/>
+          </view>
+
+
         <view class = "row_flex">
-        <view class = "body">原价</view>
-          <input class = "priceTextinput" type ="digit" placeholder="{{price[index]}}" bindinput="priceInput"/>
+          <view class = "body">家具名称：</view>
+          <input class = "body" type ="text" placeholder="{{name}}" bindinput="nameInput"/>
         </view>
 
-      <!--
         <view class = "row_flex">
-          <view class = "priceText">折后价</view>
-          <input class = "priceTextinput" type ="digit" placeholder="{{disPrice[index]}}" bindinput="disPriceInput"/>
+          <view class = "body">家具尺寸：</view>
+          <input class = "smallinput"type ="number" placeholder="{{dimension[index][0]}}" bindinput="widthInput"/>
+          <view class = "wdh">W</view>
+          <input class = "smallinput"type ="number" placeholder="{{dimension[index][1]}}" bindinput="depthInput"/>
+          <view class = "wdh">D</view>
+          <input class = "smallinput"type ="number" placeholder="{{dimension[index][2]}}" bindinput="heightInput"/>
+          <view class = "wdh">H</view>
         </view>
-      
-      -->
-    </view>
 
-      <view wx:else>
+        <view class = "row_flex">
+            <view class = "body">种类： </view>
+            <picker bindchange="typeChange" value="{{index}}" range="{{typeList}}">
+
+              <view wx:if="{{hasnotSelectType}}">
+                <button class = "picker_button" type = "default" size = "mini">种类选择</button>
+              </view>
+              <view wx:else class = "picker_button">
+                <view class = "wdh">{{type}}</view>
+              </view>
+
+
+            </picker>
+        </view>
+
+        <view class = "row_flex">
+            <view class = "body">系列： </view>
+            <picker bindchange="seriesChange" value="{{index}}" range="{{seriesList}}">
+
+              <view wx:if="{{hasnotSelectSeries}}">
+                <button class = "picker_button" type = "default" size = "mini">系列选择</button>
+              </view>
+              <view wx:else class = "picker_button">
+                <view class = "wdh">{{series}}</view>
+              </view>
+
+            </picker>
+        </view>
+        
+
+        <view class = "row_flex">
+            <view class = "body">体积(立方米)： </view>
+            <input class = "body" type ="number" placeholder="{{size[index]}}" bindinput="sizeInput"/>
+        </view>
+
+        <view class = "row_flex">
+            <view class = "body">备注：</view>
+            <textarea class="textarea" value="{{desc}}" placeholder="{{comment}}" placeholder-class="placeholder" maxlength="-1" focus="true" auto-height="true" bindinput="commentInput"></textarea>
+        </view>
+
+        <view class = "row_flex">
+            <view class = "body">材质：</view>
+            <textarea class="textarea" value="{{desc}}" placeholder="{{describtion}}" placeholder-class="placeholder" maxlength="-1" focus="true" auto-height="true" bindinput="descInput"></textarea>
+        </view>
+        
+      </view>
+
+
+      <view wx:elif="{{addingDim}}">
         <view class = "row_flex">
           <view class = "priceText">￥</view>
           <input class = "priceTextinput" type ="digit" placeholder="{{price[index]}}" bindinput="priceInput"/>
         </view>
-      </view>
+        <view class = "titleText">{{name}}</view>
 
-      <view class = "row_flex">
-        <view class = "body">家具名称：</view>
-        <input class = "body" type ="text" placeholder="{{name}}" bindinput="nameInput"/>
-      </view>
-
-      <view class = "row_flex">
-        <view class = "body">家具尺寸：</view>
-        <input class = "smallinput"type ="number" placeholder="{{dimension[index][0]}}" bindinput="widthInput"/>
-        <view class = "wdh">W</view>
-        <input class = "smallinput"type ="number" placeholder="{{dimension[index][1]}}" bindinput="depthInput"/>
-        <view class = "wdh">D</view>
-        <input class = "smallinput"type ="number" placeholder="{{dimension[index][2]}}" bindinput="heightInput"/>
-        <view class = "wdh">H</view>
-      </view>
-      
-
-      <view class = "row_flex">
-          <view class = "body">体积(立方米)： </view>
-          <input class = "body" type ="number" placeholder="{{size[index]}}" bindinput="sizeInput"/>
-      </view>
-
-      <view class = "row_flex">
-          <view class = "body">颜色/说明：</view>
-          <textarea class="textarea" value="{{desc}}" placeholder="{{describtion}}" placeholder-class="placeholder" maxlength="-1" focus="true" auto-height="true" bindinput="descInput"></textarea>
-      </view>
-      
-    </view>
-
-
-    <view wx:elif="{{addingDim}}">
-      <view class = "row_flex">
-        <view class = "priceText">￥</view>
-        <input class = "priceTextinput" type ="digit" placeholder="{{price[index]}}" bindinput="priceInput"/>
-      </view>
-      <view class = "titleText">{{name}}</view>
-
-      <view class = "row_flex">
-        <view class = "body">家具尺寸：</view>
-        <input class = "smallinput"type ="number" placeholder="{{dimension[index][0]}}" bindinput="widthInput"/>
-        <view class = "wdh">W</view>
-        <input class = "smallinput"type ="number" placeholder="{{dimension[index][1]}}" bindinput="depthInput"/>
-        <view class = "wdh">D</view>
-        <input class = "smallinput"type ="number" placeholder="{{dimension[index][2]}}" bindinput="heightInput"/>
-        <view class = "wdh">H</view>
-      </view>
-      
-
-      <view class = "row_flex">
-          <view class = "body">体积(立方米)： </view>
-          <input class = "body" type ="number" placeholder="{{size[index]}}" bindinput="sizeInput"/>
-      </view>
-
-      
-    </view>
-
-
-
-    <view wx:else>
-      
-      <view class = "priceText">￥{{price[index]}}</view>
-
-      <!--
-      <view wx:if="{{hasDisc}}">
-        <view class = "priceText">
-          ￥{{price[index]}}
-          <cover-view class = "disline"></cover-view>
+        <view class = "row_flex">
+          <view class = "body">家具尺寸：</view>
+          <input class = "smallinput"type ="number" placeholder="{{dimension[index][0]}}" bindinput="widthInput"/>
+          <view class = "wdh">W</view>
+          <input class = "smallinput"type ="number" placeholder="{{dimension[index][1]}}" bindinput="depthInput"/>
+          <view class = "wdh">D</view>
+          <input class = "smallinput"type ="number" placeholder="{{dimension[index][2]}}" bindinput="heightInput"/>
+          <view class = "wdh">H</view>
         </view>
-        <view class = "disPriceText">￥{{disPrice[index]}}</view>
-      </view>
-      <view wx:else>
+        
+        <view class = "row_flex">
+            <view class = "body">体积(立方米)： </view>
+            <input class = "body" type ="number" placeholder="{{size[index]}}" bindinput="sizeInput"/>
+        </view>
+
         
       </view>
 
-      -->
-      
 
-      <view class = "titleText">{{name}}</view>
-      <picker bindchange="bindPickerChange" value="{{index}}" range="{{dimension}}">
-      <button class = "picker_button" type = "default" size = "mini">尺寸选择</button>
-      </picker>
-      <view wx:if= "{{dimension[index][0]}}!=0}}">
-        <view class="body">
-          当前尺寸: {{dimension[index][0]}}长 X {{dimension[index][1]}}宽 X {{dimension[index][2]}}高 毫米 
+
+      <view wx:else>
+        
+        <view class = "priceText">￥{{price[index]}}</view>
+        
+
+        <view class = "titleText">{{name}}</view>
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{dimension}}">
+        <button class = "picker_button" type = "default" size = "mini">尺寸选择</button>
+        </picker>
+        <view wx:if= "{{dimension[index][0]}}!=0}}">
+          <view class="body">
+            当前尺寸: {{dimension[index][0]}}长 X {{dimension[index][1]}}宽 X {{dimension[index][2]}}高 毫米 
+          </view>
+        </view>  
+        <view wx:elif ="{{dimension[index][0]}}==0">
+          <view class="body">
+            当前尺寸: {{dimension[index][1]}}半径 X {{dimension[index][2]}}H
+          </view>
         </view>
-      </view>  
-      <view wx:elif ="{{dimension[index][0]}}==0">
-        <view class="body">
-          当前尺寸: {{dimension[index][1]}}半径 X {{dimension[index][2]}}H
-        </view>
+        <view class = "body">系列：{{series}} </view>
+        <view class = "body">种类：{{type}} </view>
+        <view class = "body">体积：{{size[index]}} 立方米</view>
+        <view class = "body">备注：{{comment}}</view>
+        <view class = "body">材质：{{describtion}}</view>
+        
+
       </view>
-      <view class = "body">体积：{{size[index]}} 立方米</view>
-      <view class = "body">颜色/说明：{{describtion}}</view>
-      
-
-    </view>
-
+    </scroll-view>
 
 
     <view class = "buybutton">
@@ -145,7 +154,7 @@
       <view class = "addDim" bindtap="addDim">添加尺寸</view>
       <view class = "delete" bindtap="deleteData" >删除此产品</view>
       </view>
-      <view wx:else class = "buy" bindtap="add" data-name = "{{name}}">添加进订单</view>
+      <view wx:if="{{addingItem}}" class = "buy" bindtap="add" data-name = "{{name}}">添加进订单</view>
 
     </view>
 

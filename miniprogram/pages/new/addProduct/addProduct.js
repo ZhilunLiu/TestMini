@@ -21,7 +21,7 @@ Page({
     depth:'',
     height:'',
     type:'',
-    typeList:['会议桌','班台','茶几/小桌','文件柜','沙发','员工工作站','其他'],
+    typeList:['班台','职员桌','文件柜','班椅','沙发','茶几','茶水柜','会议桌','会议椅','主席台','会议条桌','演讲台','接待台','洽谈桌','其他'],
     hasntSelect:true,
     hasntSelect2:true,
     seriesList:[],
@@ -31,6 +31,7 @@ Page({
     company:'',
     comment:'',
     model:'',
+    fileId:'',
   },
 
   /**
@@ -171,9 +172,10 @@ Page({
           var newDateTime = (new Date()).valueOf();
           var name = that.data.fname;
           var company = that.data.company;
+          var series = that.data.series;
           const filePath = res.tempFilePaths[i];
           console.log('in for loop now')
-          const cloudPath = company + '/' + name + newDateTime + filePath.match(/\.[^.]+?$/)[0]
+          const cloudPath = series + '/' + name + newDateTime + filePath.match(/\.[^.]+?$/)[0]
           that.upload(cloudPath, filePath);
         }
 
@@ -195,7 +197,10 @@ Page({
       filePath,
       success: res => {
 
-        console.log('[上传文件] 成功：', res)
+        console.log('[上传文件] 成功：', res);
+        
+        var fileId = [res.fileID];
+        console.log('//////////////////////////：fileId 是', fileId[0]);
         wx.cloud.getTempFileURL({
           fileList: [res.fileID],
           success: res => {
@@ -205,9 +210,10 @@ Page({
             var temp = this.data.imgUrls;
             temp.push(res.fileList[0].tempFileURL);
             that.setData({
-              imgUrls:temp
+              imgUrls:temp,
+              fileId:fileId[0],
             })
-            console.log(this.data.imgUrls);
+            console.log(this.data.fileId);
             this.addTodb();
             //}
             console.log(imgUrls)
@@ -230,6 +236,7 @@ Page({
 
   
   addTodb:function(){
+    console.log('add new item to the db the fileId is '+this.data.fileId);
     var dim = [[this.data.width,this.data.depth,this.data.height]];
     var price =[this.data.price];
     var size = [this.data.size];
@@ -247,6 +254,7 @@ Page({
         company:this.data.company,
         comment:this.data.comment,
         model:this.data.model,
+        fileId:this.data.fileId,
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id

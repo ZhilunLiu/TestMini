@@ -44,4 +44,12 @@
           
         </view>
       </view>
-    </scroll-view>
+</scroll-view>
+
+<view class = "bottomMenu">
+      <view class = "row_flex"> 
+        <view class = "pageButton" bindtap="prevPage">上一页</view>
+        <text>{{pageNumber}}/{{totalPage}}</text>
+        <view class = "pageButton" bindtap="nextPage" >下一页</view>
+      </view>
+</view>

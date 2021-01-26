@@ -1,0 +1,21 @@
+<!--miniprogram/pages/new/stuffInfo/stuffInfo.wxml-->
+<view class = "column_view">
+  <view wx:for = "{{users}}" class = "bg2">
+  <view class = "row_flex">
+      <text>姓名</text>
+      <text>{{item.name}}</text>
+    </view>
+
+    <view class = "row_flex">
+      <text>电话</text>
+      <text>{{item.phone}}</text>
+    </view>
+
+    <view class = "row_flex">
+      <text>地址</text>
+      <text>{{item.address}}</text>
+    </view>
+
+    </view>
+</view>
+

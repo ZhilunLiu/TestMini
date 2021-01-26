@@ -6,18 +6,20 @@ page{
 .swiperrr{
   width:100vw;
   height:40vh;
+  display: flex;
 }
 .slide-image{
-  margin-left: 20vw;
   align-items: center;
   justify-items: center;
-  height: 40vh;
+  text-align: center;
+  width: 100%;
 }
 .title{
   margin-top:2vh;
   width: 100%;
   height: 100%;
 }
+
 .body{
   margin-top: 2vh;
   margin-left: 5vw;
@@ -78,7 +80,7 @@ page{
 
 .buybutton{
   width: 100%;
-  height: 120rpx;
+  height: 10vh;
   position: fixed;
   bottom: 0;
   display: flex;
@@ -91,7 +93,7 @@ page{
   border-radius: 5px;
   background-color: red;
   width:25vw;
-  height: 10vw;
+  height: 8vh;
   color: white;
   display: flex;
   justify-content: center;
@@ -103,7 +105,7 @@ page{
   border-radius: 5px;
   background-color: coral;
   width:25vw;
-  height: 10vw;
+  height: 8vh;
   color: white;
   display: flex;
   justify-content: center;
@@ -114,7 +116,7 @@ page{
   border-radius: 5px;
   background-color: coral;
   width:25vw;
-  height: 10vw;
+  height: 8vh;
   color: white;
   display: flex;
   justify-content: center;

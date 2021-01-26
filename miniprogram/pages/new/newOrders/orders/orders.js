@@ -34,10 +34,10 @@ Page({
     }),
     console.log("业务员是"+this.data.stuff)
     wx.showToast({ title: '加载中', icon: 'loading', duration: 10000 });
-    if(this.data.orderId!=''){
+    if(this.data.orderId!=undefined){
       this.findByOrderId();
     }
-    if(this.data.customer!=''){
+    if(this.data.customer!=undefined){
       this.findByName();
     }
   },
@@ -63,6 +63,8 @@ Page({
             dealer:res.data[0].dealer,
             contact:res.data[0].contact,
             orderNumber:res.data[0].orderNumber,
+            orderManager:res.data[0].orderManager,
+            orderStuff:res.data[0].orderStuff,
           })
           console.log('[数据库] [查询记录] 成功: ', res);
 
@@ -100,6 +102,8 @@ Page({
             orderId:res.data[0]._id,
             contact:res.data[0].contact,
             orderNumber:res.data[0].orderNumber,
+            orderManager:res.data[0].orderManager,
+            orderStuff:res.data[0].orderStuff,
           })
           console.log('[数据库] [查询记录] 成功: ', res);
 
@@ -252,6 +256,9 @@ Page({
         })
         wx.showToast({
           title: '添加成功',
+        })
+        wx.navigateBack({
+          delta: 2,
         })
       },
       fail: err => {

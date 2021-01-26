@@ -29,7 +29,10 @@
     "pages/new/addProduct/addProduct",
     "pages/new/searchOrderResult/searchOrderResult",
     "pages/new/generateForm/generateForm",
-    "pages/new/searchProduct/searchProduct"
+    "pages/new/searchProduct/searchProduct",
+    "pages/new/myInfo/myInfo",
+    "pages/new/stuffInfo/stuffInfo",
+    "pages/new/myOrders/myOrders"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
