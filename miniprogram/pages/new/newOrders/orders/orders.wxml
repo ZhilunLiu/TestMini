@@ -52,7 +52,7 @@
     <view class = "line"></view>
 
     <view class = "row_flex">
-      <text decode="{{true}}">交货日期&nbsp;</text>
+      <text decode="{{true}}">交货日期&nbsp;;&nbsp;&nbsp;</text>
       <input class = "input"type ="text" placeholder="{{duedate}}" bindinput="duedateInput"/>
     </view>
 
@@ -65,9 +65,26 @@
 
     <view class = "line"></view>
 
+    <view class = "row_flex" wx:if = "{{manager}}">
+      <text decode="{{true}}">已付金额&nbsp;&nbsp;&nbsp;</text>
+      <input class = "input"type ="text" placeholder="{{paid}}" bindinput="paidInput"/>
+    </view>
+
+    <view class = "row_flex" wx:else>
+      <text decode="{{true}}">已付金额&nbsp;&nbsp;&nbsp;</text>
+      <text>{{paid}}</text>
+    </view>
+
+    <view class = "line"></view>
+
     <view class = "row_flex">
       <text decode="{{true}}">开票单位&nbsp;&nbsp;&nbsp;</text>
-      <input class = "input"type ="text" placeholder="{{company}}" bindinput="companyInput"/>
+      <text>{{company}}</text>
+      <picker bindchange="companyChange" value="{{index}}" range="{{companyList}}">
+      <view wx:if="{{hasnotSelectKaipiao}}">
+        <button class = "picker_button" type = "default" size = "mini" style="position: relative; left: 10vw;">选择开票单位</button>
+      </view>
+      </picker>
     </view>
 
     <view class = "line"></view>
@@ -94,6 +111,7 @@
     <view class = "row_flex" wx:else>
       <text decode="{{true}}">提成比例(&)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{commision}}</text>
     </view>
+    
 
     <view class = "line"></view>
 

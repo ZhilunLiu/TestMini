@@ -23,6 +23,9 @@ Page({
     orderManager:'',
     commision:0,
     manager:false,
+    paid:0,
+    hasnotSelectKaipiao:true,
+    companyList:[],
   },
 
   /**
@@ -30,10 +33,12 @@ Page({
    */
   onLoad: function (options) {
     this.verifyManager();
+    var app =getApp();
     this.setData({
       orderId:options.orderId,
       customer:options.customer,
       stuff:options.stuff,
+      companyList:app.globalData.companyList,
     }),
     console.log("业务员是"+this.data.stuff)
     wx.showToast({ title: '加载中', icon: 'loading', duration: 10000 });
@@ -102,6 +107,7 @@ Page({
             orderManager:res.data[0].orderManager,
             orderStuff:res.data[0].orderStuff,
             commision:res.data[0].commision,
+            paid:res.data[0].paid,
           })
           console.log('[数据库] [查询记录] 成功: ', res);
 
@@ -142,6 +148,7 @@ Page({
             orderManager:res.data[0].orderManager,
             orderStuff:res.data[0].orderStuff,
             commision:res.data[0].commision,
+            paid:res.data[0].paid,
           })
           console.log('[数据库] [查询记录] 成功: ', res);
 
@@ -273,10 +280,25 @@ Page({
     })
   },
 
+  paidInput:function (e) {
+    this.setData({
+      paid: e.detail.value
+    })
+  },
+
   update:function(){
     console.log('updating the order, the ID is ============================'+this.data.orderId);
 
     console.log('updating the order, the dealdate is ============================',this.data);
+
+    if(this.data.paid>this.data.orderTotal){
+      wx.showToast({
+        icon: 'none',
+        title: '已付金额不得大于总金额',
+        duration: 2000
+      })
+      return;
+    }
   const db = wx.cloud.database();
     db.collection('orders').doc(this.data.orderId).update({
       data: {
@@ -292,6 +314,7 @@ Page({
         orderStuff:this.data.orderStuff,
         orderManager:this.data.orderManager,
         commision:this.data.commision,
+        paid:this.data.paid,
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id
@@ -416,4 +439,12 @@ Page({
         }
       })  
   },
+
+  companyChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      hasnotSelectKaipiao: false,
+      company: this.data.companyList[e.detail.value],
+    })
+  }, 
 })

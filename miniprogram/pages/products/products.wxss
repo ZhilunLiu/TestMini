@@ -38,8 +38,8 @@
   /*文字14px*/  
   font-size: 29rpx;
   color: #101010;  
-  font-weight: 
-}  
+}
+
 /*左侧栏list的item被选中时*/  
 .nav_left .nav_left_items.active{  
   /*背景色变成白色*/  

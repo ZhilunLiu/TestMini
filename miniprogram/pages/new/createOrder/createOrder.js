@@ -19,12 +19,19 @@ Page({
     dataId:'',
     orderStuff:'',
     orderManager:'',
+    paid:0,
+    hasnotSelectKaipiao:true,
+    companyList:[],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var app =getApp();
+    this.setData({
+      companyList:app.globalData.companyList,
+    });
     const db = wx.cloud.database();
     db.collection('orders').get({
       success: res => {
@@ -214,4 +221,12 @@ Page({
       }
     })
   },
+
+  companyChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      hasnotSelectKaipiao: false,
+      company: this.data.companyList[e.detail.value],
+    })
+  }, 
 })

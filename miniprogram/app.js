@@ -33,6 +33,7 @@ App({
       cloudPath:'',
       imagePath:'',
       selectedOrderId:'',
+      companyList:['国景','鑫诺','凯美','美效','云时代','华滕','亿尚'],
   }
   }
 })
