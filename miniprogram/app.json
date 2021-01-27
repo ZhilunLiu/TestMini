@@ -32,7 +32,8 @@
     "pages/new/searchProduct/searchProduct",
     "pages/new/myInfo/myInfo",
     "pages/new/stuffInfo/stuffInfo",
-    "pages/new/myOrders/myOrders"
+    "pages/new/myOrders/myOrders",
+    "pages/new/stuffSum/stuffSum"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -76,9 +77,6 @@
   },
   "sitemapLocation": "sitemap.json",
   "usingComponents": {
-    "table-view": "../../../miniprogram_npm/miniprogram-table-component",
-    "recycle-view": "miniprogram-recycle-view/recycle-view",
-    "recycle-item": "miniprogram-recycle-view/recycle-item",
     "popup": "/component/popup/popup"
   }
 }

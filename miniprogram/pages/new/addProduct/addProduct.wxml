@@ -8,7 +8,7 @@
       <text>系列名称：</text>
       <picker bindchange="bindPicker2Change" value="{{index}}" range="{{seriesList}}">
         <view wx:if="{{hasntSelect2}}">
-          <button class = "picker_button" type = "default" size = "mini">系列选择</button>
+          <button class = "picker_button" type = "default" size = "mini" style="position: relative; left: 15rpx; top: 3rpx">系列选择</button>
         </view>
         <view wx:else class = "picker_button">
           <view class = "wdh">{{series}}</view>
@@ -17,7 +17,7 @@
 
       <input class = "smallinput"type ="text" placeholder="或请输入新家具系列" bindinput="seriesInput"/>
       <view>
-      <button class = "picker_button" type = "default" size = "mini" bindtap="addNewSeries">添加系列</button>
+      <button class = "picker_button" type = "default" size = "mini" bindtap="addNewSeries" style="position: relative; left: 6rpx; top: 3rpx">添加系列</button>
       </view>
     </view>
 
@@ -25,7 +25,7 @@
       <text>家具种类：</text>
       <picker bindchange="bindPickerChange" value="{{index}}" range="{{typeList}}">
       <view wx:if="{{hasntSelect}}">
-        <button class = "picker_button" type = "default" size = "mini">种类选择</button>
+        <button class = "picker_button" type = "default" size = "mini" style="position: relative; left: 14rpx; top: 2rpx">种类选择</button>
       </view>
       <view wx:else class = "picker_button">
         <view class = "wdh">{{type}}</view>

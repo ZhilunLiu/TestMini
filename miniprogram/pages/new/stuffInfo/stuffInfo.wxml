@@ -1,6 +1,6 @@
 <!--miniprogram/pages/new/stuffInfo/stuffInfo.wxml-->
 <view class = "column_view">
-  <view wx:for = "{{users}}" class = "bg2">
+  <view wx:for = "{{users}}" class = "bg2"  bindtap="stuffDetail" data-id="{{index}}">
   <view class = "row_flex">
       <text>姓名</text>
       <text>{{item.name}}</text>

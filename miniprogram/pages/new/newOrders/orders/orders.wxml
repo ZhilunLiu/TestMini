@@ -86,6 +86,17 @@
 
     <view class = "line"></view>
 
+    <view class = "row_flex" wx:if = "{{manager}}">
+      <text decode="{{true}}">提成比例(%)</text>
+      <input class = "input"type ="number" placeholder="{{commision}}" bindinput="commisionInput"/>
+    </view>
+
+    <view class = "row_flex" wx:else>
+      <text decode="{{true}}">提成比例(&)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{commision}}</text>
+    </view>
+
+    <view class = "line"></view>
+
     <view class = "search">
       <view class = "searchButton" bindtap="update">更改并保存</view>
     </view>

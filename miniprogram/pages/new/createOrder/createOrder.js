@@ -163,6 +163,16 @@ Page({
   },
 
   create:function(){
+    var data = this.data
+    if (data.customer == '' || data.address == '' || data.dealer == '' || data.dealdate == '' || data.duedate=='' ||data.orderTotal == '', data.company == '', data.phone == '',
+    data.contact == '',data.orderManager == '',data.orderStuff == '') {
+      wx.showToast({
+        icon: 'none',
+        title: '请填写完整订单信息',
+        duration: 2000
+      })
+      return;
+    }
     const db = wx.cloud.database();
     db.collection('orders').add({
       data: {

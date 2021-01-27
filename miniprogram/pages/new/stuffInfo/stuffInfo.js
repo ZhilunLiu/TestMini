@@ -34,6 +34,14 @@ Page({
     })
   },
 
+  stuffDetail:function(event){
+    var index = event.currentTarget.dataset.id;
+    console.log('123123123123123',this.data.users[index]);
+    wx.navigateTo({
+      url: '../stuffSum/stuffSum?openId='+this.data.users[index]._openId+'&name='+this.data.users[index].name,
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

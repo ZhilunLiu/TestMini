@@ -24,8 +24,8 @@
   </view>
 
   <view class ="tr">
-    <view class = "td_regular">序号</view>  
-    <view class = "td_regular">名称</view> 
+    <view class = "td_short">序号</view>  
+    <view class = "td_short">名称</view> 
     <view class = "td_regular">型号</view>  
     <view class = "td">图片</view>
     <view class = "td_regular">规格</view>  
@@ -38,8 +38,8 @@
   </view>
 
   <view wx:for="{{carts}}" class = "tr">
-    <view class = "td_regular">{{index+1}}</view>  
-    <view class = "td_regular">{{item.name}}</view> 
+    <view class = "td_short">{{index+1}}</view>  
+    <view class = "td_short">{{item.name}}</view> 
     <view class = "td_regular">{{item.model}}</view>  
     <image class = "td" src = "{{item.image[0]}}" mode = "widthFix"></image>
     <view class = "td_regular">{{item.dimension[0][0]}}W * {{item.dimension[0][1]}}D * {{item.dimension[0][2]}}H</view>  

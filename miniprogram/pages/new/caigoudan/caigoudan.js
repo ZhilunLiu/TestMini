@@ -65,7 +65,7 @@ Page({
     const db = wx.cloud.database();
     console.log('option id is !!!!!!!!!!!!------ '+this.data.itemId);
     if(this.data.itemId != undefined){
-      console.log('try to add item the item id is !!!!!!!!!!!!------ '+this.data.itemId);
+      console.log('try to add item the item id is !!!!!!!!!!!!------ '+this.data.itemId,'the cart is ',this.data.carts);
       //get new item detail from db
       db.collection('detail').where({
         _id:this.data.itemId
@@ -97,6 +97,9 @@ Page({
           console.log('新的家具是----- ', newItem);
             var templist = this.data.carts;
             console.log('旧的家具是清单----- ',templist);
+            if(templist==undefined){
+              templist = [];
+            }
             templist.push(newItem);
             console.log('新的家具是清单----- ',templist);
             this.setData({

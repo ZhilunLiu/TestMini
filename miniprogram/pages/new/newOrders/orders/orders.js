@@ -21,12 +21,15 @@ Page({
     contact:'',
     orderStuff:'',
     orderManager:'',
+    commision:0,
+    manager:false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.verifyManager();
     this.setData({
       orderId:options.orderId,
       customer:options.customer,
@@ -41,6 +44,39 @@ Page({
       this.findByName();
     }
   },
+
+  verifyManager:function(e){
+    var app = getApp();
+    var openId = app.globalData.openId;
+    console.log('verifing, openid is '+openId);
+    const db = wx.cloud.database();
+    // 查询当前家具的details对应name
+    db.collection('managers').where({
+      openid: openId
+    }).get({
+      success: res => {
+        if(res.data[0].openid==openId){
+          app.globalData.manager = true;
+          this.setData({
+            manager:true,
+          })
+        }
+        console.log('[数据库] [查询记录] 成功: ', res);
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      },
+      complete: com =>{
+        wx.hideToast();
+      }
+    })
+    
+  },
+
 
   findByOrderId:function(){
     console.log("find by orderNumber the number is "+this.data.orderId);
@@ -65,6 +101,7 @@ Page({
             orderNumber:res.data[0].orderNumber,
             orderManager:res.data[0].orderManager,
             orderStuff:res.data[0].orderStuff,
+            commision:res.data[0].commision,
           })
           console.log('[数据库] [查询记录] 成功: ', res);
 
@@ -104,6 +141,7 @@ Page({
             orderNumber:res.data[0].orderNumber,
             orderManager:res.data[0].orderManager,
             orderStuff:res.data[0].orderStuff,
+            commision:res.data[0].commision,
           })
           console.log('[数据库] [查询记录] 成功: ', res);
 
@@ -222,6 +260,12 @@ Page({
     })
   },
 
+  commisionInput:function (e) {
+    this.setData({
+      commision: parseInt(e.detail.value)
+    })
+  },
+
   
   orderStuffInput:function (e) {
     this.setData({
@@ -232,11 +276,10 @@ Page({
   update:function(){
     console.log('updating the order, the ID is ============================'+this.data.orderId);
 
-    console.log('updating the order, the dealdate is ============================'+this.data.dealdate);
+    console.log('updating the order, the dealdate is ============================',this.data);
   const db = wx.cloud.database();
     db.collection('orders').doc(this.data.orderId).update({
       data: {
-        orderNumber:0,
         customer:this.data.customer,
         address:this.data.company,
         dealer:this.data.nickname,
@@ -248,6 +291,7 @@ Page({
         contact:this.data.contact,  
         orderStuff:this.data.orderStuff,
         orderManager:this.data.orderManager,
+        commision:this.data.commision,
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id
