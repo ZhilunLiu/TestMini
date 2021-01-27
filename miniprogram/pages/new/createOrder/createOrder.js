@@ -22,6 +22,7 @@ Page({
     paid:0,
     hasnotSelectKaipiao:true,
     companyList:[],
+    test:'',
   },
 
   /**
