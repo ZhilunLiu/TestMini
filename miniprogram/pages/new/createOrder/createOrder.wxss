@@ -100,6 +100,12 @@ Page {
   margin-left:10vw;
 }
 
+.row_flex button{
+  margin-top: 2vh;
+  margin-left:10vw;
+}
+
+
 .wdh{
     margin-top: 2vh;
 }

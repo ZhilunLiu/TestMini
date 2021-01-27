@@ -31,16 +31,20 @@
 
     <view class = "line"></view>
 
-    <view class = "row_flex">
+    <view class="row_flex">
       <text>下单日期</text>
-      <input class = "input"type ="text" placeholder="下单日期....." bindinput="dealDateInput"/>
+      <picker mode="date" value="{{date}}" start="1990-09-01" end="2100-09-01" bindchange="dealdateChange">
+        <button class = "picker_button" type = "default" size = "mini" >{{dealdate}}</button>
+      </picker>
     </view>
 
     <view class = "line"></view>
 
-    <view class = "row_flex">
+    <view class="row_flex">
       <text>交货日期</text>
-      <input class = "input"type ="text" placeholder="交货日期....." bindinput="duedateInput"/>
+      <picker mode="date" value="{{date}}" start="1990-09-01" end="2100-09-01" bindchange="duedateChange">
+        <button class = "picker_button" type = "default" size = "mini" >{{duedate}}</button>
+      </picker>
     </view>
 
     <view class = "line"></view>
