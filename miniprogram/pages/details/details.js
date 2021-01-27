@@ -274,6 +274,7 @@ Page({
     const db = wx.cloud.database();
     db.collection('detail').doc(this.data.dataId).update({
       data: {
+        name:this.data.name,
         price: this.data.price,
         disPrice:this.data.disPrice,
         dimension: dim,
