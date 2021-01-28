@@ -93,20 +93,28 @@
 
     <view class = "line"></view>
 
-    <view class = "row_flex">
-      <text decode="{{true}}">业务主管&nbsp;&nbsp;&nbsp;</text>
-      <input class = "input"type ="text" placeholder="{{orderManager}}" bindinput="orderManagerInput"/>
+    <view class="row_flex">
+      <text>业务主管</text>
+      <picker bindchange="orderManagerChange" value="{{index}}" range="{{orderManagerList}}">
+        <view class="picker">
+          <button class = "picker_button" type = "default" size = "mini" >{{orderManager}}</button>
+        </view>
+      </picker>
     </view>
 
     <view class = "line"></view>
 
-    <view class = "row_flex">
-      <text decode="{{true}}">经办人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
-      <input class = "input"type ="text" placeholder="{{orderStuff}}" bindinput="orderStuffInput"/>
+    <view class="row_flex">
+      <text>经办人</text>
+      <picker bindchange="orderStuffChange" value="{{index}}" range="{{orderStuffList}}">
+        <view class="picker">
+          <button class = "picker_button" type = "default" size = "mini" >{{orderStuff}}</button>
+        </view>
+      </picker>
     </view>
 
     <view class = "line"></view>
-
+    
     <view class = "row_flex" wx:if = "{{manager}}">
       <text decode="{{true}}">提成比例(%)</text>
       <input class = "input"type ="number" placeholder="{{commision}}" bindinput="commisionInput"/>
