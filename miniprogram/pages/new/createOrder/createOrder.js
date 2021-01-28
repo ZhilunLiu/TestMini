@@ -17,8 +17,10 @@ Page({
     orderId:'',
     contact:'',
     dataId:'',
-    orderStuff:'',
-    orderManager:'',
+    orderManager:'姓名',
+    orderManagerList: [],
+    orderStuff:'姓名',
+    orderStuffList:[],
     paid:0,
     hasnotSelectKaipiao:true,
     companyList:[],
@@ -34,6 +36,36 @@ Page({
       companyList:app.globalData.companyList,
     });
     const db = wx.cloud.database();
+    //get all users
+    db.collection('users').get({
+      success: res => {
+        var userLen = res.data.length;
+        var batchTimes = Math.ceil(userLen / 20);
+        var batchNum = 0;
+        for(let i = 0; i < batchTimes; i++){
+          for(let j = 0; j < Math.min(userLen, 20); j++){
+            this.setData({
+              orderManagerList:this.data.orderManagerList.concat(res.data[batchNum + j].name),
+              })
+            this.setData({
+              orderStuffList:this.data.orderStuffList.concat(res.data[batchNum + j].name),
+            })
+          }
+          batchNum += 20;
+        }
+        console.log('[数据库] [查询记录] 成功: ', res);
+        console.log(this.data.orderStuffList[0]);
+        wx.hideToast();
+      },
+      fail: err => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询记录失败'
+        })
+        console.error('[数据库] [查询记录] 失败：', err)
+      }
+    })    
+    //
     db.collection('orders').get({
       success: res => {
         var len = res.data.length;
@@ -242,6 +274,20 @@ Page({
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       duedate: e.detail.value
+    })
+  },
+
+  orderManagerChange: function (e){
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      orderManager: this.data.orderManagerList[e.detail.value]
+    })
+  },
+
+  orderStuffChange: function (e){
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      orderStuff: this.data.orderStuffList[e.detail.value]
     })
   },
 })

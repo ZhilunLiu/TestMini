@@ -65,16 +65,24 @@
     </view>
     <view class = "line"></view>
 
-    <view class = "row_flex">
+    <view class="row_flex">
       <text>业务主管</text>
-      <input class = "input"type ="text" placeholder="业务主管....." bindinput="orderManagerInput"/>
+      <picker bindchange="orderManagerChange" value="{{index}}" range="{{orderManagerList}}">
+        <view class="picker">
+          <button class = "picker_button" type = "default" size = "mini" >{{orderManager}}</button>
+        </view>
+      </picker>
     </view>
 
     <view class = "line"></view>
 
-    <view class = "row_flex">
+    <view class="row_flex">
       <text>经办人</text>
-      <input class = "input"type ="text" placeholder="经办人....." bindinput="orderStuffInput"/>
+      <picker bindchange="orderStuffChange" value="{{index}}" range="{{orderStuffList}}">
+        <view class="picker">
+          <button class = "picker_button" type = "default" size = "mini" >{{orderStuff}}</button>
+        </view>
+      </picker>
     </view>
 
     <view class = "line"></view>
