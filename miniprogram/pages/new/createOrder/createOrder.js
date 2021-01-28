@@ -17,9 +17,9 @@ Page({
     orderId:'',
     contact:'',
     dataId:'',
-    orderManager:'姓名',
+    orderManager:'请选择业务主管',
     orderManagerList: [],
-    orderStuff:'姓名',
+    orderStuff:'请选择经办人',
     orderStuffList:[],
     paid:0,
     hasnotSelectKaipiao:true,
@@ -204,8 +204,8 @@ Page({
 
   create:function(){
     var data = this.data
-    if (data.customer == '' || data.address == '' || data.dealer == '' || data.dealdate == '' || data.duedate=='' ||data.orderTotal == '', data.company == '', data.phone == '',
-    data.contact == '',data.orderManager == '',data.orderStuff == '') {
+    if (data.customer == '' || data.address == '' || data.dealer == '' || data.dealdate == '' || data.duedate=='' ||data.orderTotal == ''||data.company == ''|| data.phone == ''||
+    data.contact == ''||data.orderManager == '请选择业务主管'||data.orderStuff == '请选择经办人') {
       wx.showToast({
         icon: 'none',
         title: '请填写完整订单信息',
