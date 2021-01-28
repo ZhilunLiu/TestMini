@@ -447,4 +447,18 @@ Page({
       company: this.data.companyList[e.detail.value],
     })
   }, 
+
+  dealdateChange: function (e){
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      dealdate: e.detail.value
+    })
+  },
+
+  duedateChange: function (e){
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      duedate: e.detail.value
+    })
+  },
 })
