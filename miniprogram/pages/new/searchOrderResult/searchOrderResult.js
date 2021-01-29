@@ -6,13 +6,15 @@ Page({
    */
   data: {
     orders:[],
-    orderId:0,
+    orderId:'',
     customer:'',
     stuff:'',
     manager:false,
     groupOrder:[],
     pageNumber:1,
     totalPage:1,
+    year:'',
+    status:'',
   },
 
   /**
@@ -24,21 +26,35 @@ Page({
       customer:options.customer,
       stuff:options.stuff,
       manager:getApp().globalData.manager,
+      year:options.year,
+      status:options.status,
     }),
     wx.showToast({ title: '加载中', icon: 'loading', duration: 10000 });
     console.log('业务员名字是---'+this.data.stuff);
+    console.log('年份名字是---'+this.data.year);
+    console.log('订单号是---'+this.data.orderId);
+    console.log('状态是---'+this.data.status);
+    var hasCustomer = this.data.customer!='';
+    var hasStuff = this.data.stuff!='';
+    var hasYear = this.data.year!='';
+    var hasStatus = this.data.status!='';
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!hasStatus 是'+hasStatus)
+    var twoInput = (hasCustomer&&hasStuff)||(hasCustomer&&hasYear)||(hasCustomer&&hasStatus)
+                  ||(hasStuff&&hasYear)||(hasStuff&&hasStatus)
+                  ||(hasStatus&&hasYear);
+    var threeInput = (hasCustomer&&hasStatus&&hasStuff)||(hasCustomer&&hasStatus&&hasYear)||(hasCustomer&&hasYear&&hasStuff)
     if(this.data.manager){
-      if(this.data.orderId!=0){
+      if(this.data.orderId!=''){
         this.findByOrderId();
+      }else if(this.data.customer!=''&&this.data.stuff!=''&&this.data.year!=''&&this.data.status!=''){
+        this.findByYearAndNameAndStuffAndStatus();
+      }else if(threeInput){
+        this.findByThreeInput();
       }
-      else if(this.data.customer!=''&&this.data.stuff!=''){
-        this.findByNameAndStuff();
-      }
-      else if(this.data.stuff!=''){
-        this.findByStuff();
-      }
-      else if(this.data.customer!=''){
-        this.findByName();
+      else if(twoInput){
+        this.findByTwoInput();
+      }else{
+        this.findByOneInput();
       }
     }else{
       this.setStuff();
@@ -104,15 +120,27 @@ Page({
         _openid:openId
       }).get({
         success: res => {
-          console.log('查询结果@@@@@@@@@@@@@',res);
           this.setData({
             stuff:res.data[0].name,
           })
-          if(this.data.orderId!=0){
-            this.findByOrderId();
-          }
-          else if(this.data.customer!=''){
-            this.findByNameAndStuff();
+          console.log('查询结果@@@@@@@@@@@@@',res);
+          console.log('页面为@@@@@@@@@@@@@',this.data);
+          var hasCustomer = this.data.customer!='';
+          var hasStuff = this.data.stuff!='';
+          var hasYear = this.data.year!='';
+          var hasStatus = this.data.status!='';
+          var twoInput = (hasCustomer&&hasStuff)||(hasCustomer&&hasYear)||(hasCustomer&&hasStatus)
+                        ||(hasStuff&&hasYear)||(hasStuff&&hasStatus)
+                        ||(hasStatus&&hasYear);
+          var threeInput = (hasCustomer&&hasStatus&&hasStuff)||(hasCustomer&&hasStatus&&hasYear)||(hasCustomer&&hasYear&&hasStuff)
+          if(this.data.orderId!=''){
+            this.findByIdAndStuff();
+          }else if(this.data.year!=''&&this.data.customer!=''&&this.data.status!=''){
+            this.findByYearAndNameAndStuffAndStatus();
+          }else if(threeInput){
+            this.findByThreeInput();
+          }else if(twoInput){
+            this.findByTwoInput();
           }
           wx.hideToast();
         },
@@ -161,13 +189,25 @@ Page({
       })    
   },
 
-  findByName:function(){
-    console.log('正在通过名字查询，名字是---',this.data.customer);
+  findByYearAndNameAndStuff:function(){
+    console.log('业务员正在通过名字和年份查询，名字是---',this.data.customer);
     const db = wx.cloud.database();
+    const _ = db.command;
       // 查询当前家具的details对应name
-      db.collection('orders').where({
-        customer: this.data.customer
-      }).get({
+      db.collection('orders').where(
+        _.or([
+          {
+            customer: this.data.customer,
+            year:this.data.year,
+            orderStuff:this.data.stuff,
+          },
+          {
+            customer: this.data.customer,
+            year:this.data.year,
+            orderManager:this.data.stuff,
+          },
+        ])
+      ).get({
         success: res => {
           console.log('the res is ===================',res.data);
           //分页
@@ -194,13 +234,32 @@ Page({
       })  
   },
 
-  findByStuff:function(){
-    console.log('正在通过业务员查询，名字是---',this.data.stuff);
+  findByNameOrYearAndStuff:function(){
     const db = wx.cloud.database();
+    const _ = db.command;
+    console.log('正在通过业务员查询，名字是---',this.data.stuff);
+
       // 查询当前家具的details对应name
-      db.collection('orders').where({
-        orderManager: this.data.stuff
-      }).get({
+      db.collection('orders').where(
+        _.or([
+          {
+            orderManager: this.data.stuff,
+            customer:this.data.customer
+          },
+          {
+            orderManager: this.data.stuff,
+            year:this.data.year
+          },
+          {
+            orderStuff: this.data.stuff,
+            customer:this.data.customer
+          },
+          {
+            orderStuff: this.data.stuff,
+            year:this.data.year
+          },
+        ])
+      ).get({
         success: res => {
           console.log('the res is ===================',res.data);
           //分页
@@ -236,27 +295,36 @@ Page({
     })
   },
 
-  findByNameAndStuff:function(){
-    console.log("find by name and stuff the stuff is "+this.data.stuff)
+  findByIdAndStuff:function(){
     const db = wx.cloud.database();
+    const _ = db.command;
+    console.log("find by Id and stuff the stuff is "+this.data.stuff)
+    var orderId = parseInt(this.data.orderId);
+
       // 查询当前家具的details对应name
-      db.collection('orders').where({
-        customer: this.data.customer,
-        orderManager: this.data.stuff
-      }).get({
+      db.collection('orders').where(
+        _.or([
+          {
+            orderNumber: orderId,
+            orderManager: this.data.stuff
+          },
+          {
+            orderNumber: orderId,
+            orderStuff: this.data.stuff
+          }
+        ])
+      ).get({
         success: res => {
           //分页
           var itemInPage =10 ;
           var groupOrder = this.group(res.data,itemInPage);
           var totalPage = this.getTotalPage(res.data.length,itemInPage);
-          console.log('groupOrder 是',groupOrder[0]),
           this.setData({
             orders:groupOrder[0],
             groupOrder:groupOrder,
             //get the total order numbers to calculate page number
             totalPage:totalPage,
           })
-          console.log('orders 是',this.data.orders),
           console.log('[数据库] [查询记录] 成功: ', res);
 
           wx.hideToast();
@@ -271,15 +339,217 @@ Page({
       })  
   },
 
-  findByIdAndStuff:function(){
-    console.log("find by Id and stuff the stuff is "+this.data.stuff)
-    var orderId = parseInt(this.data.orderId);
+  findByThreeInput:function(){
+    console.log("find by twoInput is ",this.data)
     const db = wx.cloud.database();
+    const _ = db.command;
       // 查询当前家具的details对应name
-      db.collection('orders').where({
-        orderNumber: orderId,
-        orderManager: this.data.stuff
-      }).get({
+      db.collection('orders').where(
+        _.or([
+          {
+            orderManager: this.data.stuff,
+            customer:this.data.customer,
+            year:this.data.year,
+          },
+          {
+            orderManager: this.data.stuff,
+            customer:this.data.customer,
+            status:this.data.status
+          },
+          {
+            orderManager: this.data.stuff,
+            year:this.data.year,
+            status:this.data.status
+          },
+          {
+            orderStuff: this.data.stuff,
+            customer:this.data.customer,
+            year:this.data.year,
+          },
+          {
+            orderStuff: this.data.stuff,
+            customer:this.data.customer,
+            status:this.data.status
+          },
+          {
+            orderStuff: this.data.stuff,
+            year:this.data.year,
+            status:this.data.status
+          },
+          {
+            customer: this.data.customer,
+            year:this.data.year,
+            status:this.data.status
+          },
+          
+        ]) 
+      ).get({
+        success: res => {
+          //分页
+          var itemInPage =10 ;
+          var groupOrder = this.group(res.data,itemInPage);
+          var totalPage = this.getTotalPage(res.data.length,itemInPage);
+          this.setData({
+            orders:groupOrder[0],
+            groupOrder:groupOrder,
+            //get the total order numbers to calculate page number
+            totalPage:totalPage,
+          })
+          console.log('[数据库] [查询记录] 成功: ', res);
+
+          wx.hideToast();
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '查询记录失败'
+          })
+          console.error('[数据库] [查询记录] 失败：', err)
+        }
+      })  
+  },
+
+  findByTwoInput:function(){
+    console.log("find by twoInput is ",this.data)
+    const db = wx.cloud.database();
+    const _ = db.command;
+      // 查询当前家具的details对应name
+      db.collection('orders').where(
+        _.or([
+          {
+            orderManager: this.data.stuff,
+            year:this.data.year,
+          },
+          {
+            orderManager: this.data.stuff,
+            status:this.data.status,
+          },
+          {
+            orderManager: this.data.stuff,
+            customer:this.data.customer,
+          },
+          {
+            orderStuff: this.data.stuff,
+            customer:this.data.customer,
+          },
+          {
+            orderStuff: this.data.stuff,
+            year:this.data.year,
+          },
+          {
+            orderStuff: this.data.stuff,
+            status:this.data.status,
+          },
+          {
+            customer:this.data.customer,
+            year:this.data.year,
+          },
+          {
+            customer:this.data.customer,
+            status:this.data.status,
+          }
+          ,
+          {
+            year:this.data.year,
+            status:this.data.status,
+          }
+        ]) 
+      ).get({
+        success: res => {
+          //分页
+          var itemInPage =10 ;
+          var groupOrder = this.group(res.data,itemInPage);
+          var totalPage = this.getTotalPage(res.data.length,itemInPage);
+          this.setData({
+            orders:groupOrder[0],
+            groupOrder:groupOrder,
+            //get the total order numbers to calculate page number
+            totalPage:totalPage,
+          })
+          console.log('[数据库] [查询记录] 成功: ', res);
+
+          wx.hideToast();
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '查询记录失败'
+          })
+          console.error('[数据库] [查询记录] 失败：', err)
+        }
+      })  
+  },
+
+  findByOneInput:function(){
+    console.log('findByOneInput!!!!!!!!!!!!!!!!!!!!!!')
+    const db = wx.cloud.database();
+    const _ = db.command;
+      // 查询当前家具的details对应name
+      db.collection('orders').where(
+        _.or([
+          {
+            orderManager: this.data.stuff,
+          },
+          {
+            customer:this.data.customer,
+          },
+          {
+            year:this.data.year,
+          },
+          {
+            orderStuff:this.data.stuff,
+          },
+          {
+            status:this.data.status,
+          },
+        ]) 
+      ).get({
+        success: res => {
+          //分页
+          var itemInPage =10 ;
+          var groupOrder = this.group(res.data,itemInPage);
+          var totalPage = this.getTotalPage(res.data.length,itemInPage);
+          this.setData({
+            orders:groupOrder[0],
+            groupOrder:groupOrder,
+            //get the total order numbers to calculate page number
+            totalPage:totalPage,
+          })
+          console.log('[数据库] [查询记录] 成功: ', res);
+
+          wx.hideToast();
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '查询记录失败'
+          })
+          console.error('[数据库] [查询记录] 失败：', err)
+        }
+      })  
+  },
+
+  findByYearAndNameAndStuffAndStatus:function(){
+    console.log('findByAllInput!!!!!!!!!!!!!!!!!!!!!!')
+    const db = wx.cloud.database();
+    const _ = db.command;
+      // 查询当前家具的details对应name
+      db.collection('orders').where(
+        _.or([
+          {
+            status:this.data.status,
+            orderStuff:this.data.stuff,
+            year:this.data.year,
+            customer:this.data.customer,
+          },
+          {
+            status:this.data.status,
+            orderManager:this.data.stuff,
+            year:this.data.year,
+            customer:this.data.customer,
+          }
+        ]) 
+      ).get({
         success: res => {
           //分页
           var itemInPage =10 ;

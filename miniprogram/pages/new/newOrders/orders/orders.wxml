@@ -11,7 +11,9 @@
 
     <view class = "row_flex">
       <text decode="{{true}}">状态&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
-      <text> 未下单 </text>
+      <picker bindchange="statusChange" value="{{index}}" range="{{statusList}}">
+        <button class = "picker_button" type = "default" size = "mini" >{{status}}</button>
+      </picker>
     </view>
 
     <view class = "line"></view>
@@ -82,12 +84,9 @@
     <view class = "line"></view>
 
     <view class = "row_flex">
-      <text decode="{{true}}">开票单位&nbsp;&nbsp;&nbsp;</text>
-      <text>{{company}}</text>
+      <text decode="{{true}}">开票单位</text>
       <picker bindchange="companyChange" value="{{index}}" range="{{companyList}}">
-      <view wx:if="{{hasnotSelectKaipiao}}">
-        <button class = "picker_button" type = "default" size = "mini" style="position: relative; left: 10vw;">选择开票单位</button>
-      </view>
+        <button class = "picker_button" type = "default" size = "mini" >{{company}}</button>
       </picker>
     </view>
 

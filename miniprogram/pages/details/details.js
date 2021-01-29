@@ -34,6 +34,7 @@ Page({
     typeList:['班台','职员桌','文件柜','班椅','沙发','茶几','茶水柜','会议桌','会议椅','主席台','会议条桌','演讲台','接待台','洽谈桌','其他'],
     hasnotSelectSeries:true,
     hasnotSelectType:true,
+    model:'',
   },
 
   bindPickerChange: function (e) {
@@ -56,6 +57,13 @@ Page({
     this.setData({
       hasnotSelectType:false,
       type: this.data.typeList[e.detail.value],
+    })
+  }, 
+
+  modelInput: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      model: e.detail.value,
     })
   }, 
 
@@ -167,6 +175,7 @@ Page({
           fileId:res.data[0].fileId,
           series:res.data[0].series,
           type:res.data[0].type,
+          model:res.data[0].model,
         })
         console.log('设置完成'+this.data.price);
         if (res.data[0].dimension[0][0]==0){
@@ -283,6 +292,7 @@ Page({
         comment:this.data.comment,
         type:this.data.type,
         series:this.data.series,
+        model:this.data.model,
       },
       success: res => {
         wx.showToast({ title: '更新成功', icon: 'success', duration: 1000 });

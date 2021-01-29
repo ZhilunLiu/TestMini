@@ -58,9 +58,8 @@
 
     <view class = "row_flex">
       <text decode="{{true}}">开票单位</text>
-      <text>{{company}}</text>
       <picker bindchange="companyChange" value="{{index}}" range="{{companyList}}">
-        <button class = "picker_button" type = "default" size = "mini" >选择开票单位</button>
+        <button class = "picker_button" type = "default" size = "mini" >{{company}}</button>
       </picker>
     </view>
     <view class = "line"></view>

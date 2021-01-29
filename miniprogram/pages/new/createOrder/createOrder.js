@@ -7,10 +7,10 @@ Page({
   data: {
     customer:'',
     address:'',
-    dealdate:'年-月-日',
-    duedate:'年-月-日',
+    dealdate:'请选择下单日期',
+    duedate:'请选择交货日期',
     orderTotal:0,
-    company:'',
+    company:'选择开票单位',
     nickname:'',
     phone:'',
     orderNumber:0,
@@ -204,7 +204,7 @@ Page({
 
   create:function(){
     var data = this.data
-    if (data.customer == '' || data.address == '' || data.dealer == '' || data.dealdate == '' || data.duedate=='' ||data.orderTotal == ''||data.company == ''|| data.phone == ''||
+    if (data.customer == '' || data.address == '' || data.dealer == '' || data.dealdate == '请选择下单日期' || data.duedate=='请选择交货日期' ||data.orderTotal == ''||data.company == '选择开票单位'|| data.phone == ''||
     data.contact == ''||data.orderManager == '请选择业务主管'||data.orderStuff == '请选择经办人') {
       wx.showToast({
         icon: 'none',
@@ -213,6 +213,7 @@ Page({
       })
       return;
     }
+    var year = this.data.dealdate.slice(0,4);
     const db = wx.cloud.database();
     db.collection('orders').add({
       data: {
@@ -225,10 +226,11 @@ Page({
         orderTotal:this.data.orderTotal,
         company:this.data.company,
         phone:this.data.phone,
-        status:'',
+        status:'未下单',
         contact:this.data.contact,
         orderManager:this.data.orderManager,
         orderStuff:this.data.orderStuff,
+        year:year,
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id

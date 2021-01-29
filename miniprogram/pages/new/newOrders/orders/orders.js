@@ -28,12 +28,17 @@ Page({
     paid:0,
     hasnotSelectKaipiao:true,
     companyList:[],
+    status:'',
+    statusList:[],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      statusList:getApp().globalData.statusList,
+    })
     const db = wx.cloud.database();
     //get all users
     db.collection('users').get({
@@ -320,7 +325,6 @@ Page({
 
   update:function(){
     console.log('updating the order, the ID is ============================'+this.data.orderId);
-
     console.log('updating the order, the dealdate is ============================',this.data);
 
     if(this.data.paid>this.data.orderTotal){
@@ -347,6 +351,7 @@ Page({
         orderManager:this.data.orderManager,
         commision:this.data.commision,
         paid:this.data.paid,
+        status:this.data.status,
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id
@@ -477,6 +482,14 @@ Page({
     this.setData({
       hasnotSelectKaipiao: false,
       company: this.data.companyList[e.detail.value],
+    })
+  }, 
+
+  statusChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      hasnotSelectKaipiao: false,
+      status: this.data.statusList[e.detail.value],
     })
   }, 
 

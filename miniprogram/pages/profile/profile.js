@@ -12,7 +12,7 @@ Page({
       manager:false,
       name:'',
       phone:'',
-      orderNumber:0,
+      orderNumber:'',
       series:'',
       fname:'',
       price:'',
@@ -31,6 +31,10 @@ Page({
       disPrice:'',
       customer:'',
       stuff:'',
+      year:'',
+      status:'',
+      hasSelectStatus:false,
+      statusList:'',
   },
 
 
@@ -48,6 +52,15 @@ Page({
       hasntSelect2: false,
       series: this.data.seriesList[e.detail.value],
     })
+  }, 
+
+  statusChange: function (e) {
+    console.log('picker发送选择改变，携带值为', this.data.statusList[e.detail.value])
+    this.setData({
+      hasSelectStatus:true,
+      status: this.data.statusList[e.detail.value],
+    })
+    console.log('改变成功，携带值为', this.data.status)
   }, 
 
   addNewSeries:function(e){
@@ -126,6 +139,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var statusList = getApp().globalData.statusList;
+    this.setData({
+      statusList:statusList
+    })
     const db = wx.cloud.database();
     // 查询当前家具的details对应name
     db.collection('gomeSeries').where({
@@ -159,7 +176,7 @@ Page({
    */
   onShow: function () {
     var app = getApp();
-    console.log('onShow!!!!!!')
+    console.log('onShow!!!!!!',this)
     if (app.globalData.userInfo!== undefined&&app.globalData.userInfo!=null){
       console.log('logged in alredy')
       console.log(app.globalData.manager);
@@ -406,6 +423,11 @@ Page({
       stuff: e.detail.value
     })
   },
+  yearInput:function (e) {
+    this.setData({
+      year: e.detail.value
+    })
+  },
 /*
   search:function(e){
     wx:wx.navigateTo({
@@ -414,9 +436,9 @@ Page({
   },
 */
   searchOrder:function(e){
-    console.log('正在跳转订单页面 订单号为'+this.data.orderNumber+' 姓名为'+this.data.customer+'业务员姓名为'+this.data.stuff);
+    console.log('正在跳转订单页面 订单号为'+this.data.orderNumber+' 姓名为'+this.data.customer+'业务员姓名为'+this.data.stuff+'状态为'+this.data.status);
     wx:wx.navigateTo({
-      url: '../new/searchOrderResult/searchOrderResult?customer='+this.data.customer+'&orderId='+this.data.orderNumber+'&stuff='+this.data.stuff,
+      url: '../new/searchOrderResult/searchOrderResult?customer='+this.data.customer+'&orderId='+this.data.orderNumber+'&stuff='+this.data.stuff+'&year='+this.data.year+'&status='+this.data.status,
     })
   },
 

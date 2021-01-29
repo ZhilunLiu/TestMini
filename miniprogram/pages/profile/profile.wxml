@@ -23,8 +23,30 @@
     <view class = "line"></view>
 
     <view class = "row_flex">
+      <text>年份</text>
+      <input class = "input"type ="text" placeholder="订单下单年份" bindinput="yearInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
       <text>订单号</text>
       <input class = "input"type ="number" placeholder="订单编号....." bindinput="orderNumInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class="row_flex">
+      <text>订单状态</text>
+      <picker bindchange="statusChange" value="{{index}}" range="{{statusList}}">
+        <view wx:if="{{hasSelectStatus}}" class="picker">
+          <button class = "picker_button" type = "default" size = "mini" >{{status}}</button>
+        </view>
+        <view wx:else class="picker">
+          <button class = "picker_button" type = "default" size = "mini" >请选择订单状态</button>
+        </view>
+
+      </picker>
     </view>
 
     <view class = "line"></view>

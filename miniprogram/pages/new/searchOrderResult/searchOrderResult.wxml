@@ -23,8 +23,8 @@
     </view>
 
     <view class = "row_flex">
-      <text>客户地址</text>
-      <text>{{item.address}}</text>
+      <text>合同金额</text>
+      <text>{{item.orderTotal}}</text>
     </view>
 
   </view>

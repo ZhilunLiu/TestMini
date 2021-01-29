@@ -2,6 +2,7 @@
 <scroll-view class = "scrollView" scroll-y="true" style="height:80vh;">
 
 <view wx:for="{{orders}}" view class = "bg2"  data-id = '{{item._id}}' bindtap="select">
+  
   <view class = "row_flex">
     <text decode="{{true}}">订单号&nbsp;&nbsp;&nbsp;</text>
     <text>{{item.orderNumber}}</text>

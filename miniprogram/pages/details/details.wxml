@@ -42,6 +42,20 @@
         </view>
 
         <view class = "row_flex">
+            <view class = "body">系列： </view>
+            <picker bindchange="seriesChange" value="{{index}}" range="{{seriesList}}">
+
+              <view wx:if="{{hasnotSelectSeries}}">
+                <button class = "picker_button" type = "default" size = "mini">系列选择</button>
+              </view>
+              <view wx:else class = "picker_button">
+                <view class = "wdh">{{series}}</view>
+              </view>
+
+            </picker>
+        </view>
+
+        <view class = "row_flex">
             <view class = "body">种类： </view>
             <picker bindchange="typeChange" value="{{index}}" range="{{typeList}}">
 
@@ -57,17 +71,8 @@
         </view>
 
         <view class = "row_flex">
-            <view class = "body">系列： </view>
-            <picker bindchange="seriesChange" value="{{index}}" range="{{seriesList}}">
-
-              <view wx:if="{{hasnotSelectSeries}}">
-                <button class = "picker_button" type = "default" size = "mini">系列选择</button>
-              </view>
-              <view wx:else class = "picker_button">
-                <view class = "wdh">{{series}}</view>
-              </view>
-
-            </picker>
+            <view class = "body">型号： </view>
+            <input class = "body" type ="number" placeholder="{{model}}" bindinput="modelInput"/>
         </view>
         
 
@@ -137,6 +142,7 @@
         </view>
         <view class = "body">系列：{{series}} </view>
         <view class = "body">种类：{{type}} </view>
+        <view class = "body">型号：{{model}}</view>
         <view class = "body">体积：{{size[index]}} 立方米</view>
         <view class = "body">备注：{{comment}}</view>
         <view class = "body">材质：{{describtion}}</view>
