@@ -520,4 +520,13 @@ Page({
       orderStuff: this.data.orderStuffList[e.detail.value]
     })
   },
+
+  goClaims: function(e){
+    var app = getApp();
+    app.globalData.selectedOrderId = this.data.orderId;
+    console.log('正在前往报销，选择了订单---------------------' + this.data.orderId);
+    wx.navigateTo({
+      url: '../../claims/claims?orderId=' + this.data.orderId,
+    })
+  }
 })

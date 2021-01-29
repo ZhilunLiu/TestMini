@@ -139,7 +139,7 @@
     </view>
 
     <view class = "search">
-      <view class = "searchButton" bindtap="getCart">下载表格</view>
+      <view class = "searchButton" bindtap="goClaims">报销</view>
     </view>
 
   </view>

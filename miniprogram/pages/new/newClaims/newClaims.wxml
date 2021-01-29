@@ -1,0 +1,21 @@
+<view class = "bg2">
+    <view class = "space"/>
+
+    <view class = "row_flex">
+      <text>报销项目</text>
+      <input class = "input"type ="text" placeholder="请填写报销项目" bindinput="projectInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "row_flex">
+      <text>报销金额</text>
+      <input class = "input"type ="number" placeholder="请填写报销金额" bindinput="moneyInput"/>
+    </view>
+
+    <view class = "line"></view>
+
+    <view class = "search">
+        <view class = "searchButton" bindtap="save">保存</view>
+    </view>
+</view>
