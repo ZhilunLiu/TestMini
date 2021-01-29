@@ -3,28 +3,33 @@
 
   <view wx:for="{{orders}}" view class = "bg2"  data-id = '{{item._id}}' bindtap="select">
     <view class = "row_flex">
-      <text decode="{{true}}">订单号&nbsp;&nbsp;&nbsp;</text>
-      <text>{{item.orderNumber}}</text>
+      <text  decode="{{true}}">订单号&nbsp;&nbsp;&nbsp;</text>
+      <view class= "content">{{item.orderNumber}}</view>
+      <text class = "th2">订单日期</text>
+      <view class= "content">{{item.dealdate}}</view>
+
+    </view>
+
+    <view class = "row_flex">
+      
     </view>
 
     <view class = "row_flex">
       <text>客户名称</text>
-      <text>{{item.customer}}</text>
-    </view>
-
-    <view class = "row_flex">
-      <text>订单日期</text>
-      <text>{{item.dealdate}}</text>
-    </view>
-
-    <view class = "row_flex">
+      <view class= "content">{{item.customer}}</view>
       <text>开票单位</text>
-      <text>{{item.company}}</text>
+      <view class= "content">{{item.company}}</view>
+    </view>
+
+    <view class = "row_flex">
+
     </view>
 
     <view class = "row_flex">
       <text>合同金额</text>
-      <text>{{item.orderTotal}}</text>
+      <view class= "content">{{item.orderTotal}}</view>
+      <text>业务经理</text>
+      <view class= "content">{{item.orderManager}}</view>
     </view>
 
   </view>
