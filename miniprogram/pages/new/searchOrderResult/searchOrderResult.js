@@ -15,6 +15,8 @@ Page({
     totalPage:1,
     year:'',
     status:'',
+    total:0,
+    claimsTotal:0,
   },
 
   /**
@@ -164,19 +166,12 @@ Page({
       }).get({
         success: res => {
           console.log('查询结果@@@@@@@@@@@@@',res);
-          //分页
-          var itemInPage =10 ;
-          var groupOrder = this.group(res.data,itemInPage);
-          var totalPage = this.getTotalPage(res.data.length,itemInPage);
-
           this.setData({
-            orders:groupOrder[0],
-            groupOrder:groupOrder,
-            //get the total order numbers to calculate page number
-            totalPage:totalPage,
+            orders:res.data,
           })
+          console.log('现在的订单为',this.data.orders)
           console.log('[数据库] [查询记录] 成功: ', res);
-
+          this.getTotal();
           wx.hideToast();
         },
         fail: err => {
@@ -187,103 +182,6 @@ Page({
           console.error('[数据库] [查询记录] 失败：', err)
         }
       })    
-  },
-
-  findByYearAndNameAndStuff:function(){
-    console.log('业务员正在通过名字和年份查询，名字是---',this.data.customer);
-    const db = wx.cloud.database();
-    const _ = db.command;
-      // 查询当前家具的details对应name
-      db.collection('orders').where(
-        _.or([
-          {
-            customer: this.data.customer,
-            year:this.data.year,
-            orderStuff:this.data.stuff,
-          },
-          {
-            customer: this.data.customer,
-            year:this.data.year,
-            orderManager:this.data.stuff,
-          },
-        ])
-      ).get({
-        success: res => {
-          console.log('the res is ===================',res.data);
-          //分页
-          var itemInPage =10 ;
-          var groupOrder = this.group(res.data,itemInPage);
-          var totalPage = this.getTotalPage(res.data.length,itemInPage);
-          this.setData({
-            orders:groupOrder[0],
-            groupOrder:groupOrder,
-            //get the total order numbers to calculate page number
-            totalPage:totalPage,
-          })
-          console.log('[数据库] [查询记录] 成功: ', res);
-          console.log('the orders are =============',this.data.orders);
-          wx.hideToast();
-        },
-        fail: err => {
-          wx.showToast({
-            icon: 'none',
-            title: '查询记录失败'
-          })
-          console.error('[数据库] [查询记录] 失败：', err)
-        }
-      })  
-  },
-
-  findByNameOrYearAndStuff:function(){
-    const db = wx.cloud.database();
-    const _ = db.command;
-    console.log('正在通过业务员查询，名字是---',this.data.stuff);
-
-      // 查询当前家具的details对应name
-      db.collection('orders').where(
-        _.or([
-          {
-            orderManager: this.data.stuff,
-            customer:this.data.customer
-          },
-          {
-            orderManager: this.data.stuff,
-            year:this.data.year
-          },
-          {
-            orderStuff: this.data.stuff,
-            customer:this.data.customer
-          },
-          {
-            orderStuff: this.data.stuff,
-            year:this.data.year
-          },
-        ])
-      ).get({
-        success: res => {
-          console.log('the res is ===================',res.data);
-          //分页
-          var itemInPage =10 ;
-          var groupOrder = this.group(res.data,itemInPage);
-          var totalPage = this.getTotalPage(res.data.length,itemInPage);
-          this.setData({
-            orders:groupOrder[0],
-            groupOrder:groupOrder,
-            //get the total order numbers to calculate page number
-            totalPage:totalPage,
-          })
-          console.log('[数据库] [查询记录] 成功: ', res);
-          console.log('the orders are =============',this.data.orders);
-          wx.hideToast();
-        },
-        fail: err => {
-          wx.showToast({
-            icon: 'none',
-            title: '查询记录失败'
-          })
-          console.error('[数据库] [查询记录] 失败：', err)
-        }
-      })  
   },
 
   select:function(event){
@@ -315,18 +213,11 @@ Page({
         ])
       ).get({
         success: res => {
-          //分页
-          var itemInPage =10 ;
-          var groupOrder = this.group(res.data,itemInPage);
-          var totalPage = this.getTotalPage(res.data.length,itemInPage);
           this.setData({
-            orders:groupOrder[0],
-            groupOrder:groupOrder,
-            //get the total order numbers to calculate page number
-            totalPage:totalPage,
+            orders:res.data[0],
           })
           console.log('[数据库] [查询记录] 成功: ', res);
-
+          this.getTotal();
           wx.hideToast();
         },
         fail: err => {
@@ -340,239 +231,362 @@ Page({
   },
 
   findByThreeInput:function(){
-    console.log("find by twoInput is ",this.data)
     const db = wx.cloud.database();
     const _ = db.command;
-      // 查询当前家具的details对应name
-      db.collection('orders').where(
-        _.or([
-          {
-            orderManager: this.data.stuff,
-            customer:this.data.customer,
-            year:this.data.year,
-          },
-          {
-            orderManager: this.data.stuff,
-            customer:this.data.customer,
-            status:this.data.status
-          },
-          {
-            orderManager: this.data.stuff,
-            year:this.data.year,
-            status:this.data.status
-          },
-          {
-            orderStuff: this.data.stuff,
-            customer:this.data.customer,
-            year:this.data.year,
-          },
-          {
-            orderStuff: this.data.stuff,
-            customer:this.data.customer,
-            status:this.data.status
-          },
-          {
-            orderStuff: this.data.stuff,
-            year:this.data.year,
-            status:this.data.status
-          },
-          {
-            customer: this.data.customer,
-            year:this.data.year,
-            status:this.data.status
-          },
-          
-        ]) 
-      ).get({
-        success: res => {
-          //分页
-          var itemInPage =10 ;
-          var groupOrder = this.group(res.data,itemInPage);
-          var totalPage = this.getTotalPage(res.data.length,itemInPage);
-          this.setData({
-            orders:groupOrder[0],
-            groupOrder:groupOrder,
-            //get the total order numbers to calculate page number
-            totalPage:totalPage,
-          })
-          console.log('[数据库] [查询记录] 成功: ', res);
-
-          wx.hideToast();
+    console.log("find by threeInput",this.data.stuff,this.data.year,this.data.customer,this.data.status)
+    //get count first
+    db.collection('orders').where(
+      _.or([
+        {
+          orderManager: this.data.stuff,
+          customer:this.data.customer,
+          year:this.data.year,
         },
-        fail: err => {
-          wx.showToast({
-            icon: 'none',
-            title: '查询记录失败'
+        {
+          orderManager: this.data.stuff,
+          customer:this.data.customer,
+          status:this.data.status
+        },
+        {
+          orderManager: this.data.stuff,
+          year:this.data.year,
+          status:this.data.status
+        },
+        {
+          orderStuff: this.data.stuff,
+          customer:this.data.customer,
+          year:this.data.year,
+        },
+        {
+          orderStuff: this.data.stuff,
+          customer:this.data.customer,
+          status:this.data.status
+        },
+        {
+          orderStuff: this.data.stuff,
+          year:this.data.year,
+          status:this.data.status
+        },
+        {
+          customer: this.data.customer,
+          year:this.data.year,
+          status:this.data.status
+        },
+      ])
+    ).count({
+      success: res => {
+        console.log('总共有',res.total,'条')
+        var index = 0;
+        while(index<res.total){
+          db.collection('orders').where(
+            _.or([
+              {
+                orderManager: this.data.stuff,
+                customer:this.data.customer,
+                year:this.data.year,
+              },
+              {
+                orderManager: this.data.stuff,
+                customer:this.data.customer,
+                status:this.data.status
+              },
+              {
+                orderManager: this.data.stuff,
+                year:this.data.year,
+                status:this.data.status
+              },
+              {
+                orderStuff: this.data.stuff,
+                customer:this.data.customer,
+                year:this.data.year,
+              },
+              {
+                orderStuff: this.data.stuff,
+                customer:this.data.customer,
+                status:this.data.status
+              },
+              {
+                orderStuff: this.data.stuff,
+                year:this.data.year,
+                status:this.data.status
+              },
+              {
+                customer: this.data.customer,
+                year:this.data.year,
+                status:this.data.status
+              },
+            ])
+          ).skip(index).get({
+            success: res => {
+              console.log('concating-----------');
+              var orders = this.data.orders;
+              orders = orders.concat(res.data);
+              this.setData({
+                orders:orders
+              })
+              console.log('[数据库] [查询记录] 成功: ', res);
+              console.log('the orders are =============',this.data.orders);
+              this.getTotal();
+              wx.hideToast();
+            }
           })
-          console.error('[数据库] [查询记录] 失败：', err)
+          index +=20;  
         }
-      })  
+      }
+    })
   },
 
   findByTwoInput:function(){
     console.log("find by twoInput is ",this.data)
     const db = wx.cloud.database();
     const _ = db.command;
-      // 查询当前家具的details对应name
-      db.collection('orders').where(
-        _.or([
-          {
-            orderManager: this.data.stuff,
-            year:this.data.year,
-          },
-          {
-            orderManager: this.data.stuff,
-            status:this.data.status,
-          },
-          {
-            orderManager: this.data.stuff,
-            customer:this.data.customer,
-          },
-          {
-            orderStuff: this.data.stuff,
-            customer:this.data.customer,
-          },
-          {
-            orderStuff: this.data.stuff,
-            year:this.data.year,
-          },
-          {
-            orderStuff: this.data.stuff,
-            status:this.data.status,
-          },
-          {
-            customer:this.data.customer,
-            year:this.data.year,
-          },
-          {
-            customer:this.data.customer,
-            status:this.data.status,
-          }
-          ,
-          {
-            year:this.data.year,
-            status:this.data.status,
-          }
-        ]) 
-      ).get({
-        success: res => {
-          //分页
-          var itemInPage =10 ;
-          var groupOrder = this.group(res.data,itemInPage);
-          var totalPage = this.getTotalPage(res.data.length,itemInPage);
-          this.setData({
-            orders:groupOrder[0],
-            groupOrder:groupOrder,
-            //get the total order numbers to calculate page number
-            totalPage:totalPage,
-          })
-          console.log('[数据库] [查询记录] 成功: ', res);
-
-          wx.hideToast();
+     //get count first
+     db.collection('orders').where(
+      _.or([
+        {
+          orderManager: this.data.stuff,
+          year:this.data.year,
         },
-        fail: err => {
-          wx.showToast({
-            icon: 'none',
-            title: '查询记录失败'
-          })
-          console.error('[数据库] [查询记录] 失败：', err)
+        {
+          orderManager: this.data.stuff,
+          status:this.data.status,
+        },
+        {
+          orderManager: this.data.stuff,
+          customer:this.data.customer,
+        },
+        {
+          orderStuff: this.data.stuff,
+          customer:this.data.customer,
+        },
+        {
+          orderStuff: this.data.stuff,
+          year:this.data.year,
+        },
+        {
+          orderStuff: this.data.stuff,
+          status:this.data.status,
+        },
+        {
+          customer:this.data.customer,
+          year:this.data.year,
+        },
+        {
+          customer:this.data.customer,
+          status:this.data.status,
         }
-      })  
+        ,
+        {
+          year:this.data.year,
+          status:this.data.status,
+        }
+      ])
+    ).count({
+      success: res => {
+        console.log('总共有',res.total,'条')
+        var index = 0;
+        while(index<res.total){
+          db.collection('orders').where(
+            _.or([
+              {
+                orderManager: this.data.stuff,
+                year:this.data.year,
+              },
+              {
+                orderManager: this.data.stuff,
+                status:this.data.status,
+              },
+              {
+                orderManager: this.data.stuff,
+                customer:this.data.customer,
+              },
+              {
+                orderStuff: this.data.stuff,
+                customer:this.data.customer,
+              },
+              {
+                orderStuff: this.data.stuff,
+                year:this.data.year,
+              },
+              {
+                orderStuff: this.data.stuff,
+                status:this.data.status,
+              },
+              {
+                customer:this.data.customer,
+                year:this.data.year,
+              },
+              {
+                customer:this.data.customer,
+                status:this.data.status,
+              }
+              ,
+              {
+                year:this.data.year,
+                status:this.data.status,
+              }
+            ])
+          ).skip(index).get({
+            success: res => {
+              console.log('concating-----------');
+              var orders = this.data.orders;
+              orders = orders.concat(res.data);
+              this.setData({
+                orders:orders
+              })
+              console.log('[数据库] [查询记录] 成功: ', res);
+              console.log('the orders are =============',this.data.orders);
+              this.getTotal();
+              wx.hideToast();
+            }
+          })
+          index +=20;  
+        }
+      }
+    })  
   },
 
   findByOneInput:function(){
     console.log('findByOneInput!!!!!!!!!!!!!!!!!!!!!!')
     const db = wx.cloud.database();
     const _ = db.command;
-      // 查询当前家具的details对应name
-      db.collection('orders').where(
-        _.or([
-          {
-            orderManager: this.data.stuff,
-          },
-          {
-            customer:this.data.customer,
-          },
-          {
-            year:this.data.year,
-          },
-          {
-            orderStuff:this.data.stuff,
-          },
-          {
-            status:this.data.status,
-          },
-        ]) 
-      ).get({
-        success: res => {
-          //分页
-          var itemInPage =10 ;
-          var groupOrder = this.group(res.data,itemInPage);
-          var totalPage = this.getTotalPage(res.data.length,itemInPage);
-          this.setData({
-            orders:groupOrder[0],
-            groupOrder:groupOrder,
-            //get the total order numbers to calculate page number
-            totalPage:totalPage,
-          })
-          console.log('[数据库] [查询记录] 成功: ', res);
-
-          wx.hideToast();
-        },
-        fail: err => {
-          wx.showToast({
-            icon: 'none',
-            title: '查询记录失败'
-          })
-          console.error('[数据库] [查询记录] 失败：', err)
-        }
-      })  
+         //get count first
+         db.collection('orders').where(
+          _.or([
+            {
+              orderManager: this.data.stuff,
+            },
+            {
+              customer:this.data.customer,
+            },
+            {
+              year:this.data.year,
+            },
+            {
+              orderStuff:this.data.stuff,
+            },
+            {
+              status:this.data.status,
+            },
+          ])
+        ).count({
+          success: res => {
+            console.log('总共有',res.total,'条')
+            var index = 0;
+            while(index<res.total){
+              db.collection('orders').where(
+                _.or([
+                  {
+                    orderManager: this.data.stuff,
+                  },
+                  {
+                    customer:this.data.customer,
+                  },
+                  {
+                    year:this.data.year,
+                  },
+                  {
+                    orderStuff:this.data.stuff,
+                  },
+                  {
+                    status:this.data.status,
+                  },
+                ])
+              ).skip(index).get({
+                success: res => {
+                  console.log('concating-----------');
+                  var orders = this.data.orders;
+                  orders = orders.concat(res.data);
+                  this.setData({
+                    orders:orders
+                  })
+                  console.log('[数据库] [查询记录] 成功: ', res);
+                  console.log('the orders are =============',this.data.orders);
+                  this.getTotal();
+                  wx.hideToast();
+                }
+              })
+              index +=20;  
+            }
+          }
+        })  
   },
 
   findByYearAndNameAndStuffAndStatus:function(){
     console.log('findByAllInput!!!!!!!!!!!!!!!!!!!!!!')
     const db = wx.cloud.database();
     const _ = db.command;
-      // 查询当前家具的details对应name
-      db.collection('orders').where(
-        _.or([
-          {
-            status:this.data.status,
-            orderStuff:this.data.stuff,
-            year:this.data.year,
-            customer:this.data.customer,
-          },
-          {
-            status:this.data.status,
-            orderManager:this.data.stuff,
-            year:this.data.year,
-            customer:this.data.customer,
+         //get count first
+         db.collection('orders').where(
+          _.or([
+            {
+              status:this.data.status,
+              orderStuff:this.data.stuff,
+              year:this.data.year,
+              customer:this.data.customer,
+            },
+            {
+              status:this.data.status,
+              orderManager:this.data.stuff,
+              year:this.data.year,
+              customer:this.data.customer,
+            }
+          ])
+        ).count({
+          success: res => {
+            console.log('总共有',res.total,'条')
+            var index = 0;
+            while(index<res.total){
+              db.collection('orders').where(
+                _.or([
+                  {
+                    status:this.data.status,
+                    orderStuff:this.data.stuff,
+                    year:this.data.year,
+                    customer:this.data.customer,
+                  },
+                  {
+                    status:this.data.status,
+                    orderManager:this.data.stuff,
+                    year:this.data.year,
+                    customer:this.data.customer,
+                  }
+                ])
+              ).skip(index).get({
+                success: res => {
+                  console.log('concating-----------');
+                  var orders = this.data.orders;
+                  orders = orders.concat(res.data);
+                  this.setData({
+                    orders:orders
+                  })
+                  console.log('[数据库] [查询记录] 成功: ', res);
+                  console.log('the orders are =============',this.data.orders);
+                  this.getTotal();
+                  wx.hideToast();
+                }
+              })
+              index +=20;  
+            }
           }
-        ]) 
-      ).get({
-        success: res => {
-          //分页
-          var itemInPage =10 ;
-          var groupOrder = this.group(res.data,itemInPage);
-          var totalPage = this.getTotalPage(res.data.length,itemInPage);
-          this.setData({
-            orders:groupOrder[0],
-            groupOrder:groupOrder,
-            //get the total order numbers to calculate page number
-            totalPage:totalPage,
-          })
-          console.log('[数据库] [查询记录] 成功: ', res);
+        })  
+  },
 
-          wx.hideToast();
-        },
-        fail: err => {
-          wx.showToast({
-            icon: 'none',
-            title: '查询记录失败'
-          })
-          console.error('[数据库] [查询记录] 失败：', err)
-        }
-      })  
+  getTotal:function(){
+    console.log('正在计算总金额',this.data.orders);
+    let total = 0;
+    let claimTotal =0;
+    for(var index in this.data.orders){
+      total = total+ parseInt(this.data.orders[index].orderTotal);
+      for(var index2 in this.data.orders[index].claims){
+        claimTotal = claimTotal +parseInt(this.data.orders[index].claims[index2].money);
+      }
+    }
+    console.log('计算完毕，金额为',total);
+    this.setData({
+      total:total,
+      claimsTotal:claimTotal
+    })
   },
 
   //页数相关代码

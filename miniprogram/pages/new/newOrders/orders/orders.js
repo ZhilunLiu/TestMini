@@ -36,8 +36,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var list = getApp().globalData.statusList;
+    for(var index in list){
+      if(list[index]=='不限状态'){
+        list.splice(index,1);
+      }
+    }
     this.setData({
-      statusList:getApp().globalData.statusList,
+      statusList:list,
     })
     const db = wx.cloud.database();
     //get all users
@@ -372,6 +378,15 @@ Page({
         })
         console.error('[数据库] [新增记录] 失败：', err)
       }
+    })
+  },
+
+  gonghuodan:function(){
+    var app = getApp();
+    app.globalData.selectedOrderId = this.data.orderId;
+    console.log('正在前往供貨单，选择了订单---------------------'+this.data.orderId);
+    wx.navigateTo({
+      url: '../../gonghuodan/gonghuodan?orderId='+this.data.orderId,
     })
   },
 

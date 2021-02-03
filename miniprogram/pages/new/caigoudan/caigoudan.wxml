@@ -1,43 +1,60 @@
+<view class = "bg2">
+    <view class = "row_flex">
+      <text>供货厂家：</text>
+      <picker bindchange="supplierChange" value="{{index}}" range="{{supplierList}}">
+      <view wx:if="{{supplier==''}}">
+        <button  class = "picker_button" type = "default" size = "mini">厂家选择</button>
+      </view>
+      <view wx:else class = "picker_button">
+        <button class = "picker_button" type = "default" size = "mini">{{supplier}}</button>
+      </view>
+      </picker>
 
-    <!-- wx:for 渲染购物车列表 -->
-    <scroll-view class = "scrollView" scroll-y="true" style="height:90vh;">
-      <view wx:for="{{carts}}" class = "items">
+      <input class = "input" type ="text" placeholder="或输入新厂家名字" bindinput="supplierInput"/>
+      <view>
+      <button class = "picker_button" type = "default" size = "mini"  bindtap="addSupplier" >添加厂家</button>
+      </view>
+  </view>
+</view>
+  
+  <!-- wx:for 渲染购物车列表 -->
+    <scroll-view class = "scrollView" scroll-y="true" style="height:80vh;">
+      <view wx:for="{{showingCart}}" class = "items">
         <view class = "row_flex">
           <!-- 点击商品图片可跳转到商品详情 -->
           <image src="{{item.image[0]}}" class="cart-thumb" bindtap="goDetails" data-title = "{{item.title}}"></image>
 
           <view class = "column_flex">
-            <text class ="itemName">{{item.name}}</text>
+            <view class = "row_flex">
+              <text class ="itemName">{{item.name}}</text>
+              <picker bindchange="itemSupplierChange" data-id = "{{index}}" value="{{index}}" range="{{supplierList}}">
+                <view wx:if="{{item.supplier==''}}" class = "result">
+                  <button type = "default" size = "mini">厂家选择</button>
+                </view>
+                <view wx:else class = "result">
+                  <button type = "default" size = "mini">{{item.supplier}}</button>
+                </view>
+              </picker>
+            </view>
             <text class = "desc">尺寸:{{item.dimension[0][0]}}mm长,{{item.dimension[0][1]}}mm宽,{{item.dimension[0][2]}}mm高</text>
+            <view class = "row_flex">
+              <text class = "price">单价：￥</text>
+              <input class = "input"type ="text" data-id="{{index}}" placeholder="{{item.buyInPrice}}" bindinput="buyInPriceInput"/>
+              <text>数量：{{item.num}}</text>
+              </view>
+
           </view>
-        </view>
-        <view class = "row_flex">
-          <view class = "icon">
-            <image  bindtap="deleteList" data-index="{{index}}" src = "../../../images/delete.png"></image>
-          </view>
-          <view wx:if="{{item.hasDisPrice}}">
-            <text class = "price">￥{{item.disPrice}}</text>
-          </view>
-          <view wx:else>
-            <text class = "price">￥{{item.price}}</text>
-          </view>
-          <!-- 增加减少数量按钮 -->
-          <view class = "num">
-              <image bindtap="minusCount" data-index="{{index}}" src = "../../../images/minus.png"></image>
-              <text>{{item.num}}</text>
-              <image bindtap="addCount" data-index="{{index}}" src = "../../../images/plus.png"></image>
-          </view>        
         </view>
       </view>
     </scroll-view>
 
 <!-- 底部操作栏 -->
 <view class ="fixed_view">
+
     <!-- 总价 -->
     <view class = "row_flex">
       <view class = "totalPrice">￥{{totalPrice}}</view>
       <view class="pay" bindtap="save">保存</view>
-      <view class="pay" bindtap="add">添加</view>
     </view>
 </view>
 

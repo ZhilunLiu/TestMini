@@ -1,252 +1,109 @@
-// miniprogram/pages/cart/cart.js
+// miniprogram/pages/new/caigoudan/caigoudan.js
 Page({
+
+  /**
+   * 页面的初始数据
+   */
   data: {
-    carts: [],               // 购物车列表
-    hasList: false,          // 列表是否有数据
-    totalPrice: 0,           // 总价，初始为0
-    selectAllStatus: true,    // 全选状态，默认全选
-    hasDisPrice:false,
-    itemId:0,
-    orderId:0,
-    newItem:[],
+    carts:[],
+    orderId:'',
+    buyInPrice:0,
+    totalPrice:0,
+    supplierList:[],
+    supplier:'',
+    newSupplier:'',
+    supplierId:'',
+    showingCart:[],
   },
 
-  save:function(e){
-    //save the cart to the database
-    var orderId = getApp().globalData.selectedOrderId;
-    const db = wx.cloud.database();
-    console.log('try to save the caigoudan, the orderId is----------------'+orderId);
-    db.collection('orders').doc(orderId).update({
-      data: {
-        carts: this.data.carts,
-        orderReg:this.data.totalPrice,
-      },
-      success: res => {
-        wx.showToast({ title: '更新成功', icon: 'success', duration: 1000 });
-        console.log('[数据库] [更新记录] 成功', res);
-        wx:wx.navigateBack({
-          delta: 0,
-        })
-        /*/wx:wx.navigateTo({
-          url: '../newOrders/orders/orders',
-        })*/
-      },
-      fail: err => {
-        icon: 'none',
-          console.error('[数据库] [更新记录] 失败：', err)
-      }
-    })
-   
-    
-  },
-
-  onShow:function(options) {
-    console.log('reshowing page, the orderId is '+this.data.orderId);
-    this.refreshCart();
-  },
-
-    /**
+  /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('caigoudan Onloading-----------------------------');
-    var theitemId = options.itemId;
     this.setData({
-      itemId:theitemId
+      orderId:options.orderId,
     })
-    //get the cart detail of this order
     this.getCart();
-    //refreshCart by push new Item it to it
+    this.getSuppliers();
+  },
+
+  supplierChange:function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      supplier: this.data.supplierList[e.detail.value],
+    })
     this.refreshCart();
-  },
+  }, 
 
-  refreshCart:function(){
-    var newItem = [];
-    const db = wx.cloud.database();
-    console.log('option id is !!!!!!!!!!!!------ '+this.data.itemId);
-    if(this.data.itemId != undefined){
-      console.log('try to add item the item id is !!!!!!!!!!!!------ '+this.data.itemId,'the cart is ',this.data.carts);
-      //get new item detail from db
-      db.collection('detail').where({
-        _id:this.data.itemId
-      }).get({
-        success: res => {
-          this.setData({
-            newItem:res.data[0],
-          })
-          console.log('found the Item !!!!!!!!!!!!------ ',this.data.newItem);
-          //push new item 
-          if(this.data.newItem.name != undefined){
-            console.log('cin the if statement!!!!!!!!!!!!!!111111------- ',this.data.newItem.name);
-            newItem = {
-              id:this.data.newItem._id,
-              name: this.data.newItem.name,
-              price: this.data.newItem.price,
-              image: this.data.newItem.url,
-              dimension: this.data.newItem.dimension,
-              selected: true,
-              comment:this.data.newItem.comment,
-              describtion:this.data.newItem.describtion,
-              company:this.data.newItem.company,
-              series:this.data.newItem.series,
-              model:this.data.newItem.model,
-              num: 1
-            };
-            console.log('create new Item and try to push!!!!!!!!!!!!------ ',newItem);
-             //console.log('[数据库] [查询记录] 成功: ', res);
-          console.log('新的家具是----- ', newItem);
-            var templist = this.data.carts;
-            console.log('旧的家具是清单----- ',templist);
-            if(templist==undefined){
-              templist = [];
-            }
-            templist.push(newItem);
-            console.log('新的家具是清单----- ',templist);
-            this.setData({
-              carts:templist,
-            })
-            
-          }
-          //refresh price
-          this.getTotalPrice();
-          wx.hideToast();
-        },
-        fail: err => {
-          console.log('search failed!!! ');
-        },
-      })
+  itemSupplierChange:function (e) {
+    var carts = this.data.carts;
+    var showingCart = this.data.showingCart;
+    var index = e.currentTarget.dataset.id;
+    console.log('picker发送选择改变，携带值为', e.detail.value,'id为',index)
+    showingCart[index].supplier = this.data.supplierList[e.detail.value];
+
+    //refresh data in cart
+    for(let i = 0;i<carts.length;i++){
+      if(carts[i].id==showingCart[index].id){
+        carts[i].supplier = showingCart[index].supplier;
+      }
     }
-  },
+    this.setData({
+      showingCart:showingCart,
+      carts:carts,
+    })
+  }, 
 
-  getCart:function(){
+  addSupplier:function(){
+    
+    var list = this.data.supplierList;
+    console.log('adding supplier，list is ',list);
+    list.push(this.data.newSupplier);
     const db = wx.cloud.database();
-    var orderId = getApp().globalData.selectedOrderId;
-    console.log('gettting cartttttttttttttttttttttt order Id is '+orderId);
-    db.collection('orders').where({
-      _id:orderId
-    }).get({
+
+    db.collection('supplier').doc(this.data.supplierId).update({
+      data:{
+        supplierList:list,
+      },
       success: res => {
-        this.setData({
-          carts:res.data[0].carts,
+        wx.showToast({
+          title: '添加成功',
         })
-        
-        this.getTotalPrice();
-        wx.hideToast();
+        this.setData({
+          supplierList:list,
+        })
       },
       fail: err => {
-        console.log('getting cart failed!!! ');
+        wx.showToast({
+          icon: 'none',
+          title: '新增记录失败'
+        })
+        console.error('[数据库] [新增记录] 失败：', err)
+      }
+    })
+  },
+
+  supplierInput: function (e) {
+    this.setData({
+      newSupplier: e.detail.value
+    })
+  },
+
+  getSuppliers:function(){
+    const db = wx.cloud.database();
+    console.log('gettting supplierList');
+    db.collection('supplier').where({
+    }).get({
+      success: res => {
+        console.log('get supply success',res.data[0].supplierList)
+        this.setData({
+          supplierList:res.data[0].supplierList,
+          supplierId:res.data[0]._id,
+        })
       },
-    })
-  },
-
-  getTotalPrice:function() {
-    let carts = this.data.carts;                  // 获取购物车列表
-    console.log('carts is ',carts);
-    let total = 0;
-    for (let i = 0; i < carts.length; i++) {         // 循环列表得到每个数据
-          total += carts[i].num * carts[i].price[0];
-    }
-    console.log('totalprice is '+total);
-    this.setData({                                // 最后赋值到data中渲染到页面
-      totalPrice: total.toFixed(2)
-    });
-  },
-
-  selectList :function(e) {
-    const index = e.currentTarget.dataset.index;    // 获取data- 传进来的index
-    let carts = this.data.carts;                    // 获取购物车列表
-    const selected = carts[index].selected;         // 获取当前商品的选中状态
-    carts[index].selected = !selected;              // 改变状态
-    this.setData({
-      carts: carts
-    });
-    this.getTotalPrice();                           // 重新获取总价
-  },
-
-  selectAll(e) {
-    let selectAllStatus = this.data.selectAllStatus;    // 是否全选状态
-    selectAllStatus = !selectAllStatus;
-    let carts = this.data.carts;
-
-    for (let i = 0; i < carts.length; i++) {
-      carts[i].selected = selectAllStatus;            // 改变所有商品状态
-    }
-    this.setData({
-      selectAllStatus: selectAllStatus,
-      carts: carts
-    });
-    this.getTotalPrice();                               // 重新获取总价
-  },
-
-  // 增加数量
-  addCount(e) {
-    const index = e.currentTarget.dataset.index;
-    let carts = this.data.carts;
-    let num = carts[index].num;
-    num = num + 1;
-    carts[index].num = num;
-    this.setData({
-      carts: carts
-    });
-    this.getTotalPrice();
-  },
-  // 减少数量
-  minusCount(e) {
-    const index = e.currentTarget.dataset.index;
-    let carts = this.data.carts;
-    let num = carts[index].num;
-    if (num <= 1) {
-      return false;
-    }
-    num = num - 1;
-    carts[index].num = num;
-    this.setData({
-      carts: carts
-    });
-    this.getTotalPrice();
-  },
-
-  deleteList(e) {
-    const index = e.currentTarget.dataset.index;
-    let carts = this.data.carts;
-    carts.splice(index, 1);              // 删除购物车列表里这个商品
-    this.setData({
-      carts: carts
-    });
-    if (!carts.length) {                  // 如果购物车为空
-      this.setData({
-        hasList: false, 
-        totalPrice:0             // 修改标识为false，显示购物车为空页面
-      });
-    } else {                              // 如果不为空
-      this.getTotalPrice();           // 重新计算总价格
-    }
-  },
-
-
-
-
-
-  _success() {
-    console.log('你点击了确定');
-    this.popup.hidePopup();
-    this.back();
-  },
-
-  _noItemsuccess(){
-    console.log('你点击了确定');
-    this.noItem.hidePopup();
-  },
-
-  back: function (e) {
-    wx.navigateBack({
-      delta: 1, // 回退前 delta(默认为1) 页面
-    })
-  },
-
-  add:function(e){
-    wx.navigateTo({
-      url: '../addCaigoudan/addCaigoudan?orderId = '+this.data.orderId,
+      fail: err => {
+        console.log('getting supplier failed!!! ');
+      },
     })
   },
 
@@ -254,11 +111,15 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
+  onShow: function () {
+
+  },
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -271,7 +132,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    console.log('Caigoudan is unloading!!!!!!!!!!!!!!_________________+++++++++++++++++++++++++');
+
   },
 
   /**
@@ -293,5 +154,157 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  buyInPriceInput: function (e) {
+    var index = parseInt(e.currentTarget.dataset.id);
+    var carts = this.data.carts;
+    let showingCart = this.data.showingCart;
+    showingCart[index].buyInPrice = e.detail.value;
+    //change data in cart
+    for(let i = 0;i<carts.length;i++){
+      if(carts[i].id==showingCart[index].id){
+        carts[i].buyInPrice = showingCart[index].buyInPrice;
+      }
+    }
+    this.setData({
+      showingCart:showingCart,
+      carts:carts,
+    })
+    console.log(this.data.carts);
+  },
+
+  getCart:function(){
+    const db = wx.cloud.database();
+    var orderId = getApp().globalData.selectedOrderId;
+    console.log('gettting cartttttttttttttttttttttt order Id is '+orderId);
+    wx.showToast({
+      title: '正在加载中',
+      duration:3000,
+      icon:'loading'
+    })
+    db.collection('orders').where({
+      _id:orderId
+    }).get({
+      success: res => {
+        console.log('cart ========== is ',res.data[0].carts);
+        this.setData({
+          carts:res.data[0].carts,
+          showingCart:res.data[0].carts,
+        })
+        
+        this.getTotalPrice();
+        wx.hideToast();
+      },
+      fail: err => {
+        console.log('getting cart failed!!! ');
+      },
+    })
+  },
+  
+  refreshCart:function(){
+    var carts = this.data.carts;
+    var newCart = [];
+    for(let i = 0;i<carts.length;i++){
+      if(carts[i].supplier==this.data.supplier){
+        newCart.push(carts[i]);
+      }
+    }
+    this.setData({
+      showingCart:newCart,
+    })
+  },
+
+  save:function(e){
+    this.getTotalPrice();
+    //save the cart to the database
+    var orderId = getApp().globalData.selectedOrderId;
+    const db = wx.cloud.database();
+    console.log('try to save the caigoudan, the orderId is----------------'+orderId);
+    db.collection('orders').doc(orderId).update({
+      data: {
+        carts: this.data.carts,
+        caigouTotal:this.data.totalPrice,
+      },
+      success: res => {
+        wx.showToast({ title: '更新成功', icon: 'success', duration: 1000 });
+        console.log('[数据库] [更新记录] 成功', res);
+        wx:wx.navigateBack({
+          delta: 0,
+        })
+        /*/wx:wx.navigateTo({
+          url: '../newOrders/orders/orders',
+        })*/
+      },
+      fail: err => {
+        icon: 'none',
+          console.error('[数据库] [更新记录] 失败：', err)
+      }
+    })
+   
+    
+  },
+
+  getTotalPrice:function() {
+    let carts = this.data.showingCart;                  // 获取购物车列表
+    console.log('carts is ',carts);
+    let total = 0;
+    for (let i = 0; i < carts.length; i++) {         // 循环列表得到每个数据
+          total += carts[i].num * carts[i].buyInPrice;
+    }
+    console.log('totalprice is '+total);
+    this.setData({                                // 最后赋值到data中渲染到页面
+      totalPrice: total.toFixed(2)
+    });
+  },
+
+
+
+
+
+
+
+
+    //页数相关代码
+    getTotalPage:function(len,itemInPage){
+      var totalPage =1;
+      if(len%itemInPage==0){
+        totalPage = len/itemInPage;
+      }else{
+        totalPage = Math.floor(len/itemInPage)+1;
+      }
+      return totalPage;
+    },
+  
+    group:function(array, subGroupLength) {
+      let index = 0;
+      let newArray = [];
+      let len = array.length;
+      newArray.push(array.slice(index, Math.min(index += subGroupLength,len)));
+      while(index < len) {
+          newArray.push(array.slice(index, Math.min(index += subGroupLength,len)));
+      }
+      console.log('returing newArray===========',newArray);
+      return newArray;
+    },
+  
+    prevPage:function(){
+      console.log('跳转到上一页');
+      if(this.data.pageNumber>1){
+        this.setData({
+          carts:this.data.groupOrder[this.data.pageNumber-2],
+          pageNumber:this.data.pageNumber-1,
+        })
+      }
+  
+    },
+  
+    nextPage:function(){
+      console.log('跳转到下一页');
+      if(this.data.pageNumber<this.data.totalPage){
+        this.setData({
+          carts:this.data.groupOrder[this.data.pageNumber],
+          pageNumber:this.data.pageNumber+1,
+        })
+      }
+    },
 })

@@ -17,9 +17,23 @@ Page({
   onLoad: function (options) {
     this.setData({
       orderId:options.orderId,
-      claims:options.claims,
     })
-    
+    const db = wx.cloud.database();
+    db.collection('orders').where(
+      {
+        _id:this.data.orderId
+      }
+    ).get({
+      success: res => {
+        // 在返回结果中会包含新创建的记录的 _id
+        this.setData({
+          claims: res.data[0].claims,
+        })
+      },
+      fail: err => {
+        console.error('[数据库] 失败：', err)
+      }
+    })
   },
 
   save:function(){
@@ -38,10 +52,11 @@ Page({
     }
    
     var claims = this.data.claims;
+    console.log(this.data.claims);
     if(claims==undefined||claims==''){
       claims = [];
     }
-    console.log(this.data.claims);
+    
     claims.push(newClaims);
     const db = wx.cloud.database();
     db.collection('orders').doc(this.data.orderId).update({

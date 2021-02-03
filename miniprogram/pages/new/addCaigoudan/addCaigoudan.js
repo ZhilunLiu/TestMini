@@ -13,9 +13,6 @@ Page({
     carts:[],
     orderId:'',
     seriesList:[],
-    groupOrder:[],
-    pageNumber:1,
-    totalPage:1,
   },
 
   /**
@@ -101,6 +98,7 @@ Page({
     this.setData({
       hasntSelect: false,
       series: this.data.seriesList[e.detail.value],
+      carts:[],
     })
     this.searchFurniture();
   }, 
@@ -110,82 +108,107 @@ Page({
     this.setData({
       hasntSelect2: false,
       type: this.data.typeList[e.detail.value],
+      carts:[],
     })
     this.searchFurniture();
   }, 
 
   searchFurniture:function(){
     const db = wx.cloud.database();
-    if(!this.data.hasntSelect&& this.data.hasntSelect2){
-      console.log('searching furniture with series!!!  seriess is '+this.data.series);
-      db.collection('detail').where({
-        series:this.data.series
-      }).get({
-        success: res => {
-          var itemInPage =10 ;
-          var groupOrder = this.group(res.data,itemInPage);
-          var totalPage = this.getTotalPage(res.data.length,itemInPage);
-          this.setData({
-            carts:groupOrder[0],
-            groupOrder:groupOrder,
-            totalPage:totalPage
-          })
-          console.log('seriesList is !!!! ', res);
-          console.log('[数据库] [查询记录] 成功: ', res);
-          wx.hideToast();
-        },
-        fail: err => {
-          console.log('search failed!!! ');
-        }
-      })
-    }
-    else if(!this.data.hasntSelect2 && this.data.hasntSelect){
-      console.log('searching furniture with type!!!  type is '+this.data.type);
-    db.collection('detail').where({
-      type:this.data.type
-    }).get({
-      success: res => {
-        var itemInPage =10 ;
-        var groupOrder = this.group(res.data,itemInPage);
-        var totalPage = this.getTotalPage(res.data.length,itemInPage);
-        this.setData({
-          carts:groupOrder[0],
-          groupOrder:groupOrder,
-          totalPage:totalPage
-        })
-        console.log('cart is !!!! ', this.data.carts);
-        console.log('[数据库] [查询记录] 成功: ', res);
-        wx.hideToast();
-      },
-      fail: err => {
-        console.log('search failed!!! ');
-      }
+    const _ = db.command;
+    wx.showToast({
+      title: '正在载入中',
+      duration:3000,
+      icon:'loading'
     })
+    if(this.data.hasntSelect|| this.data.hasntSelect2){
+        //get count
+        db.collection('detail').where(
+          _.or([
+            {
+              series:this.data.series
+            },
+            {
+              type:this.data.type
+            }
+          ])
+          ).count({
+            success:res=>{
+              console.log('总共有',res.total,'条数据',this);
+              console.log('searching furniture with series!!! or type ',this);
+              var index = 0;
+              while(index<res.total){
+                console.log('in while loop---------------------');
+                db.collection('detail').where(
+                  _.or([
+                    {
+                      series:this.data.series
+                    },
+                    {
+                      type:this.data.type
+                    }
+                  ])
+                  ).skip(index).get({
+                  success: res => {
+                    var carts = this.data.carts;
+                    console.log('concating two array, was',carts, 'concating ',res.data);
+                    carts = carts.concat(res.data);
+                    console.log('become-----------',carts);
+                    this.setData({
+                      carts:carts
+                    })
+                    console.log('[数据库] [查询记录] 成功: ', res);
+                    wx.hideToast();
+                  },
+                  fail: err => {
+                    console.log('search failed!!! ');
+                  }
+                })
+                index += 20;
+              }
+            }
+          })
+
     }
     else{
       console.log('searching furniture with series and type!!! ');
-      db.collection('detail').where({
-        type:this.data.type,
-        series:this.data.series
-      }).get({
-        success: res => {
-          var itemInPage =10 ;
-          var groupOrder = this.group(res.data,itemInPage);
-          var totalPage = this.getTotalPage(res.data.length,itemInPage);
-
-          this.setData({
-            carts:groupOrder[0],
-            groupOrder:groupOrder,
-            totalPage:totalPage
-          })
-          console.log('seriesList is !!!! ', res);
-          console.log('[数据库] [查询记录] 成功: ', res);
-          wx.hideToast();
-        },
-        fail: err => {
-          console.log('search failed!!! ');
-        }
-      })
+      //get count
+      db.collection('detail').where(
+          {
+            series:this.data.series,
+            type:this.data.type
+          }
+        ).count({
+          success:res=>{
+            console.log('总共有',res.total,'条数据',this);
+            var index = 0;
+            while(index<res.total){
+              console.log('in while loop---------------------');
+              db.collection('detail').where(
+                  {
+                    series:this.data.series,
+                    type:this.data.type
+                  }
+                ).skip(index).get({
+                success: res => {
+                  var carts = this.data.carts;
+                  console.log('concating two array, was',carts, 'concating ',res.data);
+                  carts = carts.concat(res.data);
+                  console.log('become-----------',carts);
+                  this.setData({
+                    carts:carts
+                  })
+                  console.log('[数据库] [查询记录] 成功: ', res);
+                  wx.hideToast();
+                },
+                fail: err => {
+                  console.log('search failed!!! ');
+                }
+              })
+              index += 20;
+            }
+          }
+        })
     }
   },
 
@@ -241,49 +264,5 @@ Page({
       url: '../../details/details?itemId='+itemId+'&orderId='+this.data.orderId+'&addingItem='+true,
     })
   },
-
-    //页数相关代码
-    getTotalPage:function(len,itemInPage){
-      var totalPage =1;
-      if(len%itemInPage==0){
-        totalPage = len/itemInPage;
-      }else{
-        totalPage = Math.floor(len/itemInPage)+1;
-      }
-      return totalPage;
-    },
-  
-    group:function(array, subGroupLength) {
-      let index = 0;
-      let newArray = [];
-      let len = array.length;
-      newArray.push(array.slice(index, Math.min(index += subGroupLength,len)));
-      while(index < len) {
-          newArray.push(array.slice(index, Math.min(index += subGroupLength,len)));
-      }
-      console.log('returing newArray===========',newArray);
-      return newArray;
-    },
-  
-    prevPage:function(){
-      console.log('跳转到上一页');
-      if(this.data.pageNumber>1){
-        this.setData({
-          carts:this.data.groupOrder[this.data.pageNumber-2],
-          pageNumber:this.data.pageNumber-1,
-        })
-      }
-  
-    },
-  
-    nextPage:function(){
-      console.log('跳转到下一页');
-      if(this.data.pageNumber<this.data.totalPage){
-        this.setData({
-          carts:this.data.groupOrder[this.data.pageNumber],
-          pageNumber:this.data.pageNumber+1,
-        })
-      }
-    },
 
 })

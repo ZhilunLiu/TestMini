@@ -42,9 +42,9 @@ Page({
   },
 
   newClaims:function(){
-    console.log('正在新增报销');
+    console.log('正在新增报销,claims 是',this.data.claims);
     wx.navigateTo({
-      url: '../newClaims/newClaims?orderId='+this.data.orderId+'&claims='+this.data.claims,
+      url: '../newClaims/newClaims?orderId='+this.data.orderId,
     })
   },
 

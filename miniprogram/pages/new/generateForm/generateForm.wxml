@@ -1,6 +1,4 @@
 <!--miniprogram/pages/new/generateFrom/generateForm.wxml-->
-<canvas canvas-id="shareBox"></canvas>
-
 <view class = "table">
   <view class ="tr">
     <view class = "th">湖南鑫诺家具产品价格表，长沙韶山路城开大厦8层，电话85684712</view>  

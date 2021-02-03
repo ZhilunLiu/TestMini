@@ -303,3 +303,8 @@ Page {
   margin-top:3vh;
   font-size :1rem;
 }
+
+.spaceBtwButton{
+  margin-left: 3vw;
+  margin-right: 3vw;
+}

@@ -66,46 +66,34 @@
 
     </view>
 
-    <view wx:if="{{!manager}}" class="row_flex">
+    <view  class="bg2">
       <view class = "search">
-        <view class = "searchButton" bindtap="myOrders">我的订单</view>
-      </view>
-    </view>
-
-    <view class="row_flex">
-      <view class = "search">
+        <view wx:if="{{!manager}}"class = "searchButton" bindtap="myOrders">我的订单</view>
+        <view wx:if="{{!manager}}" class = "spaceBtwButton"></view>
         <view class = "searchButton" bindtap="create">新建订单</view>
       </view>
     </view>
 
-    <view class="row_flex">
+    <view class="bg2">
       <view class = "search">
         <view class = "searchButton" bindtap="addFurniture">添加产品</view>
-      </view>
-    </view>
-
-    <view class="row_flex">
-      <view class = "search">
+        <view class = "spaceBtwButton"></view>
         <view class = "searchButton" bindtap="searchFurniture">搜索产品</view>
       </view>
     </view>
 
-    <view class="row_flex">
+
+    <view class="bg2">
       <view class = "search">
         <view class = "searchButton" bindtap="myInfo">我的信息</view>
+        <view wx:if="{{manager}}" class = "spaceBtwButton"></view>
+        <view wx:if="{{manager}}" class = "searchButton" bindtap="stuffInfo">员工信息</view>
       </view>
     </view>
 
     <!--如果是管理员账号，渲染如下-->
     <view wx:if="{{manager}}">
-    <view class="row_flex">
-      <view class = "search">
-        <view class = "searchButton" bindtap="stuffInfo">员工信息</view>
-      </view>
-    </view>
-
     
-
       <!--
       <view class = "bg">
         <view class = "space"/>

@@ -437,8 +437,12 @@ Page({
 */
   searchOrder:function(e){
     console.log('正在跳转订单页面 订单号为'+this.data.orderNumber+' 姓名为'+this.data.customer+'业务员姓名为'+this.data.stuff+'状态为'+this.data.status);
+    var status = this.data.status;
+    if(status=='不限状态'){
+      status = '';
+    }
     wx:wx.navigateTo({
-      url: '../new/searchOrderResult/searchOrderResult?customer='+this.data.customer+'&orderId='+this.data.orderNumber+'&stuff='+this.data.stuff+'&year='+this.data.year+'&status='+this.data.status,
+      url: '../new/searchOrderResult/searchOrderResult?customer='+this.data.customer+'&orderId='+this.data.orderNumber+'&stuff='+this.data.stuff+'&year='+this.data.year+'&status='+status,
     })
   },
 

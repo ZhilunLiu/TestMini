@@ -1,5 +1,11 @@
 <!--miniprogram/pages/new/searchOrderResult/searchOrderResult.wxml-->
-<scroll-view class = "scrollView" scroll-y="true" style="height:80vh;">
+<view class = "bg2">
+  <view class = "row_flex">
+    <view style="width:20vw">总计金额：{{total}}元</view>
+    <view>报销金额：{{claimsTotal}}元</view>
+  </view>
+</view>
+<scroll-view class = "scrollView" scroll-y="true" style="height:90vh;">
 
   <view wx:for="{{orders}}" view class = "bg2"  data-id = '{{item._id}}' bindtap="select">
     <view class = "row_flex">
@@ -35,11 +41,3 @@
   </view>
 
 </scroll-view>
-
-<view class = "bottomMenu">
-      <view class = "row_flex"> 
-        <view class = "pageButton" bindtap="prevPage">上一页</view>
-        <text>{{pageNumber}}/{{totalPage}}</text>
-        <view class = "pageButton" bindtap="nextPage" >下一页</view>
-      </view>
-</view>

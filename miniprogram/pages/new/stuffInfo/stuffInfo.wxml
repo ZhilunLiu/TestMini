@@ -1,21 +1,42 @@
 <!--miniprogram/pages/new/stuffInfo/stuffInfo.wxml-->
 <view class = "column_view">
   <view wx:for = "{{users}}" class = "bg2"  bindtap="stuffDetail" data-id="{{index}}">
-  <view class = "row_flex">
+    <view class = "row_flex">
       <text>姓名</text>
-      <text>{{item.name}}</text>
+      <view wx:if="{{manager}}">
+        <input class = "input"type ="text" data-id="{{index}}" placeholder="{{item.name}}" bindinput="nameInput"/>
+      </view>
+      <view wx:else>
+          <text>{{item.name}}</text>
+      </view>
+
     </view>
 
     <view class = "row_flex">
       <text>电话</text>
-      <text>{{item.phone}}</text>
+      <view wx:if="{{manager}}">
+        <input class = "input"type ="text" data-id="{{index}}" placeholder="{{item.phone}}" bindinput="phoneInput"/>
+        </view>
+        <view wx:else>
+          <text>{{item.phone}}</text>
+        </view>
     </view>
 
     <view class = "row_flex">
       <text>地址</text>
-      <text>{{item.address}}</text>
+      <view wx:if="{{manager}}">
+        <input class = "input"type ="text" data-id="{{index}}" placeholder="{{item.address}}" bindinput="addressInput"/>
+      </view>
+      <view wx:else>
+        <text>{{item.address}}</text>
+      </view>
     </view>
 
     </view>
+</view>
+
+<!-- 底部操作栏 -->
+<view class ="fixed_view">
+      <view class="pay" bindtap="save">保存</view>
 </view>
 

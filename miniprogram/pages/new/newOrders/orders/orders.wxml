@@ -3,51 +3,56 @@
     <view class = "space"/>
 
     <view class = "row_flex">
-      <text decode="{{true}}">订单号 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
+      <text style="width:10vw">订单号</text>
       <text>{{orderNumber}}</text>
     </view>
 
     <view class = "line"></view>
 
     <view class = "row_flex">
-      <text decode="{{true}}">状态&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
-      <picker bindchange="statusChange" value="{{index}}" range="{{statusList}}">
-        <button class = "picker_button" type = "default" size = "mini" >{{status}}</button>
-      </picker>
+      <text style="width:10vw">状态</text>
+      <view wx:if="{{manager}}">
+        <picker bindchange="statusChange" value="{{index}}" range="{{statusList}}">
+          <button class = "picker_button" type = "default" size = "mini" >{{status}}</button>
+        </picker>
+      </view>
+      <view wx:else>
+        <text>{{status}}</text>
+      </view>
     </view>
 
     <view class = "line"></view>
 
     <view class = "row_flex">
-      <text decode="{{true}}">客户单位&nbsp;&nbsp;&nbsp;</text>
+      <text style="width:10vw">客户单位</text>
       <input class = "input"type ="text" placeholder="{{customer}}" bindinput="nameInput"/>
     </view>
 
     <view class = "line"></view>
 
     <view class = "row_flex">
-      <text>客户联系人</text>
+      <text style="width:10vw">客户联系人</text>
       <input class = "input"type ="text" placeholder="{{contact}}" bindinput="contactInput"/>
     </view>
       
     <view class = "line"></view>
 
     <view class = "row_flex">
-      <text decode="{{true}}">电话&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
+      <text style="width:10vw">电话</text>
       <input class = "input"type ="text" placeholder="{{phone}}" bindinput="phoneInput"/>
     </view>
       
     <view class = "line"></view>
 
     <view class = "row_flex">
-      <text decode="{{true}}">地址&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
+      <text style="width:10vw">地址</text>
       <input class = "input"type ="text" placeholder="{{address}}" bindinput="addressInput"/>
     </view>
 
     <view class = "line"></view>
 
     <view class="row_flex">
-      <text>下单日期</text>
+      <text style="width:10vw">下单日期</text>
       <picker mode="date" value="{{date}}" start="1990-09-01" end="2100-09-01" bindchange="dealdateChange">
         <button class = "picker_button" type = "default" size = "mini" >{{dealdate}}</button>
       </picker>
@@ -56,7 +61,7 @@
     <view class = "line"></view>
 
     <view class="row_flex">
-      <text>交货日期</text>
+      <text style="width:10vw">交货日期</text>
       <picker mode="date" value="{{date}}" start="1990-09-01" end="2100-09-01" bindchange="duedateChange">
         <button class = "picker_button" type = "default" size = "mini" >{{duedate}}</button>
       </picker>
@@ -65,26 +70,26 @@
     <view class = "line"></view>
 
     <view class = "row_flex">
-      <text decode="{{true}}">合同金额&nbsp;&nbsp;&nbsp;</text>
+      <text style="width:10vw">合同金额</text>
       <input class = "input"type ="text" placeholder="{{orderTotal}}" bindinput="orderTotalInput"/>
     </view>
 
     <view class = "line"></view>
 
     <view class = "row_flex" wx:if = "{{manager}}">
-      <text decode="{{true}}">已付金额&nbsp;&nbsp;&nbsp;</text>
+      <text style="width:10vw">已付金额</text>
       <input class = "input"type ="text" placeholder="{{paid}}" bindinput="paidInput"/>
     </view>
 
     <view class = "row_flex" wx:else>
-      <text decode="{{true}}">已付金额&nbsp;&nbsp;&nbsp;</text>
+      <text style="width:10vw">已付金额</text>
       <text>{{paid}}</text>
     </view>
 
     <view class = "line"></view>
 
     <view class = "row_flex">
-      <text decode="{{true}}">开票单位</text>
+      <text style="width:10vw">开票单位</text>
       <picker bindchange="companyChange" value="{{index}}" range="{{companyList}}">
         <button class = "picker_button" type = "default" size = "mini" >{{company}}</button>
       </picker>
@@ -93,7 +98,7 @@
     <view class = "line"></view>
 
     <view class="row_flex">
-      <text>业务主管</text>
+      <text style="width:10vw">业务主管</text>
       <picker bindchange="orderManagerChange" value="{{index}}" range="{{orderManagerList}}">
         <view class="picker">
           <button class = "picker_button" type = "default" size = "mini" >{{orderManager}}</button>
@@ -104,7 +109,7 @@
     <view class = "line"></view>
 
     <view class="row_flex">
-      <text>经办人</text>
+      <text style="width:10vw">经办人</text>
       <picker bindchange="orderStuffChange" value="{{index}}" range="{{orderStuffList}}">
         <view class="picker">
           <button class = "picker_button" type = "default" size = "mini" >{{orderStuff}}</button>
@@ -115,12 +120,12 @@
     <view class = "line"></view>
     
     <view class = "row_flex" wx:if = "{{manager}}">
-      <text decode="{{true}}">提成比例(%)</text>
+      <text style="width:10vw">提成比例(%)</text>
       <input class = "input"type ="number" placeholder="{{commision}}" bindinput="commisionInput"/>
     </view>
 
     <view class = "row_flex" wx:else>
-      <text decode="{{true}}">提成比例(&)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{commision}}</text>
+      <text style="width:10vw">提成比例(&{{commision}}</text>
     </view>
     
 
@@ -128,18 +133,22 @@
 
     <view class = "search">
       <view class = "searchButton" bindtap="update">更改并保存</view>
-    </view>
-
-    <view class = "search">
-      <view class = "searchButton" bindtap="caigoudan">供货单</view>
-    </view>
-
-    <view class = "search">
-      <view class = "searchButton" bindtap="generateFrom">生成表格</view>
-    </view>
-
-    <view class = "search">
+      <view class = "spaceBtwButton"></view>
       <view class = "searchButton" bindtap="goClaims">报销</view>
     </view>
+
+
+    <view class = "search">
+      <view class = "searchButton" bindtap="gonghuodan">供货单</view>
+      <view class = "spaceBtwButton"></view>
+      <view class = "searchButton" bindtap="generateFrom">生成供货单表格</view>
+    </view>
+
+    <view wx:if="{{manager}}" class = "search">
+      <view class = "searchButton" bindtap="caigoudan">采购单</view>
+      <view class = "spaceBtwButton"></view>
+      <view class = "searchButton" bindtap="generateCaigoudan">生成采购单表格</view>
+    </view>
+
 
   </view>

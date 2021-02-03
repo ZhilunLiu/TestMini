@@ -23,7 +23,7 @@
   </view>
 </view>
 
-<scroll-view class = "scrollView" scroll-y="true" style="height:80vh;">
+<scroll-view class = "scrollView" scroll-y="true" style="height:90vh;">
       <view wx:for="{{carts}}" class = "items">
         <view class = "row_flex">
           <!-- 点击商品图片可跳转到商品详情 -->
@@ -45,11 +45,3 @@
         </view>
       </view>
 </scroll-view>
-
-<view class = "bottomMenu">
-      <view class = "row_flex"> 
-        <view class = "pageButton" bindtap="prevPage">上一页</view>
-        <text>{{pageNumber}}/{{totalPage}}</text>
-        <view class = "pageButton" bindtap="nextPage" >下一页</view>
-      </view>
-</view>

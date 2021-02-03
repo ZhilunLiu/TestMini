@@ -1,1 +1,28 @@
 /* miniprogram/pages/new/stuffInfo/stuffInfo.wxss */
+.fixed_view{
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height:8vh;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+.pay{
+  margin-right: 8vw;
+  border-radius: 5px;
+  background-color: coral;
+  width:18vw;
+  height: 6vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row_flex{
+  flex-direction: row;
+  display: flex;
+}

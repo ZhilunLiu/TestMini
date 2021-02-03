@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/profile/profile",
-    "pages/new/caigoudan/caigoudan",
+    "pages/new/gonghuodan/gonghuodan",
     "pages/new/newOrders/orders/orders",
     "pages/new/createOrder/createOrder",
     "pages/home/home",
@@ -33,7 +33,8 @@
     "pages/new/myOrders/myOrders",
     "pages/new/stuffSum/stuffSum",
     "pages/new/claims/claims",
-    "pages/new/newClaims/newClaims"
+    "pages/new/newClaims/newClaims",
+    "pages/new/caigoudan/caigoudan"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
