@@ -7,17 +7,23 @@
       <text  decode="{{true}}">报销项目&nbsp;&nbsp;&nbsp;</text>
       <view class= "content">{{item.project}}</view>
       <text class = "th2">报销金额</text>
-      <view class= "content">{{item.money}}</view>
+      <view wx:if="{{manager}}">
+        <input class = "input"type ="text" data-id = "{{index}}" placeholder="{{item.money}}" bindinput="moneyInput"/>
+      </view>
+      <view wx:else>
+        <view class= "content">{{item.money}}</view>
+      </view>
+      <view class = "icon">
+            <image  bindtap="deleteClaim" data-index="{{index}}" src = "../../../images/delete.png"></image>
+      </view>
     </view>
 
   </view>
 
 </scroll-view>
 
-<view class = "bottomMenu">
-      <view class = "row_flex"> 
-        <view class = "pageButton" bindtap="prevPage">上一页</view>
-        <text>{{pageNumber}}/{{totalPage}}</text>
-        <view class = "pageButton" bindtap="nextPage" >下一页</view>
-      </view>
+<!-- 底部操作栏 -->
+<view class ="fixed_view">
+      <view class="pay" bindtap="save">保存</view>
 </view>
+

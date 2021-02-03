@@ -231,6 +231,12 @@ Page({
         orderManager:this.data.orderManager,
         orderStuff:this.data.orderStuff,
         year:year,
+        carts:[],
+        claims:[],
+        caigouTotal:'0.00',
+        commision:'',
+        paid:'',
+        orderReg:'',
       },
       success: res => {
         // 在返回结果中会包含新创建的记录的 _id

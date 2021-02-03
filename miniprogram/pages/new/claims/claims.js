@@ -6,10 +6,8 @@ Page({
    */
   data: {
     orderId:'',
-    groupOrder: [],
-    pageNumber: 1,
-    totalPage: 1,
     claims:[],
+    manager:false,
   },
 
   /**
@@ -17,7 +15,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      orderId:options.orderId
+      orderId:options.orderId,
+      manager:getApp().globalData.manager,
     })
     const db = wx.cloud.database();
     console.log('正在加载报销信息，订单号为'+this.data.orderId);
@@ -45,6 +44,44 @@ Page({
     console.log('正在新增报销,claims 是',this.data.claims);
     wx.navigateTo({
       url: '../newClaims/newClaims?orderId='+this.data.orderId,
+    })
+  },
+
+  moneyInput:function (e) {
+    var index = e.currentTarget.dataset.id;
+    var claims = this.data.claims;
+    claims[index].money = e.detail.value;
+    this.setData({
+      claims: claims
+    })
+  },
+
+  save:function(){
+    wx.showToast({
+      title: '正在更改中',
+      duration:5000,
+      icon:'loading'
+    })
+      const db = wx.cloud.database();
+      // 查询当前家具的details对应name
+      db.collection('orders').doc(this.data.orderId).update({
+        data:{
+          claims:this.data.claims
+        },
+        success: res => {
+          console.log('[user] [更新记录] 成功: ', res);
+          wx.hideToast();
+
+        },
+      })
+  },
+
+  deleteClaim:function(e){
+    var claims = this.data.claims;
+    var index = e.currentTarget.dataset.index;
+    claims.splice(index,1)
+    this.setData({
+      claims:claims
     })
   },
 
@@ -95,49 +132,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-  //页数相关代码
-  getTotalPage: function (len, itemInPage) {
-    var totalPage = 1;
-    if (len % itemInPage == 0) {
-      totalPage = len / itemInPage;
-    } else {
-      totalPage = Math.floor(len / itemInPage) + 1;
-    }
-    return totalPage;
-  },
-
-  group: function (array, subGroupLength) {
-    let index = 0;
-    let newArray = [];
-    let len = array.length;
-    newArray.push(array.slice(index, Math.min(index += subGroupLength, len)));
-    while (index < len) {
-      newArray.push(array.slice(index, Math.min(index += subGroupLength, len)));
-    }
-    console.log('returing newArray===========', newArray);
-    return newArray;
-  },
-
-  prevPage: function () {
-    console.log('跳转到上一页');
-    if (this.data.pageNumber > 1) {
-      this.setData({
-        orders: this.data.groupOrder[this.data.pageNumber - 2],
-        pageNumber: this.data.pageNumber - 1,
-      })
-    }
-
-  },
-
-  nextPage: function () {
-    console.log('跳转到下一页');
-    if (this.data.pageNumber < this.data.totalPage) {
-      this.setData({
-        orders: this.data.groupOrder[this.data.pageNumber],
-        pageNumber: this.data.pageNumber + 1,
-      })
-    }
   },
 })

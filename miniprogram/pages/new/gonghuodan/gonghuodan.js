@@ -153,12 +153,13 @@ Page({
     }).get({
       success: res => {
         console.log('cart ========== is ',res.data[0].carts);
+
         this.setData({
           carts:res.data[0].carts,
         })
-        
-        this.getTotalPrice();
         wx.hideToast();
+        this.getTotalPrice();
+        
       },
       fail: err => {
         console.log('getting cart failed!!! ');
