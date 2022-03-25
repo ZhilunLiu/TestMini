@@ -24,9 +24,9 @@ Page({
 
   goProducts: function (event) {
     console.log('clicked');
-    //wx.navigateTo({
-      //url: '../productList/productList',
-    //})
+    wx.navigateTo({
+      url: '../productList/productList',
+    })
   },
 
   goSolutions: function (event) {

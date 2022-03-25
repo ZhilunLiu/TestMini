@@ -1,5 +1,25 @@
 Page({
+  onConfirm() {
+    this.selectComponent('#item').toggle();
+  },
+
+  onSwitch1Change({ detail }) {
+    this.setData({ switch1: detail });
+  },
+
+  onSwitch2Change({ detail }) {
+    this.setData({ switch2: detail });
+  },
   data: {
+    switchTitle1: '包邮',
+    switchTitle2: '团购',
+    itemTitle: '筛选',
+    option1: [
+      { text: '全部商品', value: 0 },
+      { text: '新款商品', value: 1 },
+      { text: '活动商品', value: 2 },
+    ],
+    value1: 0,
     cateItems: [
       {
         cate_id: 1,
