@@ -17,10 +17,21 @@ Page({
     seriesName:['高管系列','柏拉图','开普勒'],
     index:0,
     indicatorDots: true,
-    autoplay: false,
-    interval: 4000,
-    duration: 1800
+    autoplay: true,
+    interval: 3000,
+    duration: 500,
+
+    //van-search props
+    value:'',
   },
+
+  searchProduct:function(e){
+    console.log(e.detail);
+    wx.navigateTo({
+      url: '../searchProducts/searchProducts?searchValue='+e.detail,
+    })
+  },
+
 
   goProducts: function (event) {
     console.log('clicked');

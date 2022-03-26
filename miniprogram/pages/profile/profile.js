@@ -35,8 +35,29 @@ Page({
       status:'',
       hasSelectStatus:false,
       statusList:'',
+
+      //van-tab props
+      active:0,
   },
 
+  onClick(event) {
+    wx.showToast({
+      title: `点击标签 ${event.detail + 1}`,
+      icon: 'none',
+    });
+  },
+
+  naviToContact:function(){
+    wx.navigateTo({
+      url: '../contact/contact',
+    })
+  },
+
+  naviToAbout:function(){
+    wx.navigateTo({
+      url: '../about/about',
+    })
+  },
 
   bindPickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -139,6 +160,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
     var statusList = getApp().globalData.statusList;
     this.setData({
       statusList:statusList
@@ -187,9 +209,18 @@ Page({
         logged:app.globalData.logged,
       })
     }
+  },
 
+  naviToAddProducts:function(){
+    wx:wx.navigateTo({
+      url: '../new/addProduct/addProduct'
+    })
+  },
+
+  naviToAddSeries:function(){
 
   },
+
 
   /**
    * 生命周期函数--监听页面隐藏

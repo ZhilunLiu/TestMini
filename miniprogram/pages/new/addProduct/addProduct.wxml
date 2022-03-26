@@ -1,80 +1,112 @@
 <view class = "bg2">
-    <view class = "row_flex">
-        <text>家具厂家：</text>
-        <input class = "input"type ="digit" placeholder="请输入家具厂家" bindinput="companyInput"/>
-    </view>
+  <van-cell-group>
+    <van-field
+      label="家具厂家"
+      value="{{ value }}"
+      placeholder="请输入厂家名"
+      border="{{ false }}"
+      bind:change="companyInput"
+    />
 
-    <view class = "row_flex">
-      <text>系列名称：</text>
-      <picker bindchange="bindPicker2Change" value="{{index}}" range="{{seriesList}}">
-        <view wx:if="{{hasntSelect2}}">
-          <button class = "picker_button" type = "default" size = "mini" style="position: relative; left: 15rpx; top: 3rpx">系列选择</button>
-        </view>
-        <view wx:else class = "picker_button">
-          <view class = "wdh">{{series}}</view>
-        </view>
-      </picker>
+    <van-field
+      label="家具名称"
+      value="{{ value }}"
+      placeholder="请输入家具名"
+      border="{{ false }}"
+      bind:change="nameInput"
+    />   
 
-      <input class = "smallinput"type ="text" placeholder="或请输入新家具系列" bindinput="seriesInput"/>
-      <view>
-      <button class = "picker_button" type = "default" size = "mini" bindtap="addNewSeries" style="position: relative; left: 6rpx; top: 3rpx">添加系列</button>
-      </view>
-    </view>
+    <van-field
+      label="家具价格"
+      value="{{ value }}"
+      placeholder="请输入价格"
+      border="{{ false }}"
+      bind:change="priceInput"
+      type="number"
+    />    
 
-    <view class = "row_flex">
-      <text>家具种类：</text>
-      <picker bindchange="bindPickerChange" value="{{index}}" range="{{typeList}}">
-      <view wx:if="{{hasntSelect}}">
-        <button class = "picker_button" type = "default" size = "mini" style="position: relative; left: 14rpx; top: 2rpx">种类选择</button>
-      </view>
-      <view wx:else class = "picker_button">
-        <view class = "wdh">{{type}}</view>
-      </view>
-      </picker>
-    </view>
+    <van-field
+      label="家具描述"
+      value="{{ value }}"
+      placeholder="面板镶入白色拉丝铝条....."
+      border="{{ false }}"
+      bind:change="descInput"
+    />
 
-    <view class = "row_flex">
-      <text>家具名称：</text>
-      <input class = "input"type ="text" placeholder="请输入家具名称" bindinput="fnameInput"/>
-    </view>
+    <van-field
+      label="家具型号"
+      value="{{ value }}"
+      placeholder="G-JPSB18A"
+      border="{{ false }}"
+      bind:change="modelInput"
+    />
 
-    <view class = "row_flex">
-      <text>家具价格：</text>
-      <input class = "input"type ="digit" placeholder="请输入家具价格" bindinput="priceInput"/>
-    </view>
+    <van-field
+      label="家具备注"
+      value="{{ value }}"
+      placeholder="黑浮雕+银拉丝"
+      border="{{ false }}"
+      bind:change="commentInput"
+    />
 
-    <view class = "row_flex">
-      <text>家具描述：</text>
-      <input class = "input"type ="text" placeholder="请输入家具描述" bindinput="descInput"/>
-    </view>
+    <van-field
+      label="家具大小"
+      value="{{ value }}"
+      placeholder="多少立方米"
+      border="{{ false }}"
+      bind:change="sizeInput"
+      type="number"
+    />
 
-    <view class = "row_flex">
-      <text>家具型号：</text>
-      <input class = "input"type ="text" placeholder="请输入家具型号" bindinput="modelInput"/>
-    </view>
+    <van-field
+      label="尺寸（长）"
+      value="{{ value }}"
+      placeholder="多少毫米"
+      border="{{ false }}"
+      bind:change="widthInput"
+      type="number"
+    />
 
-    <view class = "row_flex">
-      <text>家具备注：</text>
-      <input class = "input"type ="text" placeholder="请输入家具备注" bindinput="commentInput"/>
-    </view>
+    <van-field
+      label="尺寸（宽）"
+      value="{{ value }}"
+      placeholder="多少毫米"
+      border="{{ false }}"
+      bind:change="depthInput"
+      type="number"
+    />
 
-    <view class = "row_flex">
-      <text>家具大小：</text>
-      <input class = "input"type ="number" placeholder="请输入家具大小" bindinput="sizeInput"/>
-    </view>
+    <van-field
+      label="尺寸（高）"
+      value="{{ value }}"
+      placeholder="多少毫米"
+      border="{{ false }}"
+      bind:change="heightInput"
+      type="number"
+    />
 
-    <view class = "row_flex">
-      <text>家具尺寸：</text>
-      <input class = "smallinput"type ="number" placeholder="XXXX" bindinput="widthInput"/>
-      <view class = "wdh">W</view>
-      <input class = "smallinput"type ="number" placeholder="XXXX" bindinput="depthInput"/>
-      <view class = "wdh">D</view>
-      <input class = "smallinput"type ="number" placeholder="XXXX" bindinput="heightInput"/>
-      <view class = "wdh">H</view>
-    </view>
+    <van-cell title="家具系列" value="{{series}}" is-link bind:click="chooseSeries" />
 
-    <view class = "uploadImg" bindtap="uploadImgbutton">
-      <view class = "searchButton">上传产品图片</view>
-    </view>
+    <van-cell title="家具种类" value="{{type}}" is-link bind:click="chooseType" />
+  </van-cell-group>
+
+  <van-action-sheet
+      show="{{ showChooseSeries }}"
+      actions="{{ seriesList }}"
+      bind:close="onChooseSeriesClose"
+      bind:select="onSeriesSelect"
+  />
+  <van-action-sheet
+      show="{{ showChooseType }}"
+      actions="{{ typeListInAction }}"
+      bind:close="onChooseTypeClose"
+      bind:select="onTypeSelect"
+  />
+
+
+    <view class = "uploadImg" >
+      <view class = "buttonStyle"bindtap="uploadImgbutton">上传图片</view>
+     </view>
 
   </view>
+

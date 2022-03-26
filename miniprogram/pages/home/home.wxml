@@ -1,7 +1,31 @@
 <!--miniprogram/pages/home/home.wxml-->
 <view class="container">
+  <van-search value="{{ value }}" placeholder="请输入搜索关键词" shape="round" custom-class="searchStyle" bind:change="searchInput" bind:search="searchProduct"/>
 
-  <view class ="swiper">
+  <view class = "foot">
+    <!-- <image mode="widthFix"  src='https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%85%AC%E5%85%B1/foot.PNG?sign=e04216eb9891455eb016fc066839b2f3&t=1572029084'></image> -->
+    <image mode="widthFix"  src='../../images/homeImg1.png'></image>
+  </view>
+
+  <view class = "bgOficon">  
+    <view class = "row-view">
+      <view class = "box" bindtap="goProducts">
+        <image src='../../images/product.png'></image>
+        <text>产品展示</text>
+      </view>
+      <view class = "box" bindtap = "goSolutions">
+        <image src='../../images/case2.png'></image>
+        <text>公司案例</text>
+      </view>
+      <view class = "box">
+        <button  open-type = 'contact' class = "button" ><image src='../../images/service.png'></image></button>
+        <text>在线询价</text>
+      </view>
+    </view>
+  </view>
+
+
+  <!-- <view class ="swiper">
     <swiper class = "swiperrr" indicator-dots="{{indicatorDots}}"
       autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}} " bindchange="bindchangeTag">
       <block wx:for="{{imgUrls}}">
@@ -10,39 +34,13 @@
       </swiper-item>
       </block>
     </swiper>
-  </view>
-  <view class = "bgOficon">  
-  <view class = "row-view">
-    <view class = "box" bindtap="goProducts">
-      <image src='../../images/desk.png'></image>
-      <text>产品展示</text>
-    </view>
-    <view class = "box" bindtap = "goSolutions">
-      <image src='../../images/analytics.png'></image>
-      <text>公司案例</text>
-    </view>
-    <view class = "box" bindtap="goCoop">
-      <image src='../../images/agreement.png'></image>
-      <text>合作品牌</text>
-    </view>
-    <view class = "box">
-
-      <button  open-type = 'contact' class = "button" ><image src='../../images/user.png'></image></button>
-      <text>在线询价</text>
-    </view>
-
-  </view>
-  </view>
+  </view> -->
 
 
-  <view class = "bgOfsub">
-  <view class = "line"></view>
-  <view class="subtitle"><image src="/images/title.png"></image> 热销系列</view>
-  <view class = "line"></view>
-  </view>
+
     <view class ="swiper">
     <swiper class = "swiperrr2" indicator-dots="{{indicatorDots}}"
-      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}} " bindchange="bindchangeTag">
+      autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}} ">
       <block wx:for="{{seriesUrls}}">
         <swiper-item>
           <image src="{{item}}" class="swiperrr" data-index = "{{index}}" data-url="{{item}}" bindtap="tapSeries" />
@@ -51,9 +49,9 @@
     </swiper>
   </view>
 
-      <view class = "foot">
-    <image src ='https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%85%AC%E5%85%B1/foot.PNG?sign=e04216eb9891455eb016fc066839b2f3&t=1572029084'></image>
-  </view>
+  <!-- <view class = "foot">
+    <image mode="widthFix" src = "https://636c-cloudtest-s30u3-1300472119.tcb.qcloud.la/%E5%85%AC%E5%85%B1/%E5%90%88%E4%BD%9C%E5%93%81%E7%89%8C.PNG?sign=2b8a2462d6ec68468eb287628bdef90c&t=1571793777"></image>
+  </view>   -->
+
 
 </view> 
-

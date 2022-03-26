@@ -2,13 +2,13 @@
 
 <view class="contact-block" bindtap="phoneCall" hover-class="contact-hover">
   <view class="contact-text">
-  <image src="/images/telephone-call-32.png"></image> 135 0748 4078</view>
+  <image src="/images/telephone-call-32.png"></image> 137 0748 4178</view>
 </view>
 <view class="line"></view>
 
 <view class="contact-block">
   <view class="contact-text">
-  <image src="/images/weixin-48.png"></image> S248632178</view>
+  <image src="/images/weixin-48.png"></image> HNSINO</view>
 </view>
 <view class="line"></view>
 
@@ -16,3 +16,4 @@
   <view class="contact-text">
   <image src="/images/map-icon-32.png"></image> 湖南省长沙市雨花区桔园小区城开大厦综合楼803、804室</view>
 </view>
+

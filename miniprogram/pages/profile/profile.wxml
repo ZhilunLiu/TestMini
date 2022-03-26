@@ -6,137 +6,37 @@
   </view>
   <view wx:else class = "column_view">
     <image src = "../../images/profile.png"></image>
-    <button open-type="getUserInfo" bindgetuserinfo="getInfo" >授权登录</button>
+    <view class= "space"/>
+    <view class = "row_flex">
+      <button class="buttonStyle" open-type="getUserInfo" bindgetuserinfo="getInfo" >授权登录</button>
+    </view>
   </view>  
 </view>
 
 <view wx:if = "{{logged}}">
-  <view class = "column_view">
-  <view class = "bg2">
-    <view class = "space"/>
+  <van-grid column-num="2"> 
+        <van-grid-item icon="like-o" text="我的收藏" bind:click="naviToFav"/>
+        <van-grid-item icon="orders-o" text="我的订单" bind:click="naviToOrders"/>
+  </van-grid>
 
-    <view class = "row_flex">
-      <text>客户</text>
-      <input class = "input"type ="text" placeholder="客户姓名" bindinput="customerInput"/>
-    </view>
-
-    <view class = "line"></view>
-
-    <view class = "row_flex">
-      <text>年份</text>
-      <input class = "input"type ="text" placeholder="订单下单年份" bindinput="yearInput"/>
-    </view>
-
-    <view class = "line"></view>
-
-    <view class = "row_flex">
-      <text>订单号</text>
-      <input class = "input"type ="number" placeholder="订单编号....." bindinput="orderNumInput"/>
-    </view>
-
-    <view class = "line"></view>
-
-    <view class="row_flex">
-      <text>订单状态</text>
-      <picker bindchange="statusChange" value="{{index}}" range="{{statusList}}">
-        <view wx:if="{{hasSelectStatus}}" class="picker">
-          <button class = "picker_button" type = "default" size = "mini" >{{status}}</button>
-        </view>
-        <view wx:else class="picker">
-          <button class = "picker_button" type = "default" size = "mini" >请选择订单状态</button>
-        </view>
-
-      </picker>
-    </view>
-
-    <view class = "line"></view>
-
-    <view  wx:if="{{manager}}" class = "row_flex" >
-      <text>业务员</text>
-      <input class = "input"type ="text" placeholder="业务员名称....." bindinput="stuffInput"/>
-    </view>
-
-    <view wx:if="{{manager}}"  class = "line"></view>
-
-    
-
-    <view class = "search">
-      <view class = "searchButton" bindtap="searchOrder">搜索订单</view>
-    </view>
-
-    </view>
-
-    <view  class="bg2">
-      <view class = "search">
-        <view wx:if="{{!manager}}"class = "searchButton" bindtap="myOrders">我的订单</view>
-        <view wx:if="{{!manager}}" class = "spaceBtwButton"></view>
-        <view class = "searchButton" bindtap="create">新建订单</view>
-      </view>
-    </view>
-
-    <view class="bg2">
-      <view class = "search">
-        <view class = "searchButton" bindtap="addFurniture">添加产品</view>
-        <view class = "spaceBtwButton"></view>
-        <view class = "searchButton" bindtap="searchFurniture">搜索产品</view>
-      </view>
-    </view>
-
-
-    <view class="bg2">
-      <view class = "search">
-        <view class = "searchButton" bindtap="myInfo">我的信息</view>
-        <view wx:if="{{manager}}" class = "spaceBtwButton"></view>
-        <view wx:if="{{manager}}" class = "searchButton" bindtap="stuffInfo">员工信息</view>
-      </view>
-    </view>
-
-    <!--如果是管理员账号，渲染如下-->
-    <view wx:if="{{manager}}">
-    
-      <!--
-      <view class = "bg">
-        <view class = "space"/>
-
-        <view class = "row_flex">
-          <text>姓名</text>
-          <input class = "input"type ="text" placeholder="收件人姓名" bindinput="nameInput"/>
-        </view>
-
-          
-        <view class = "line"></view>
-
-        <view class = "row_flex">
-          <text>电话</text>
-          <input class = "input"type ="number" placeholder="联系电话" bindinput="phoneInput"/>
-        </view>
-
-        <view class = "line"></view>
-
-        <view class = "row_flex">
-          <text>订单号</text>
-          <input class = "input"type ="text" placeholder="otn....." bindinput="orderNumInput"/>
-        </view>
-
-        <view class = "line"></view>
-
-        <view class = "search">
-          <view class = "searchButton" bindtap="search">搜索</view>
-        </view>
-    -->
-      </view>
-
-    <view wx:else class = "column_view">
-  
-    </view>
+  <view class="space"/>
+      <!--如果是管理员账号，渲染如下-->
+  <view wx:if="{{manager}}">
+    <van-cell-group>
+        <van-cell title="添加家具" icon="plus" is-link bind:click="naviToAddProducts"/>
+        <van-cell title="添加系列" icon="plus" is-link bind:click="naviToAddSeries"/>
+    </van-cell-group>
+    <view class="space"/>
+  </view>
+  <view wx:else="">
 
   </view>
-
-
-
-
-
 </view>
+
+<van-cell-group>
+    <van-cell title="联系我们" icon="location-o" is-link bind:click="naviToContact"/>
+    <van-cell title="公司简介" icon="chart-trending-o" is-link bind:click="naviToAbout"/>
+</van-cell-group>
 
 
 

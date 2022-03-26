@@ -1,0 +1,27 @@
+<!--searchProducts/searchProducts.wxml-->
+<van-search value="{{ searchValue }}" placeholder="请输入搜索关键词" shape="round" custom-class="searchStyle" bind:search="searchProduct"/>
+
+<view>
+      <block wx:for="{{filtedItems}}">
+        <view class="nav_items">
+        <!--界面跳转 -->
+          <navigator url="../details/details?name={{item.name}}&itemId={{item._id}}">
+            <view class="space" />
+            <image class = "itemImage" src="{{item.url[0]}}" mode="widthFix"/>
+            <view class="flexLeft">      
+                  <text class="itemName">{{item.name}}</text>
+                  <view class="itemDesc">{{item.comment}}</view>
+                  <view class="space" />
+                  <view class ="price">
+                    <text>￥</text>
+                    <view class="itemPrice">{{item.price}}</view>
+                    <text>.00</text>
+                  </view>
+                  <view class="space" />
+            </view>
+
+            
+          </navigator>
+        </view>
+      </block>
+  </view>

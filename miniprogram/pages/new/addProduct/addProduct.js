@@ -9,11 +9,10 @@ Page({
     avatarUrl:'',
     nickname:'',
     manager:false,
-    name:'',
+    productName:'',
     phone:'',
     orderNumber:'',
     series:'',
-    fname:'',
     price:'',
     size:'',
     desc:'',
@@ -32,31 +31,24 @@ Page({
     comment:'',
     model:'',
     fileId:'',
+
+    //van-cell props
+    value:'',
+
+    //van-actionsheet props
+    showChooseSeries: false,
+    showChooseType: false,
+    seriesList:[],
+    typeListInAction:[
+      {name:'班台'},{name:'职员桌'},{name:'文件柜'},{name:'班椅'},{name:'沙发'},{name:'茶几'},{name:'茶水柜'},{name:'会议桌'},{name:'会议椅'},{name:'主席台'},{name:'会议条桌'},{name:'演讲台'},{name:'接待台'},{name:'洽谈桌'},{name:'其他'},
+    ]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const db = wx.cloud.database();
-    // 查询当前家具的details对应name
-    db.collection('gomeSeries').where({
-    }).get({
-      success: res => {
-        var tempList = [];
-        for(let i =0;i <res.data.length;i++){
-          tempList.push(res.data[i].name);
-        }
-        this.setData({
-          seriesList:tempList,
-        })
-        console.log('seriesList is !!!! ', res);
-        console.log('[数据库] [查询记录] 成功: ', res);
-        wx.hideToast();
-      },
-      fail: err => {
-      }
-    })
+    this.loadSeries()
   },
 
   /**
@@ -110,11 +102,11 @@ Page({
 
   uploadImgbutton:function(){
     var data = this.data
-    if (data.series == '' || data.fname == '' || data.type == '' || data.price == '' || data.company=='' ||data.desc == '', data.width == '', data.height == '') {
+    if (data.series == '' || data.name == '' || data.type == '' || data.price == '' || data.company=='' ||data.desc == '', data.width == '', data.height == '') {
       wx.showToast({
         icon: 'none',
-        title: '请填写完整家具信息',
-        duration: 2000
+        title: '请填写完整家具信息, 包括厂家，名称，价格，描述，系列，种类 以及尺寸（长与高）',
+        duration: 2500
       })
       return;
     }
@@ -123,22 +115,24 @@ Page({
   },
 
   isDublicate:function(){
-    console.log('name is ' + this.data.fname + ' series is ' + this.data.series);
+    console.log('name is ' + this.data.name + ' series is ' + this.data.series);
     const db = wx.cloud.database();
     // 查询当前家具的details对应name
     db.collection('detail').where({
-      name: this.data.fname,
+      name: this.data.productName,
       company: this.data.company
     }).get({
       success: res => {
         
         if(res.data.length ==0){
+
           this.doUpload()
+
         }else{
           wx.showToast({
             icon: 'none',
-            title: '已有重复家具',
-            duration: 1500,
+            title: '在该系列中已有重复家具',
+            duration: 2500,
           })
         }
 
@@ -160,21 +154,20 @@ Page({
     // 选择图片
     wx.chooseImage({
       count: 9,
-      sizeType: ['compressed'],
+      sizeType: ['original'],
       sourceType: ['album', 'camera'],
       success: function (res) {
 
         wx.showLoading({
           title: '上传中',
         })
+
         // 上传图片
         for (let i = 0; i < res.tempFilePaths.length; i++) {
           var newDateTime = (new Date()).valueOf();
-          var name = that.data.fname;
-          var company = that.data.company;
+          var name = that.data.name;
           var series = that.data.series;
           const filePath = res.tempFilePaths[i];
-          console.log('in for loop now')
           const cloudPath = series + '/' + name + newDateTime + filePath.match(/\.[^.]+?$/)[0]
           that.upload(cloudPath, filePath);
         }
@@ -188,7 +181,6 @@ Page({
 
   upload: function (cloudPath, filePath) {
     var that = this;
-    var app = getApp();
     console.log('uploading:');
     console.log(filePath);
     console.log(cloudPath);
@@ -205,8 +197,7 @@ Page({
           fileList: [res.fileID],
           success: res => {
             // get temp file URL
-            //for (let i = 0; i < res.fileList.length;i++){
-              //console.log('url is ' + res.fileList[i].tempFileURL)
+
             var temp = this.data.imgUrls;
             temp.push(res.fileList[0].tempFileURL);
             that.setData({
@@ -243,7 +234,7 @@ Page({
     const db = wx.cloud.database();
     db.collection('detail').add({
       data: {
-        name: this.data.fname,
+        name: this.data.productName,
         price: price,
         size: size,
         series: this.data.series,
@@ -277,111 +268,143 @@ Page({
     })
   },
 
-  nameInput: function (e) {
-    this.setData({
-      name: e.detail.value
-    })
-  },
-
   phoneInput: function (e) {
     this.setData({
-      phone: e.detail.value
+      phone: e.detail
     })
   },
 
   orderNumInput: function (e) {
     this.setData({
-      orderNumber: e.detail.value
+      orderNumber: e
     })
   },
 
-  seriesInput: function (e) {
+  seriesInput: function (event) {
     this.setData({
-      newSeries: e.detail.value
+      newSeries: event.detail
     })
   },
 
-  fnameInput: function (e) {
+  nameInput: function (event) {
     this.setData({
-      fname: e.detail.value
+      productName: event.detail
     })
   },
 
   priceInput: function (e) {
     this.setData({
-      price: e.detail.value
-    })
-  },
-
-  disPriceInput: function (e) {
-    this.setData({
-      disPrice: e.detail.value
+      price: e.detail
     })
   },
 
   descInput: function (e) {
     this.setData({
-      desc: e.detail.value
+      desc: e.detail
     })
   },
 
   sizeInput: function (e) {
     this.setData({
-      size: e.detail.value
+      size: e.detail
     })
   },
 
   widthInput: function (e) {
     this.setData({
-      width: e.detail.value
+      width: e.detail
     })
   },
 
   depthInput: function (e) {
     this.setData({
-      depth: e.detail.value
+      depth: e.detail
     })
   },
 
   heightInput: function (e) {
     this.setData({
-      height: e.detail.value
+      height: e.detail
     })
   },
 
   companyInput: function (e) {
     this.setData({
-      company: e.detail.value
+      company: e.detail
     })
   },
 
   modelInput: function (e) {
     this.setData({
-      model: e.detail.value
+      model: e.detail
     })
   },
 
   commentInput: function (e) {
     this.setData({
-      comment: e.detail.value
+      comment: e.detail
     })
   },
 
-  bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+  chooseSeries:function(){
     this.setData({
-      hasntSelect: false,
-      type: this.data.typeList[e.detail.value],
+      showChooseSeries:true
     })
-  }, 
+  },
 
-  bindPicker2Change: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+  chooseType:function(){
     this.setData({
-      hasntSelect2: false,
-      series: this.data.seriesList[e.detail.value],
+      showChooseType:true
     })
-  }, 
+  },
+
+  onChooseSeriesClose() {
+    this.setData({ showChooseSeries: false });
+  },
+
+  onSeriesSelect(e) {
+    console.log(e.detail);
+    this.setData({
+      series:e.detail.name
+    })
+  },
+
+  onChooseTypeClose() {
+    this.setData({ showChooseType: false });
+  },
+
+  onTypeSelect(e) {
+    console.log(e.detail);
+    this.setData({
+      type:e.detail.name
+    })
+  },
+
+  loadSeries:function(){
+    var tempList = this.data.seriesList;
+    const db = wx.cloud.database();
+    db.collection('gomeSeries').where({
+    }).get({
+      success: res => {
+        for(let i =0 ;i<res.data.length;i++){
+          var item = {
+            name: res.data[i].name
+          }
+          console.log(item);
+
+          tempList.push(item);
+        }
+        console.log(tempList);
+        this.setData({
+          seriesList: tempList,
+        })
+        console.log('[数据库] [查询记录] 成功: ', res);
+      },
+      fail: err => {
+      }
+    })
+  },
+
 
   addNewSeries:function(e){
     if(this.data.newSeries == ''){

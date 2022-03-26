@@ -1,0 +1,11 @@
+.buttonStyle{
+  border-radius: 50px;
+  background-color: rgb(57, 70, 189);
+  width:30vw;
+  height: 5vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: small;
+}

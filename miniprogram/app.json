@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/home/home",
     "pages/profile/profile",
     "pages/new/gonghuodan/gonghuodan",
     "pages/new/newOrders/orders/orders",
     "pages/new/createOrder/createOrder",
-    "pages/home/home",
     "pages/products/products",
     "pages/solutions/solutions",
     "pages/contact/contact",
@@ -34,7 +34,8 @@
     "pages/new/stuffSum/stuffSum",
     "pages/new/claims/claims",
     "pages/new/newClaims/newClaims",
-    "pages/new/caigoudan/caigoudan"
+    "pages/new/caigoudan/caigoudan",
+    "pages/searchProducts/searchProducts"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -45,8 +46,8 @@
   },
   "resizable": true,
   "tabBar": {
-    "color": "#7A7E83",
-    "selectedColor": "#3cc51f",
+    "color": "#000000",
+    "selectedColor": "#3946BD",
     "borderStyle": "black",
     "backgroundColor": "#ffffff",
     "list": [
@@ -55,18 +56,6 @@
         "iconPath": "images/home.png",
         "selectedIconPath": "images/home.png",
         "text": "首页"
-      },
-      {
-        "pagePath": "pages/contact/contact",
-        "iconPath": "images/contact.png",
-        "selectedIconPath": "images/contact.png",
-        "text": "联系我们"
-      },
-      {
-        "pagePath": "pages/about/about",
-        "iconPath": "images/file.png",
-        "selectedIconPath": "images/file.png",
-        "text": "公司简介"
       },
       {
         "pagePath": "pages/profile/profile",
@@ -83,14 +72,25 @@
     "van-sidebar-item": "@vant/weapp/sidebar-item/index",
     "van-nav-bar": "@vant/weapp/nav-bar/index",
     "van-tab": "@vant/weapp/tab/index",
-  "van-tabs": "@vant/weapp/tabs/index",
-  "van-goods-action": "@vant/weapp/goods-action/index",
-  "van-goods-action-icon": "@vant/weapp/goods-action-icon/index",
-  "van-goods-action-button": "@vant/weapp/goods-action-button/index",
-  "van-submit-bar": "@vant/weapp/submit-bar/index",
-  "van-grid": "@vant/weapp/grid/index",
-  "van-grid-item": "@vant/weapp/grid-item/index",
-  "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
-  "van-dropdown-item": "@vant/weapp/dropdown-item/index"
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-goods-action": "@vant/weapp/goods-action/index",
+    "van-goods-action-icon": "@vant/weapp/goods-action-icon/index",
+    "van-goods-action-button": "@vant/weapp/goods-action-button/index",
+    "van-submit-bar": "@vant/weapp/submit-bar/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
+    "van-dropdown-item": "@vant/weapp/dropdown-item/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-tabbar": "@vant/weapp/tabbar/index",
+  "van-tabbar-item": "@vant/weapp/tabbar-item/index",
+  "van-search": "@vant/weapp/search/index",
+  "van-dialog": "@vant/weapp/dialog/index"
   }
 }

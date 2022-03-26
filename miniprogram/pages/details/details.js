@@ -16,7 +16,7 @@ Page({
     name:'',
     describtion:'',
     size:[],
-    dimension:[],
+    dimension:[[]],
     index:0,
     dimensionFlag:true,
     addingDim:false,
@@ -35,14 +35,39 @@ Page({
     hasnotSelectSeries:true,
     hasnotSelectType:true,
     model:'',
+    hasModel:false,
+    hasSize:false,
+    manager:false,
+
+    // van-action props
+    show: false,
+    actions: [],
+
+    //van-cell props
+    dimValue:'',
+
+    //van-field props
+    priceValue: '',
   },
 
-  bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+
+
+  dimChange(){
     this.setData({
-      index: e.detail.value
+      show:true
     })
-  },  
+  },
+
+  onClose() {
+    this.setData({ show: false});
+  },
+
+  onSelect(event) {
+    console.log(event.detail);
+    this.setData({
+      index:event.detail.index
+    })
+  },
 
   seriesChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -143,6 +168,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var app = getApp();
+    console.log('option is -------------------',options)
+    this.setData({
+      manager:app.globalData.manager
+    })
+
     wx.showToast({ title: '加载中', icon: 'loading', duration: 10000 });
     var itemName = options.name;
     var itemId = options.itemId;
@@ -177,7 +208,41 @@ Page({
           type:res.data[0].type,
           model:res.data[0].model,
         })
-        console.log('设置完成'+this.data.price);
+        console.log('设置完成'+this.data.dimension);
+        if(this.data.size != ''){
+          this.setData({
+            hasSize:true
+          })
+        }
+
+        if(this.data.model != ''){
+          this.setData({
+            hasModel:true
+          })
+        }
+
+        // 设置规格弹框
+        if(this.data.dimension != []){
+          console.log('dimension is', this.data.dimension.length);
+          var tempAction = [];
+          for(let i=0;i<this.data.dimension.length;i++){
+            var dimToString = '';
+            for(let j=0;j<this.data.dimension[i].length;j++){
+              dimToString += this.data.dimension[i][j]+"x"
+            }
+            dimToString= dimToString.slice(0,dimToString.length-1)
+            var dim = {
+              name:dimToString,
+              index:i
+            }
+            tempAction.push(dim);
+          }
+          this.setData({
+            actions : tempAction
+          })
+        }
+
+
         if (res.data[0].dimension[0][0]==0){
           this.setData({dimensionFlag:false})
         }

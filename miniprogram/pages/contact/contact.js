@@ -23,8 +23,9 @@ Page({
         display: 'ALWAYS',
       }
     }],
-    
+
   },
+
 
   phoneCall: function () {
     wx.makePhoneCall({

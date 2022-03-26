@@ -196,17 +196,6 @@ Page {
 
 }
 
-.uploadImg{
-  margin-top:5vh;
-  margin-left:30vw;
-  margin-right:30vw;
-  width: 30vw;
-  height: 5vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .iconDesc{
   margin-top:1vh;
 }
@@ -235,6 +224,13 @@ Page {
   height: 1vh;
   margin-bottom: 1vh;
   margin-top: 1vh;
+}
+
+.col_flex{
+  flex-direction: column;
+  display: flex;
+  justify-content: center;  /* 水平居中 */
+  align-items: center;
 }
 
 .row_flex{
@@ -301,7 +297,8 @@ Page {
 
 .username{
   margin-top:3vh;
-  font-size :1rem;
+  font-size :large;
+  font-weight: bold;
 }
 
 .spaceBtwButton{

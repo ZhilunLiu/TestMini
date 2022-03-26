@@ -1,44 +1,12 @@
 <view class = "container">
 <scroll-view class='scroll_left' scroll-y="true">
-  <view class = "margin"></view>
-    <view class = "bg" data-name="{{names[0]}}" bindtap="goSolutionDetail" style="background-image: url('{{imgUrls[0]}}');background-repeat:no-repeat;background-size:100% 100%;-moz-background-size:100% 100%;">
+  <view wx:for="{{imgUrls}}" wx:for-index="idx">
+    <van-cell-group inset>
+      <image src="{{item}}"></image>
       <view class = "bgoftitle">
-        <text>{{names[0]}}</text>
-      </view>  
-    </view>
-   <view class = "margin"></view>
-    <view class = "bg" data-name="{{names[1]}}" bindtap="goSolutionDetail" style="background-image: url('{{imgUrls[1]}}');background-repeat:no-repeat;background-size:100% 100%;-moz-background-size:100% 100%;">
-      <view class = "bgoftitle">
-        <text>{{names[1]}}</text>
-      </view>  
-    </view>
-
-    <view class = "margin"></view>
-    <view class = "bg" data-name="{{names[2]}}" bindtap="goSolutionDetail" style="background-image: url('{{imgUrls[2]}}');background-repeat:no-repeat;background-size:100% 100%;-moz-background-size:100% 100%;">
-      <view class = "bgoftitle">
-        <text>{{names[2]}}</text>
-      </view>  
-    </view>
-
-    <view class = "margin"></view>
-    <view class = "bg" data-name="{{names[3]}}" bindtap="goSolutionDetail" style="background-image: url('{{imgUrls[3]}}');background-repeat:no-repeat;background-size:100% 100%;-moz-background-size:100% 100%;">
-      <view class = "bgoftitle">
-        <text>{{names[3]}}</text>
-      </view>  
-    </view>
-
-    <view class = "margin"></view>
-    <view class = "bg" data-name="{{names[4]}}" bindtap="goSolutionDetail" style="background-image: url('{{imgUrls[4]}}');background-repeat:no-repeat;background-size:100% 100%;-moz-background-size:100% 100%;">
-      <view class = "bgoftitle">
-        <text>{{names[4]}}</text>
-      </view>  
-    </view>
-
-    <view class = "margin"></view>
-    <view class = "bg" data-name="{{names[5]}}" bindtap="goSolutionDetail" style="background-image: url('{{imgUrls[5]}}');background-repeat:no-repeat;background-size:100% 100%;-moz-background-size:100% 100%;">
-      <view class = "bgoftitle">
-        <text>{{names[5]}}</text>
-      </view>  
-    </view>
+          <text>{{names[idx]}}</text>
+        </view>  
+    </van-cell-group>
+  </view>
 </scroll-view>
 </view>
